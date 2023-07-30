@@ -18,6 +18,7 @@ class _loginPageState extends State<loginPage> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthStateLoggedOut) {
+          //Todo: show error dialogs
           if (state.exception is userNotFoundAuthException) {
             print("user not found");
           } else if (state.exception is wrongPasswordAuthExceptions) {

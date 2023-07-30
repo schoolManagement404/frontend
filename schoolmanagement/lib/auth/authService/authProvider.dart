@@ -1,7 +1,6 @@
 import 'package:schoolmanagement/core/allUser/student/studentModal.dart';
 
 abstract class authProvider {
-  bool? isLoggedIn;
   //initialize
   Future<void> initialize();
   //login
