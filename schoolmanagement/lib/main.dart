@@ -5,6 +5,9 @@ import 'package:schoolmanagement/auth/authService/mongodbAuthProvider.dart';
 import 'package:schoolmanagement/config/routes/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
+import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
+import 'package:schoolmanagement/features/assignment/presentation/screen/addAssignmentPage.dart';
+import 'package:schoolmanagement/features/assignment/presentation/screen/assigmentPage.dart';
 import 'package:schoolmanagement/features/home/presentation/screens/homePage.dart';
 import 'package:schoolmanagement/features/login/presentation/screen/loginPage.dart';
 
@@ -27,9 +30,16 @@ class MyApp extends StatelessWidget {
         ),
         onGenerateRoute: AppRoutes.onGenerateRoutes,
         initialRoute: "/",
-        home: BlocProvider<AuthBloc>(
-          create: (context) => AuthBloc(mongoDBAuth()),
-          child: const AuthPage(),
+        home: MultiBlocProvider(
+          providers: [
+            BlocProvider<AuthBloc>(
+              create: (context) => AuthBloc(mongoDBAuth()),
+            ),
+            BlocProvider<AssignmentBloc>(
+              create: (context) => AssignmentBloc(),
+            ),
+          ],
+          child: const assignmentPage(),
         ));
   }
 }

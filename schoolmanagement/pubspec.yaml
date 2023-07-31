@@ -39,6 +39,7 @@ dependencies:
   hive_flutter: ^1.1.0
   http: ^1.1.0
   retrofit: ^4.0.1
+  image_picker: ^1.0.1
   
 
 dev_dependencies:
@@ -48,7 +49,7 @@ dev_dependencies:
   hive_generator: ^2.0.0
   flutter_test:
     sdk: flutter
-
+  omni_datetime_picker: ^1.0.7
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.

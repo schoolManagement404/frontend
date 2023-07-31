@@ -7,12 +7,10 @@ class student {
   final String section;
   final String rollNo;
   final String profilePicUrl;
-  final String joinedDate;
-  final String isNull;
+  final DateTime joinedDate;
   //constructor
   const student(
-      {required this.isNull,
-      required this.student_id,
+      {required this.student_id,
       required this.classroom_id,
       required this.name,
       required this.studentClass,
@@ -23,7 +21,6 @@ class student {
   //factory method to convert json to dart object
   factory student.fromJson(Map<String, dynamic> json) {
     return student(
-      isNull: json['isNull'],
       student_id: json['student_id'],
       classroom_id: json['classroom_id'],
       name: json['name'],
@@ -31,7 +28,18 @@ class student {
       section: json['section'],
       rollNo: json['rollNo'],
       profilePicUrl: json['profilePicUrl'],
-      joinedDate: json['joinedDate'],
+      joinedDate: DateTime.parse(json['joinedDate']),
     );
   }
+  //method to convert dart object to json
+  Map<String, dynamic> toJson() => {
+        'student_id': student_id,
+        'classroom_id': classroom_id,
+        'name': name,
+        'studentClass': studentClass,
+        'section': section,
+        'rollNo': rollNo,
+        'profilePicUrl': profilePicUrl,
+        'joinedDate': joinedDate.toIso8601String(),
+      };
 }

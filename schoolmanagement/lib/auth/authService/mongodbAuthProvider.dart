@@ -29,13 +29,17 @@ class mongoDBAuth implements authProvider {
         'password': password,
       });
       if (response.statusCode == 200) {
+        print(response.statusCode.toString());
         loggedInHive().setLoggedIn('true');
         print('successfully logged in');
       } else if (response.statusCode == 404) {
+        print(response.statusCode.toString());
         throw userNotFoundAuthException();
-      } else if (response.statusCode == 401) {
+      } else if (response.statusCode == 400) {
+        print(response.statusCode.toString());
         throw wrongPasswordAuthExceptions();
       } else {
+        print(response.statusCode.toString());
         throw genericAuthException();
       }
     } catch (e) {
