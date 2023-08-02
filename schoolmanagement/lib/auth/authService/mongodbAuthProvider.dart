@@ -31,6 +31,7 @@ class mongoDBAuth implements authProvider {
       if (response.statusCode == 200) {
         print(response.statusCode.toString());
         loggedInHive().setLoggedIn('true');
+        loggedInHive().setStudentId(id);
         print('successfully logged in');
       } else if (response.statusCode == 404) {
         print(response.statusCode.toString());
@@ -50,6 +51,7 @@ class mongoDBAuth implements authProvider {
   @override
   Future<void> logout() {
     loggedInHive().setLoggedIn('false');
+    loggedInHive().removeStudentId();
     return Future.value();
   }
 }

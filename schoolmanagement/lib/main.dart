@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
               create: (context) => AssignmentBloc(),
             ),
           ],
-          child: const assignmentPage(),
+          child: const addAssignment(),
         ));
   }
 }

@@ -29,6 +29,30 @@ class assignmentErrorState extends AssignmentState {
   }) : super(isLoading: isLoading, message: message);
 }
 
+class dueDateAddedState extends AssignmentState {
+  final DateTime? dueDate;
+  const dueDateAddedState({
+    required this.dueDate,
+    required isLoading,
+  }) : super(isLoading: isLoading);
+}
+
+class selectClassroomState extends AssignmentState {
+  final String classroom_id;
+  const selectClassroomState({
+    required this.classroom_id,
+    required isLoading,
+  }) : super(isLoading: isLoading);
+}
+
+class selectFilesState extends AssignmentState {
+  final List<File> files;
+  const selectFilesState({
+    required this.files,
+    required isLoading,
+  }) : super(isLoading: isLoading);
+}
+
 class assignmentAddState extends AssignmentState {
   const assignmentAddState({
     required isLoading,

@@ -50,8 +50,8 @@ class _loginPageState extends State<loginPage> {
               ElevatedButton(
                 onPressed: () {
                   // Respond to button press
-                  final id = usernameController.text;
-                  final password = usernameController.text;
+                  final id = usernameController.text.trim();
+                  final password = usernameController.text.trim();
                   context
                       .read<AuthBloc>()
                       .add(AuthEventLogIn(id: id, password: password));

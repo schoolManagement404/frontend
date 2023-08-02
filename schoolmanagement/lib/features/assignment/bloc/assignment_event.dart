@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 part of 'assignment_bloc.dart';
 
 @immutable
@@ -11,6 +13,11 @@ class fetchAssignmentEvent extends AssignmentEvent {
   });
 }
 
+class dueDateAddedEvent extends AssignmentEvent {
+  final DateTime? dueDate;
+  dueDateAddedEvent({required this.dueDate});
+}
+
 class createAssignmentEvent extends AssignmentEvent {
   final assignment newAssignment;
   final String teacher_id;
@@ -20,4 +27,15 @@ class createAssignmentEvent extends AssignmentEvent {
     required this.classroom_id,
     required this.newAssignment,
   });
+}
+
+class selectClassroomEvent extends AssignmentEvent {
+  final String classroom_id;
+  selectClassroomEvent({
+    required this.classroom_id,
+  });
+}
+
+class selectFilesEvent extends AssignmentEvent {
+  selectFilesEvent();
 }

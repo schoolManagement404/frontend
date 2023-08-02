@@ -7,7 +7,7 @@ class assignment {
   final String assignment_description;
   final DateTime assignment_deadline;
   final DateTime created_date;
-  final String assignment_file;
+  final List<String> assignment_file;
 
   assignment({
     required this.classroom_id,
@@ -30,7 +30,7 @@ class assignment {
         assignment_description: json['assignment_description'],
         assignment_deadline: DateTime.parse(json['assignment_deadline']),
         created_date: DateTime.parse(json['created_date']),
-        assignment_file: json['assignment_file'],
+        assignment_file: List<String>.from(json['assignment_file']),
       );
   //method to convert dart object to json
   Map<String, dynamic> toJson() => {
