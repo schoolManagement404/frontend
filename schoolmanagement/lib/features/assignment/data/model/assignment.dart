@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 class assignment {
   final String classroom_id;
   final String teacher_id;

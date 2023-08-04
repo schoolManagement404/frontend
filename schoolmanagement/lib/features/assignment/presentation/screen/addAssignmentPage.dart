@@ -257,7 +257,7 @@ class _addAssignmentState extends State<addAssignment> {
                         // Handle the case when the assigned date is not selected
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text("Please fill the fields"),
+                            content: Text("Please fill the required fields"),
                             duration: Duration(seconds: 2),
                           ),
                         );
