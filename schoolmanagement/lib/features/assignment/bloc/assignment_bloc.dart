@@ -68,7 +68,7 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
       } on Exception catch (e) {
         emit(assignmentErrorState(
             exception: e,
-            message: 'Error while posting assignments',
+            message: 'Error while posting assignments $e',
             isLoading: false));
       }
     });

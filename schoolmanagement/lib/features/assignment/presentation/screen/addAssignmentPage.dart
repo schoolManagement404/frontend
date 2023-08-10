@@ -64,7 +64,7 @@ class _addAssignmentState extends State<addAssignment> {
   DateTime? dueDate;
   List<String> filePaths = [];
   List<String> classRoomID = ['1', '2', '3', '4', '5'];
-  List<String> subject = [];
+  List<String> subject = ['math', 'science'];
   List<File> selectedFiles = [];
   List<String> selectedFilesPaths = [];
   List<int> fileSizes = [];
@@ -85,7 +85,7 @@ class _addAssignmentState extends State<addAssignment> {
       //Also TO change the options of subject according to the class room selected
       if (state is selectClassroomState) {
         selectedClassRoomID = state.classroom_id.toString();
-        subject.add('added');
+        print(selectedClassRoomID);
       }
       //to show snackbar when assignment is added
       if (state is assignmentAddState) {
@@ -190,7 +190,7 @@ class _addAssignmentState extends State<addAssignment> {
                   controller: dueDateController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'due date',
+                      labelText: 'Due date',
                       suffixIcon: SuffixIconButton1(
                           icon: Icon(Icons.edit_calendar_outlined),
                           onTap: () async {

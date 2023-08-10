@@ -38,7 +38,7 @@ class assignment {
   Map<String, dynamic> toJson() => {
         'classroom_id': classroom_id,
         'teacher_id': teacher_id,
-        'subjecct_id': subject_id,
+        'subject_id': subject_id,
         'assigmnet_id': assignment_id,
         'assignment_name': assignment_name,
         'assignment_description': assignment_description,

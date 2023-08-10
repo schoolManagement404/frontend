@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:schoolmanagement/config/appUrl/appUrl.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:schoolmanagement/core/allUser/student/studentModal.dart';
 
 import '../model/feeModel.dart';
 

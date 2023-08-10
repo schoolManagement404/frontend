@@ -20,7 +20,7 @@ class _assignmentPageState extends State<assignmentPage> {
   @override
   Widget build(BuildContext context) {
     context.read<AssignmentBloc>().add(fetchAssignmentEvent(
-        student_id: loggedInHive().getStudentId().toString()));
+        student_id: 'loggedInHive().getStudentId().toString()'));
     return BlocConsumer<AssignmentBloc, AssignmentState>(
         listener: (context, state) {
       if (state.isLoading) {

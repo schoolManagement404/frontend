@@ -11,7 +11,7 @@ class assignmentApi {
     try {
       // Get all assignments from the server
       final response = await http
-          .get(Uri.parse('http://10.0.2.2:3000/students/12/assignments'));
+          .get(Uri.parse('http://localhost:3000/students/12/assignments'));
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body) as List<dynamic>;
 
@@ -51,8 +51,8 @@ class assignmentApi {
   Future<List<assignment>> postAssignment(assignment assignment) async {
     try {
       //multipart request for posting assignment files
-      final request =
-          http.MultipartRequest('POST', Uri.parse(appUrl.assignmentPost));
+      final request = http.MultipartRequest(
+          'POST', Uri.parse('http://10.0.2.2:3000/teachers/12/assignments'));
       final assignmentData = assignment.toJson();
       assignmentData.forEach((key, value) {
         request.fields[key] = value.toString();
