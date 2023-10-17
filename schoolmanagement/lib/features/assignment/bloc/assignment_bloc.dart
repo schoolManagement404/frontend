@@ -47,6 +47,7 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
     on<selectFilesEvent>((event, emit) async {
       FilePickerResult? result =
           await FilePicker.platform.pickFiles(allowMultiple: true);
+      print("Result= ${result}");
       if (result != null) {
         final List<File> _selectedFiles =
             result.paths.map((path) => File(path!)).toList();
@@ -62,13 +63,14 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
       try {
         assignmentApi _assignmentApi = assignmentApi();
         await _assignmentApi.postAssignment(event.newAssignment);
+
         emit(const assignmentAddState(
           isLoading: false,
         ));
       } on Exception catch (e) {
         emit(assignmentErrorState(
             exception: e,
-            message: 'Error while posting assignments $e',
+            message: 'Error while posting assignments: $e',
             isLoading: false));
       }
     });

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:schoolmanagement/config/appUrl/appUrl.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
@@ -11,16 +12,11 @@ class assignmentApi {
     try {
       // Get all assignments from the server
       final response = await http
-          .get(Uri.parse('http://localhost:3000/students/12/assignments'));
+          .get(Uri.parse('http://10.0.2.2:3000/students/12/assignments'));
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body) as List<dynamic>;
 
         final assignments = jsonData.map((json) {
-          final List<String> fileUrls =
-              (json['assignment_file'] as List<dynamic>)
-                  .map((dynamic url) => url.toString())
-                  .toList();
-
           return assignment(
             // Map other assignment attributes here
             classroom_id: json['classroom_id'],
@@ -31,7 +27,8 @@ class assignmentApi {
             assignment_description: json['assignment_description'],
             assignment_deadline: DateTime.parse(json['assignment_deadline']),
             created_date: DateTime.parse(json['created_date']),
-            assignment_file: fileUrls, // Assign file URLs to assignment_file
+            assignment_file: json['assignment_file']
+                .toString(), // Assign file URLs to assignment_file
           );
         }).toList();
 
@@ -43,41 +40,37 @@ class assignmentApi {
     } catch (e) {
       // Handle any exceptions that occur during the API call
       print('Error while fetching assignment: $e');
-      throw Exception('Failed to fetch assignment $e');
+      throw Exception('Failed to fetch assignments: $e');
     }
   }
 
   //funtion to post student
   Future<List<assignment>> postAssignment(assignment assignment) async {
     try {
-      //multipart request for posting assignment files
-      final request = http.MultipartRequest(
-          'POST', Uri.parse('http://10.0.2.2:3000/teachers/12/assignments'));
-      final assignmentData = assignment.toJson();
-      assignmentData.forEach((key, value) {
-        request.fields[key] = value.toString();
-      });
-      for (String filePath in assignment.assignment_file) {
-        request.files.add(await http.MultipartFile.fromPath(
-          'assignment_file',
-          filePath,
-        ));
-      }
-      final response = await request.send();
-      // If response is ok, then return a list of assignment
+      print(assignment.toJson());
+      final response = await http.post(
+        Uri.parse("http://10.0.2.2:3000/teachers/12/assignments"),
+        body: jsonEncode(assignment.toJson()),
+        //add header
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
       if (response.statusCode == 200) {
-        print('successfully posted');
-        return getAllAssignment(student_id: '12'); //return all assignments
+        print("Assignment posted successfully");
+        return [];
       } else {
-        throw Exception('Failed to post assignment');
+        print("Assignment not posted, Status code: ${response.statusCode}");
+        throw Exception(
+            'Assignment not posted, Status code: ${response.statusCode}');
       }
     } catch (e) {
-      // Handle any exceptions that occur during the API call
       print('Error while posting assignment: $e');
       throw Exception('Failed to post assignment: $e');
     }
   }
 }
+
   //  ***EXAMPLE assignment to be fetched***
   // try {
   //   List<Assignment> assignments = await assignmentApi.getAssignments();

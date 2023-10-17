@@ -45,6 +45,8 @@ class _assignmentPageState extends State<assignmentPage> {
                 title: Text(state.assignmentList[index].assignment_name),
                 subtitle:
                     Text(state.assignmentList[index].assignment_description),
+                trailing: Text(
+                    state.assignmentList[index].assignment_deadline.toString()),
               );
             },
           ),

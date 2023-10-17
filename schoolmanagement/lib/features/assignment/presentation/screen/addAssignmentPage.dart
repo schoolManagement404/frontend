@@ -61,10 +61,11 @@ class _addAssignmentState extends State<addAssignment> {
   TextEditingController assignmentIdController = TextEditingController();
   TextEditingController dueDateController = TextEditingController();
   TextEditingController assignmentTitleController = TextEditingController();
+  TextEditingController driveLinkController = TextEditingController();
   DateTime? dueDate;
   List<String> filePaths = [];
-  List<String> classRoomID = ['1', '2', '3', '4', '5'];
-  List<String> subject = ['math', 'science'];
+  List<String> classRoomID = ['C002', '2', '3', '4', '5'];
+  List<String> subject = ["EEEG101", 'math', 'science'];
   List<File> selectedFiles = [];
   List<String> selectedFilesPaths = [];
   List<int> fileSizes = [];
@@ -206,6 +207,13 @@ class _addAssignmentState extends State<addAssignment> {
                     labelText: 'Description',
                   ),
                 ),
+                TextField(
+                  controller: driveLinkController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Drive Link',
+                  ),
+                ),
                 ElevatedButton(
                     onPressed: () async {
                       context.read<AssignmentBloc>().add(selectFilesEvent());
@@ -226,8 +234,6 @@ class _addAssignmentState extends State<addAssignment> {
 
                 ElevatedButton(
                     onPressed: () {
-                      print(selectedFilesPaths);
-                      print(selectedFilesPaths.length);
                       if (dueDate != null &&
                           selectedClassRoomID != null &&
                           selectedSubject != null &&
@@ -246,7 +252,8 @@ class _addAssignmentState extends State<addAssignment> {
                                     assignmentTitleController.text.trim(),
                                 assignment_description:
                                     descriptionController.text.trim(),
-                                assignment_file: selectedFilesPaths,
+                                assignment_file:
+                                    driveLinkController.text.trim(),
                                 assignment_deadline: dueDate!,
                                 created_date: DateTime.now(),
                               ),
