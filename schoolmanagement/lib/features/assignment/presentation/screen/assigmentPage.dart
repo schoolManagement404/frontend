@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
@@ -6,21 +8,15 @@ import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
 import 'package:schoolmanagement/features/assignment/data/service/assignmentApiService.dart';
 
-class assignmentPage extends StatefulWidget {
+import 'assignmentDetails.dart';
+
+class assignmentPage extends StatelessWidget {
   const assignmentPage({super.key});
 
   @override
-  State<assignmentPage> createState() => _assignmentPageState();
-}
-
-class _assignmentPageState extends State<assignmentPage> {
-  assignmentApi? assignment;
-  String? classRoomId;
-  String? student_id;
-  @override
   Widget build(BuildContext context) {
     context.read<AssignmentBloc>().add(fetchAssignmentEvent(
-        student_id: 'loggedInHive().getStudentId().toString()'));
+        student_id: json.decode(loggedInHive().getLoginInfo())["id"]));
     return BlocConsumer<AssignmentBloc, AssignmentState>(
         listener: (context, state) {
       if (state.isLoading) {
@@ -42,11 +38,30 @@ class _assignmentPageState extends State<assignmentPage> {
             itemCount: state.assignmentList.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(state.assignmentList[index].assignment_name),
-                subtitle:
-                    Text(state.assignmentList[index].assignment_description),
-                trailing: Text(
-                    state.assignmentList[index].assignment_deadline.toString()),
+                title: Text(
+                  state.assignmentList[index].assignment_name,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(state.assignmentList[index].subject_id),
+                trailing: Column(
+                  children: [
+                    Text("Due Date:"),
+                    Text(state.assignmentList[index].assignment_deadline
+                        .toIso8601String()
+                        .split("T")[0]
+                        .toString()),
+                  ],
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AssignmentDetailPage(
+                        currentAssignment: state.assignmentList[index],
+                      ),
+                    ),
+                  );
+                },
               );
             },
           ),

@@ -4,8 +4,8 @@ part of 'fee_bloc.dart';
 abstract class FeeState {
   final bool isLoading;
   final String? message;
-
-  const FeeState({required this.isLoading, this.message});
+  final List<bool>? expandedStates;
+  const FeeState({required this.isLoading, this.message, this.expandedStates});
 }
 
 class FeeInitialState extends FeeState {
@@ -16,8 +16,20 @@ class FeeLoadedState extends FeeState {
   final List<StudentFee> feeList;
   const FeeLoadedState({
     required this.feeList,
+    required List<bool>? expandedStates,
     required isLoading,
-  }) : super(isLoading: isLoading);
+  }) : super(isLoading: isLoading, expandedStates: expandedStates);
+  FeeLoadedState copyWith({
+    bool? isLoading,
+    List<bool>? expandedStates,
+    List<StudentFee>? feeList,
+  }) {
+    return FeeLoadedState(
+      isLoading: isLoading ?? this.isLoading,
+      expandedStates: expandedStates ?? this.expandedStates,
+      feeList: feeList ?? this.feeList,
+    );
+  }
 }
 
 class feeErrorState extends FeeState {

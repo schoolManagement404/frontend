@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider<FeeBloc>(create: (context) => FeeBloc()),
           ],
-          child: const addAssignment(),
+          child: const AuthPage(),
         ));
   }
 }

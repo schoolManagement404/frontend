@@ -12,10 +12,9 @@ class feePage extends StatefulWidget {
 }
 
 class _feePageState extends State<feePage> {
-  List<bool> _expandedStates = List.generate(10, (index) => false);
-
   @override
   Widget build(BuildContext context) {
+    context.read<FeeBloc>().add(fetchFeeEvent(student_id: '12'));
     return BlocConsumer<FeeBloc, FeeState>(
       listener: (context, state) {
         if (state.isLoading) {
@@ -23,9 +22,6 @@ class _feePageState extends State<feePage> {
               context: context, text: state.message ?? "Please wait a moment");
         } else {
           LoadingScreen().hide();
-        }
-        if (state is toggleExpansionState) {
-          _expandedStates[state.index] = !_expandedStates[state.index];
         }
       },
       builder: (context, state) {
@@ -53,29 +49,50 @@ class _feePageState extends State<feePage> {
                               Column(
                                 children: [
                                   Text(
-                                      'School fee for ${state.feeList[index].feeMonth}'),
-                                  Text('Rs: ${state.feeList[index].toPayFee}')
+                                      'School fee for ${state.feeList[index].fee_month}'),
+                                  Text(
+                                    'Remaining Rs: ${state.feeList[index].monthly_fee + state.feeList[index].exam_fee + state.feeList[index].extracurricular_fee + state.feeList[index].late_charge - state.feeList[index].discount_scholarship - state.feeList[index].paid_fee}',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  )
                                 ],
                               ),
-                              Text(state.feeList[index].toPayFee ==
-                                      state.feeList[index].paidFee
-                                  ? 'Paid'
-                                  : 'Due'),
                               IconButton(
-                                icon: Icon(_expandedStates[index]
+                                icon: Icon(state.expandedStates![index]
                                     ? Icons.arrow_drop_up
                                     : Icons.arrow_drop_down),
-                                onPressed: () => context
-                                    .read<FeeBloc>()
-                                    .add(toggleExpansionEvent(index: index)),
+                                onPressed: () {
+                                  context.read<FeeBloc>().add(
+                                        toggleExpansionEvent(index: index),
+                                      );
+                                },
                               ),
                             ],
                           ),
-                          if (_expandedStates[index])
+                          if (state.expandedStates![index])
                             Container(
                               padding: EdgeInsets.symmetric(vertical: 10),
-                              child: Text(
-                                  'Additional content for Item ${index + 1}'),
+                              child: Column(
+                                children: [
+                                  Text(
+                                      "Monthly fee: ${state.feeList[index].monthly_fee}"),
+                                  Text(
+                                      "Exam Fee: ${state.feeList[index].exam_fee}"),
+                                  Text(
+                                      "Extra Curricular fee: ${state.feeList[index].extracurricular_fee}"),
+                                  Text(
+                                      "Late Charge: ${state.feeList[index].late_charge}"),
+                                  Text(
+                                      "Discount: ${state.feeList[index].discount_scholarship}"),
+                                  Text(
+                                      "Paid fee: ${state.feeList[index].paid_fee}"),
+                                  Text(
+                                    'Remaining: ${state.feeList[index].monthly_fee + state.feeList[index].exam_fee + state.feeList[index].extracurricular_fee + state.feeList[index].late_charge - state.feeList[index].discount_scholarship - state.feeList[index].paid_fee}',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
                             ),
                         ],
                       ),
@@ -88,7 +105,7 @@ class _feePageState extends State<feePage> {
         } else {
           return const Scaffold(
               body: Center(
-            child: CircularProgressIndicator(),
+            child: Text("no data"),
           ));
         }
       },

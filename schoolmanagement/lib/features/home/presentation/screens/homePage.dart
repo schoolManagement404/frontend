@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
+
+import '../../../../core/hiveLocalDB/loggedInState/loggedIn.dart';
 
 class homePage extends StatefulWidget {
   const homePage({super.key});
@@ -20,11 +24,27 @@ class _homePageState extends State<homePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("HomePage"),
+              Text(json.decode(loggedInHive().getLoginInfo()).toString()),
               ElevatedButton(
                   onPressed: () {
                     context.read<AuthBloc>().add(const AuthEventLogOut());
                   },
-                  child: Text("Logout"))
+                  child: Text("Logout")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/view_assignments");
+                  },
+                  child: Text("Assignment")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/add_assignment");
+                  },
+                  child: Text("Add Assignment")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/fee");
+                  },
+                  child: Text("Fee")),
             ],
           )),
         );

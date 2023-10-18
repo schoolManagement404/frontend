@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class loggedInHive {
@@ -5,19 +6,19 @@ class loggedInHive {
   Future<void> initializeHive() async {
     await Hive.initFlutter();
     await Hive.openBox('isLoggedIn');
-    await Hive.openBox('student_id');
+    await Hive.openBox('loginInfo');
   }
 
   //getting box
   static Box<dynamic> get box1 => Hive.box('isLoggedIn');
-  static Box<dynamic> get box2 => Hive.box('student_id');
+  static Box<dynamic> get box2 => Hive.box('loginInfo');
   //setting logged in state
   void setLoggedIn(String isLoggedIn) {
     box1.put('isLoggedIn', isLoggedIn);
   }
 
-  void setStudentId(String student_id) {
-    box2.put('student_id', student_id);
+  void setLoginInfo(dynamic loginInfo) {
+    box2.put('loginInfo', loginInfo);
   }
 
   //getting logged in state
@@ -25,11 +26,11 @@ class loggedInHive {
     return box1.get('isLoggedIn').toString();
   }
 
-  String getStudentId() {
-    return box2.get('student_id').toString();
+  String getLoginInfo() {
+    return box2.get('loginInfo').toString();
   }
 
-  void removeStudentId() {
-    box2.delete('student_id');
+  void removeLoginInfo() {
+    box2.delete('loginInfo');
   }
 }

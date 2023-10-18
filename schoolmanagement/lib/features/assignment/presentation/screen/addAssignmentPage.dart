@@ -66,9 +66,9 @@ class _addAssignmentState extends State<addAssignment> {
   List<String> filePaths = [];
   List<String> classRoomID = ['C002', '2', '3', '4', '5'];
   List<String> subject = ["EEEG101", 'math', 'science'];
-  List<File> selectedFiles = [];
-  List<String> selectedFilesPaths = [];
-  List<int> fileSizes = [];
+  // List<File> selectedFiles = [];
+  // List<String> selectedFilesPaths = [];
+  // List<int> fileSizes = [];
   String? selectedClassRoomID;
   String? selectedSubject;
   @override
@@ -102,11 +102,11 @@ class _addAssignmentState extends State<addAssignment> {
         dueDateController.text = state.dueDate.toString();
       }
       //to update the selected files in the listview
-      if (state is selectFilesState) {
-        selectedFiles = state.files;
-        selectedFilesPaths = selectedFiles.map((e) => e.path).toList();
-        fileSizes = selectedFiles.map((file) => file.lengthSync()).toList();
-      }
+      // if (state is selectFilesState) {
+      //   selectedFiles = state.files;
+      //   selectedFilesPaths = selectedFiles.map((e) => e.path).toList();
+      //   fileSizes = selectedFiles.map((file) => file.lengthSync()).toList();
+      // }
       //to show snackbar when error occurs
       if (state is assignmentErrorState) {
         print(state.message);
@@ -200,7 +200,6 @@ class _addAssignmentState extends State<addAssignment> {
                   readOnly: true,
                 ),
                 TextField(
-                  maxLines: 3,
                   controller: descriptionController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -214,23 +213,23 @@ class _addAssignmentState extends State<addAssignment> {
                     labelText: 'Drive Link',
                   ),
                 ),
-                ElevatedButton(
-                    onPressed: () async {
-                      context.read<AssignmentBloc>().add(selectFilesEvent());
-                    },
-                    child: Text("Add file")),
+                // ElevatedButton(
+                //     onPressed: () async {
+                //       context.read<AssignmentBloc>().add(selectFilesEvent());
+                //     },
+                //     child: Text("Add file")),
                 //List view to show files if files are selected
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: selectedFiles.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(selectedFilesPaths[index].split('/').last),
-                      subtitle: Text(
-                          "${(fileSizes[index] / 1024).toStringAsFixed(2)} KB"),
-                    );
-                  },
-                ),
+                // ListView.builder(
+                //   shrinkWrap: true,
+                //   itemCount: selectedFiles.length,
+                //   itemBuilder: (context, index) {
+                //     return ListTile(
+                //       title: Text(selectedFilesPaths[index].split('/').last),
+                //       subtitle: Text(
+                //           "${(fileSizes[index] / 1024).toStringAsFixed(2)} KB"),
+                //     );
+                //   },
+                // ),
 
                 ElevatedButton(
                     onPressed: () {

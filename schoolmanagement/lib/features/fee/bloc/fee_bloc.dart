@@ -11,15 +11,19 @@ class FeeBloc extends Bloc<FeeEvent, FeeState> {
     on<fetchFeeEvent>((event, emit) async {
       emit(const FeeInitialState(isLoading: true));
       try {
+        StudentFeeApi _studentFeeApi = StudentFeeApi();
         final List<StudentFee> feeList =
-            await StudentFeeApi().getStudentFees(event.student_id);
+            await _studentFeeApi.getStudentFees(event.student_id);
         if (feeList.isEmpty) {
           emit(feeErrorState(
               exception: Exception('No fees found'),
               message: 'No fees found',
               isLoading: false));
         } else {
-          emit(FeeLoadedState(feeList: feeList, isLoading: false));
+          emit(FeeLoadedState(
+              feeList: feeList,
+              isLoading: false,
+              expandedStates: List.generate(feeList.length, (index) => false)));
         }
       } on Exception catch (e) {
         emit(feeErrorState(
@@ -29,7 +33,14 @@ class FeeBloc extends Bloc<FeeEvent, FeeState> {
       }
     });
     on<toggleExpansionEvent>((event, emit) async {
-      emit(toggleExpansionState(index: event.index, isLoading: false));
+      if (state is FeeLoadedState) {
+        final currentState = state as FeeLoadedState;
+        final updatedExpandedStates =
+            List<bool>.from(currentState.expandedStates!);
+        updatedExpandedStates[event.index] =
+            !updatedExpandedStates[event.index];
+        emit(currentState.copyWith(expandedStates: updatedExpandedStates));
+      }
     });
   }
 }

@@ -51,7 +51,7 @@ class _loginPageState extends State<loginPage> {
                 onPressed: () {
                   // Respond to button press
                   final id = usernameController.text.trim();
-                  final password = usernameController.text.trim();
+                  final password = passwordController.text.trim();
                   context
                       .read<AuthBloc>()
                       .add(AuthEventLogIn(id: id, password: password));
