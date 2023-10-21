@@ -16,6 +16,7 @@ class homePage extends StatefulWidget {
 class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         return Scaffold(
@@ -45,6 +46,12 @@ class _homePageState extends State<homePage> {
                     Navigator.pushNamed(context, "/fee");
                   },
                   child: Text("Fee")),
+
+                  ElevatedButton(
+                    onPressed: (){
+                    Navigator.pushNamed(context, "/profile");
+                  },
+                  child: Text("Profile"),)
             ],
           )),
         );

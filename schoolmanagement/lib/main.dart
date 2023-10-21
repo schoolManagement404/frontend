@@ -13,6 +13,7 @@ import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/fee/presentation/screens/feePage.dart';
 import 'package:schoolmanagement/features/home/presentation/screens/homePage.dart';
 import 'package:schoolmanagement/features/login/presentation/screen/loginPage.dart';
+import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,8 @@ class MyApp extends StatelessWidget {
               create: (context) => AssignmentBloc(),
             ),
             BlocProvider<FeeBloc>(create: (context) => FeeBloc()),
+            BlocProvider<ProfileBloc>(
+              create: (context)=>ProfileBloc())
           ],
           child: const AuthPage(),
         ));

@@ -6,6 +6,8 @@ import 'package:schoolmanagement/features/assignment/presentation/screen/assigme
 import 'package:schoolmanagement/features/calendar/presentation/screens/home/home_page.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/fee/presentation/screens/feePage.dart';
+import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
+import 'package:schoolmanagement/features/profile/presentation/profile.dart';
 
 import '../../features/assignment/bloc/assignment_bloc.dart';
 import '../../features/assignment/presentation/screen/assignmentDetails.dart';
@@ -38,6 +40,15 @@ class AppRoutes {
             child: const feePage(),
           ),
         );
+
+        case '/profile':
+        return _materialRoute(
+          settings,
+          BlocProvider<ProfileBloc>
+          (create:(context) => ProfileBloc(),
+          child: const Profile(),) 
+        );
+
       default:
         return _materialRoute(settings, const NotFound());
     }
