@@ -6,10 +6,10 @@ part of 'assignment_bloc.dart';
 abstract class AssignmentEvent {}
 
 class fetchAssignmentEvent extends AssignmentEvent {
-  final String student_id;
+  final String userId;
 
   fetchAssignmentEvent({
-    required this.student_id,
+    required this.userId,
   });
 }
 

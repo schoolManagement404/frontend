@@ -26,7 +26,6 @@ class _ProfileState extends State<Profile> {
         if (state.isLoading) {
           LoadingScreen().show(
               context: context, text: state.message ?? "Please wait a moment");
-
         } else {
           LoadingScreen().hide();
         }
@@ -37,12 +36,12 @@ class _ProfileState extends State<Profile> {
             body: Center(child: Text("Error ${state.message!}")),
           );
         } else if (state is profileLoadedState) {
-            final jsonData = state.profileList;
-            final userData = jsonData["data"]["student"];
+          final jsonData = state.profileList;
+          final userData = jsonData["data"]["student"];
 
-            return Scaffold(
-              body:Center(
-                child: Column(
+          return Scaffold(
+            body: Center(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("User profile"),
@@ -50,10 +49,10 @@ class _ProfileState extends State<Profile> {
                   Text("Roll no: ${userData["roll_no"]}"),
                   Text("Class: ${userData["class"]}"),
                   Text("Section: ${userData["section"]}")
-                  ],
-                          ),
+                ],
               ),
-            );
+            ),
+          );
         } else {
           return Scaffold(body: Text("sorry"));
         }

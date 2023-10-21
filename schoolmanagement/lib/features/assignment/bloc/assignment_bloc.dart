@@ -18,7 +18,7 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
       try {
         assignmentApi _assignmentApi = assignmentApi();
         final List<assignment> assignments =
-            await _assignmentApi.getAllAssignment(student_id: event.student_id);
+            await _assignmentApi.getAllAssignment(userId: event.userId);
         if (assignments.isEmpty) {
           emit(assignmentErrorState(
               exception: Exception('No assignments found'),
@@ -44,18 +44,20 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
       emit(selectClassroomState(
           classroom_id: event.classroom_id, isLoading: false));
     });
-    on<selectFilesEvent>((event, emit) async {
-      FilePickerResult? result =
-          await FilePicker.platform.pickFiles(allowMultiple: true);
-      print("Result= ${result}");
-      if (result != null) {
-        final List<File> _selectedFiles =
-            result.paths.map((path) => File(path!)).toList();
-        emit(selectFilesState(files: _selectedFiles, isLoading: false));
-      } else {
-        // User canceled the picker
-      }
-    });
+
+    // ***For File Picker*** (not used now)
+    // on<selectFilesEvent>((event, emit) async {
+    //   FilePickerResult? result =
+    //       await FilePicker.platform.pickFiles(allowMultiple: true);
+    //   print("Result= ${result}");
+    //   if (result != null) {
+    //     final List<File> _selectedFiles =
+    //         result.paths.map((path) => File(path!)).toList();
+    //     emit(selectFilesState(files: _selectedFiles, isLoading: false));
+    //   } else {
+    //     // User canceled the picker
+    //   }
+    // });
 
     // uploading assignment for teacher
     on<createAssignmentEvent>((event, emit) async {

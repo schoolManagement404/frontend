@@ -7,12 +7,11 @@ import 'package:http/http.dart' as http;
 
 class assignmentApi {
   //funtion to get all assignments
-  Future<List<assignment>> getAllAssignment(
-      {required String student_id}) async {
+  Future<List<assignment>> getAllAssignment({required String userId}) async {
     try {
       // Get all assignments from the server
-      final response = await http.get(
-          Uri.parse('http://10.0.2.2:3000/students/${student_id}/assignments'));
+      final response = await http
+          .get(Uri.parse('http://10.0.2.2:3000/students/$userId/assignments'));
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body) as List<dynamic>;
 
@@ -43,9 +42,8 @@ class assignmentApi {
   }
 
   //funtion to post student
-  Future<List<assignment>> postAssignment(assignment assignment) async {
+  Future<assignment> postAssignment(assignment assignment) async {
     try {
-      print(assignment.toJson());
       final response = await http.post(
         Uri.parse("http://10.0.2.2:3000/teachers/12/assignments"),
         body: jsonEncode(assignment.toJson()),
@@ -56,7 +54,7 @@ class assignmentApi {
       );
       if (response.statusCode == 200) {
         print("Assignment posted successfully");
-        return [];
+        return assignment;
       } else {
         print("Assignment not posted, Status code: ${response.statusCode}");
         throw Exception(
