@@ -16,7 +16,9 @@ class assignmentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<AssignmentBloc>().add(fetchAssignmentEvent(
-        userId: json.decode(loggedInHive().getLoginInfo())["id"]));
+        userId: json.decode(loggedInHive().getLoginInfo())["data"]["student"]
+            ["student_id"]));
+    print(loggedInHive().getLoginInfo());
     return BlocConsumer<AssignmentBloc, AssignmentState>(
         listener: (context, state) {
       if (state.isLoading) {
