@@ -10,6 +10,9 @@ import 'package:schoolmanagement/features/home/presentation/screens/homePage.dar
 import 'package:schoolmanagement/features/login/presentation/screen/loginPage.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());

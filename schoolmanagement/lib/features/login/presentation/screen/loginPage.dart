@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/auth/authService/authException.dart';
 import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
+<<<<<<< Updated upstream
 import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
+=======
+import 'package:schoolmanagement/features/login/presentation/widget/loginButton.dart';
+import 'package:schoolmanagement/features/login/presentation/widget/textfield.dart';
+
+import 'package:gap/gap.dart';
+>>>>>>> Stashed changes
 
 class loginPage extends StatefulWidget {
   const loginPage({super.key});
@@ -38,35 +45,46 @@ class _loginPageState extends State<loginPage> {
       },
       child: Scaffold(
         body: SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(height: 20),
-              TextField(
-                controller: usernameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter your id',
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Center(
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Color(0xFF966AC0),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
-              TextField(
-                controller: passwordController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter your password',
+                const Gap(20),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: Image.network(
+                      'https://img.freepik.com/free-vector/ok-concept-illustration_114360-2039.jpg?w=1380&t=st=1699675494~exp=1699676094~hmac=f502746d26befea0234fce6fb4e9329b1dba20abef972a085074dfefaf2948e8'),
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Respond to button press
-                  final id = usernameController.text.trim();
-                  final password = passwordController.text.trim();
-                  context
-                      .read<AuthBloc>()
-                      .add(AuthEventLogIn(id: id, password: password));
-                },
-                child: const Text('Submit'),
-              ),
-            ],
+                LoginTextField(
+                  text: 'Username...',
+                  controller: usernameController,
+                ),
+                LoginTextField(
+                    text: 'Password...',
+                    controller: passwordController,
+                    isPassword: true),
+                const Gap(15),
+                LoginButton(
+                    text: 'Login',
+                    onPressed: () {
+                      // Respond to button press
+                      final id = usernameController.text.trim();
+                      final password = passwordController.text.trim();
+                      context
+                          .read<AuthBloc>()
+                          .add(AuthEventLogIn(id: id, password: password));
+                    })
+              ],
+            ),
           ),
         ),
       ),
