@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/auth/authService/authException.dart';
 import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
-<<<<<<< Updated upstream
+
 import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
-=======
+
 import 'package:schoolmanagement/features/login/presentation/widget/loginButton.dart';
 import 'package:schoolmanagement/features/login/presentation/widget/textfield.dart';
 
 import 'package:gap/gap.dart';
->>>>>>> Stashed changes
+
 
 class loginPage extends StatefulWidget {
   const loginPage({super.key});
