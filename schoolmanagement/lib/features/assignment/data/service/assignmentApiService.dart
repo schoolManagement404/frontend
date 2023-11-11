@@ -15,21 +15,7 @@ class assignmentApi {
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body) as List<dynamic>;
 
-        final assignments = jsonData.map((json) {
-          return assignment(
-              // Map other assignment attributes here
-              classroom_id: json['classroom_id'],
-              teacher_id: json['teacher_id'],
-              subject_id: json['subject_id'],
-              assignment_id: json['assignment_id'],
-              assignment_name: json['assignment_name'],
-              assignment_description: json['assignment_description'],
-              assignment_deadline: DateTime.parse(json['assignment_deadline']),
-              created_date: DateTime.parse(json['created_date']),
-              assignment_file: json['assignment_file']);
-        }).toList();
-
-        return assignments;
+        return (jsonData).map((json) => assignment.fromJson(json)).toList();
       } else {
         // If response is not ok, throw an exception
         throw Exception('Error Status: ${response.statusCode}');

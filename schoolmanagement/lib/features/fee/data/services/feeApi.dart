@@ -15,11 +15,9 @@ class StudentFeeApi {
       final response = await http.get(
           Uri.parse('http://10.0.2.2:3000/students/${studentID}/fee_status'));
       if (response.statusCode == 200) {
-        var jsonData = jsonDecode(response.body.toString());
+        var jsonData = jsonDecode(response.body) as List<dynamic>;
         // If response is ok, then return a list of StudentFees
-        return (jsonData as List)
-            .map((json) => StudentFee.fromJson(json))
-            .toList();
+        return (jsonData).map((json) => StudentFee.fromJson(json)).toList();
       } else {
         print(response.statusCode);
         // If response is not ok, throw an exception

@@ -1,16 +1,11 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
 import 'package:schoolmanagement/auth/authService/mongodbAuthProvider.dart';
 import 'package:schoolmanagement/config/routes/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
-import 'package:schoolmanagement/features/assignment/presentation/screen/addAssignmentPage.dart';
-import 'package:schoolmanagement/features/assignment/presentation/screen/assigmentPage.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
-import 'package:schoolmanagement/features/fee/presentation/screens/feePage.dart';
 import 'package:schoolmanagement/features/home/presentation/screens/homePage.dart';
 import 'package:schoolmanagement/features/login/presentation/screen/loginPage.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
@@ -43,8 +38,7 @@ class MyApp extends StatelessWidget {
               create: (context) => AssignmentBloc(),
             ),
             BlocProvider<FeeBloc>(create: (context) => FeeBloc()),
-            BlocProvider<ProfileBloc>(
-              create: (context)=>ProfileBloc())
+            BlocProvider<ProfileBloc>(create: (context) => ProfileBloc())
           ],
           child: const AuthPage(),
         ));

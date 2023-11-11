@@ -4,14 +4,9 @@ import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 
 import '../../../../core/Error/loadingScreen/loadingScreen.dart';
 
-class feePage extends StatefulWidget {
+class feePage extends StatelessWidget {
   const feePage({super.key});
 
-  @override
-  State<feePage> createState() => _feePageState();
-}
-
-class _feePageState extends State<feePage> {
   @override
   Widget build(BuildContext context) {
     context.read<FeeBloc>().add(fetchFeeEvent(student_id: '12'));
@@ -51,7 +46,7 @@ class _feePageState extends State<feePage> {
                                   Text(
                                       'School fee for ${state.feeList[index].fee_month}'),
                                   Text(
-                                    'Remaining Rs: ${state.feeList[index].monthly_fee + state.feeList[index].exam_fee + state.feeList[index].extracurricular_fee + state.feeList[index].late_charge - state.feeList[index].discount_scholarship - state.feeList[index].paid_fee}',
+                                    'Remaining Rs: ${state.feeList[index].monthly_fee + (state.feeList[index].exam_fee ?? 0) + (state.feeList[index].extracurricular_fee ?? 0) + (state.feeList[index].late_charge ?? 0) - (state.feeList[index].discount_scholarship ?? 0) - (state.feeList[index].paid_fee ?? 0)}',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
                                   )
@@ -77,17 +72,17 @@ class _feePageState extends State<feePage> {
                                   Text(
                                       "Monthly fee: ${state.feeList[index].monthly_fee}"),
                                   Text(
-                                      "Exam Fee: ${state.feeList[index].exam_fee}"),
+                                      "Exam Fee: ${state.feeList[index].exam_fee ?? 0}"),
                                   Text(
-                                      "Extra Curricular fee: ${state.feeList[index].extracurricular_fee}"),
+                                      "Extra Curricular fee: ${state.feeList[index].extracurricular_fee ?? 0}"),
                                   Text(
-                                      "Late Charge: ${state.feeList[index].late_charge}"),
+                                      "Late Charge: ${state.feeList[index].late_charge ?? 0}"),
                                   Text(
-                                      "Discount: ${state.feeList[index].discount_scholarship}"),
+                                      "Discount: ${state.feeList[index].discount_scholarship ?? 0}"),
                                   Text(
-                                      "Paid fee: ${state.feeList[index].paid_fee}"),
+                                      "Paid fee: ${state.feeList[index].paid_fee ?? 0}"),
                                   Text(
-                                    'Remaining: ${state.feeList[index].monthly_fee + state.feeList[index].exam_fee + state.feeList[index].extracurricular_fee + state.feeList[index].late_charge - state.feeList[index].discount_scholarship - state.feeList[index].paid_fee}',
+                                    'Remaining: ${state.feeList[index].monthly_fee + (state.feeList[index].exam_fee ?? 0) + (state.feeList[index].extracurricular_fee ?? 0) + (state.feeList[index].late_charge ?? 0) - (state.feeList[index].discount_scholarship ?? 0) - (state.feeList[index].paid_fee ?? 0)}',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
                                   )

@@ -4,12 +4,12 @@ class StudentFee {
   final String student_id;
   final String fee_month;
   final int monthly_fee;
-  final int exam_fee;
-  final int extracurricular_fee;
-  final int discount_scholarship;
-  final int late_charge;
-  final int paid_fee;
-  final int bus_fee;
+  final int? exam_fee;
+  final int? extracurricular_fee;
+  final int? discount_scholarship;
+  final int? late_charge;
+  final int? paid_fee;
+  final int? bus_fee;
 
   StudentFee({
     required this.student_id,
