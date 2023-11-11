@@ -4,7 +4,7 @@ class assignment {
   final String classroom_id;
   final String teacher_id;
   final String subject_id;
-  final String assignment_id;
+  final String? assignment_id;
   final String assignment_name;
   final String assignment_description;
   final DateTime assignment_deadline;
@@ -12,7 +12,7 @@ class assignment {
   final String assignment_file;
 
   assignment({
-    required this.assignment_id,
+    this.assignment_id,
     required this.classroom_id,
     required this.teacher_id,
     required this.subject_id,

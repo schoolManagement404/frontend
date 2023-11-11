@@ -37,7 +37,7 @@ class mongoDBAuth implements authProvider {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-
+      print(response.statusCode);
       if (response.statusCode == 200) {
         print(response.statusCode.toString());
         loggedInHive().setLoggedIn('true');
@@ -45,19 +45,15 @@ class mongoDBAuth implements authProvider {
         loggedInHive().setLoginInfo(response.body);
         print('successfully logged in');
       } else if (response.statusCode == 404) {
-        print(response.statusCode.toString());
         throw userNotFoundAuthException();
       } else if (response.statusCode == 401) {
-        print(response.statusCode.toString());
-        throw wrongPasswordAuthExceptions();
+        throw wrongPasswordAuthException();
       } else {
-        print(response.statusCode.toString());
         print("GA1");
         throw genericAuthException();
       }
     } catch (e) {
-      print(e.toString());
-      throw genericAuthException();
+      rethrow;
     }
   }
 

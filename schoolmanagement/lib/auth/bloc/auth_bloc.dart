@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:schoolmanagement/auth/authService/authException.dart';
 import 'package:schoolmanagement/auth/authService/authProvider.dart';
 import 'package:schoolmanagement/core/hiveLocalDB/loggedInState/loggedIn.dart';
 part 'auth_event.dart';
@@ -30,7 +31,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           password: password,
         );
         emit(const AuthStateLoggedIn(isLoading: false));
-      } on Exception catch (e) {
+      } on userNotFoundAuthException catch (e) {
+        print("Bloc threw ${e}");
         emit(AuthStateLoggedOut(exception: e, isLoading: false));
       }
     });

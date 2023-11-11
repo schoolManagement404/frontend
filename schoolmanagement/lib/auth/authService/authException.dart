@@ -1,7 +1,7 @@
 //login exceptions
 class userNotFoundAuthException implements Exception {}
 
-class wrongPasswordAuthExceptions implements Exception {}
+class wrongPasswordAuthException implements Exception {}
 
 //generic exceptions
 class genericAuthException implements Exception {}

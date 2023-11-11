@@ -8,6 +8,7 @@ import 'package:schoolmanagement/features/assignment/data/model/assignment.dart'
 import 'package:schoolmanagement/features/assignment/data/service/assignmentApiService.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentWidgets.dart';
+import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
 import '../../bloc/assignment_bloc.dart';
 
 class addAssignment extends StatefulWidget {
@@ -58,7 +59,6 @@ class _addAssignmentState extends State<addAssignment> {
   //create text field controllers to add assignment
   TextEditingController descriptionController = TextEditingController();
   TextEditingController teacherIdController = TextEditingController();
-  TextEditingController assignmentIdController = TextEditingController();
   TextEditingController dueDateController = TextEditingController();
   TextEditingController assignmentTitleController = TextEditingController();
   TextEditingController driveLinkController = TextEditingController();
@@ -173,13 +173,6 @@ class _addAssignmentState extends State<addAssignment> {
                 ),
 
                 TextField(
-                  controller: assignmentIdController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter assignment id',
-                  ),
-                ),
-                TextField(
                   controller: assignmentTitleController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -236,7 +229,6 @@ class _addAssignmentState extends State<addAssignment> {
                       if (dueDate != null &&
                           selectedClassRoomID != null &&
                           selectedSubject != null &&
-                          assignmentIdController.text.trim() != '' &&
                           assignmentTitleController.text.trim() != '') {
                         context
                             .read<AssignmentBloc>()
@@ -245,8 +237,6 @@ class _addAssignmentState extends State<addAssignment> {
                                 classroom_id: selectedClassRoomID.toString(),
                                 teacher_id: teacherIdController.text.trim(),
                                 subject_id: selectedSubject.toString(),
-                                assignment_id:
-                                    assignmentIdController.text.trim(),
                                 assignment_name:
                                     assignmentTitleController.text.trim(),
                                 assignment_description:
@@ -261,12 +251,9 @@ class _addAssignmentState extends State<addAssignment> {
                             ));
                       } else {
                         // Handle the case when the assigned date is not selected
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Please fill the required fields"),
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
+                        const CustomSnackBar(
+                            message: '"Please fill the required fields"',
+                            timeInSeconds: 2);
                       }
                     },
                     child: const Text("Submit")),

@@ -52,35 +52,3 @@ class assignmentApi {
     }
   }
 }
-
-  //  ***EXAMPLE assignment to be fetched***
-  // try {
-  //   List<Assignment> assignments = await assignmentApi.getAssignments();
-  //   assignments.forEach((assignment) {
-  //     print('Assignment Title: ${assignment.assignmentTitle}');
-  //     print('Description: ${assignment.description}');
-  //     print('Due Date: ${assignment.dueDate}');
-  //     print('Assigned Date: ${assignment.assignedDate}');
-  //     print('File URL: ${assignment.fileUrl}');
-  //     print('-----------------------');
-  //   });
-  // } catch (e) {
-  //   print('Error: $e');
-  // }
-
-
-// ***EXAMPLE assignment to be posted***
-//   Assignment newAssignment = Assignment(
-//     assignmentTitle: 'New Assignment',
-//     description: 'Complete the new task',
-//     dueDate: DateTime(2023, 8, 15),
-//     assignedDate: DateTime.now(),
-//     fileUrl: 'https://example.com/new_assignment',
-//   );
-
-//   try {
-//     await assignmentApi.postAssignment(newAssignment);
-//   } catch (e) {
-//     print('Error: $e');
-//   }
-// }
