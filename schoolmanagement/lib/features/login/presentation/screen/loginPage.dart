@@ -10,7 +10,6 @@ import 'package:schoolmanagement/features/login/presentation/widget/textfield.da
 
 import 'package:gap/gap.dart';
 
-
 class loginPage extends StatefulWidget {
   const loginPage({super.key});
 
@@ -21,6 +20,7 @@ class loginPage extends StatefulWidget {
 class _loginPageState extends State<loginPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool isPassShown = false;
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
@@ -65,13 +65,22 @@ class _loginPageState extends State<loginPage> {
                       'https://img.freepik.com/free-vector/ok-concept-illustration_114360-2039.jpg?w=1380&t=st=1699675494~exp=1699676094~hmac=f502746d26befea0234fce6fb4e9329b1dba20abef972a085074dfefaf2948e8'),
                 ),
                 LoginTextField(
+                  suffixIconData: Icons.person,
                   text: 'Username...',
                   controller: usernameController,
                 ),
                 LoginTextField(
+                    suffixIconData: isPassShown
+                        ? Icons.remove_red_eye
+                        : Icons.password_sharp, //TO:DO  need a better icon
+                    onSuffixIconTap: () {
+                      setState(() {
+                        isPassShown = !isPassShown;
+                      });
+                    },
                     text: 'Password...',
                     controller: passwordController,
-                    isPassword: true),
+                    isPassword: !isPassShown),
                 const Gap(15),
                 LoginButton(
                     text: 'Login',

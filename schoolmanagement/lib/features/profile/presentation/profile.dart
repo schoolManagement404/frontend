@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
+import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/curved_nav/draw_curvednav.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/image.dart';
@@ -47,20 +48,23 @@ class _ProfileState extends State<Profile> {
               'https://iidamidamerica.org/wp-content/uploads/2020/12/male-placeholder-image.jpeg';
 
           return Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+              appBar: CustomAppBar(
+                appBarHeight: 56.0,
+                leadingWidget: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
                 ),
-                title: const Text("User Profile",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
+                titleWidget: Text(
+                  'User Profile',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
                 centerTitle: true,
-                backgroundColor: Colors.deepPurple,
+                backGroundColor: Colors.deepPurple,
               ),
               body: Stack(
                 children: [
@@ -102,48 +106,50 @@ class _ProfileState extends State<Profile> {
                   Positioned(
                     top: 120,
                     width: MediaQuery.of(context).size.width,
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Welcome ,",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                    child: SingleChildScrollView(
+                      child: Center(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Welcome ,",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                " ${userData["name"] ?? "User"}",
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Class :",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                " ${userData["class"] ?? "Class"} ${userData["section"] ?? "Section"}",
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
+                                Text(
+                                  " ${userData["name"] ?? "User"}",
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Class :",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  " ${userData["class"] ?? "Class"} ${userData["section"] ?? "Section"}",
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

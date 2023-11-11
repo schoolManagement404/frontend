@@ -5,7 +5,6 @@ SuffixIconButton({IconData? icon, Function? onTap}) {
     onTap: onTap as void Function()?,
     child: Icon(
       icon,
-      color: const Color.fromARGB(255, 255, 255, 255),
     ),
   );
 }

@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentWidgets.dart';
 
 class LoginTextField extends StatelessWidget {
   final String text;
   final bool isPassword;
   final TextEditingController controller;
-
-  const LoginTextField(
-      {super.key,
-      required this.text,
-      this.isPassword = false,
-      required this.controller});
+  final IconData? suffixIconData;
+  final Function? onSuffixIconTap;
+  const LoginTextField({
+    super.key,
+    required this.text,
+    this.isPassword = false,
+    required this.controller,
+    this.suffixIconData,
+    this.onSuffixIconTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,8 @@ class LoginTextField extends StatelessWidget {
           controller: controller,
           obscureText: isPassword,
           decoration: InputDecoration(
+            suffixIcon:
+                SuffixIconButton(icon: suffixIconData, onTap: onSuffixIconTap),
             isDense: true,
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
