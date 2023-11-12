@@ -11,6 +11,7 @@ import 'package:schoolmanagement/features/home/presentation/screens/homePage.dar
 import 'package:schoolmanagement/features/login/presentation/screen/loginPage.dart';
 import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 import 'package:schoolmanagement/features/navigationShell/scaffold_with_navbar.dart';
+import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 
 void main() async {
@@ -42,7 +43,10 @@ class MyApp extends StatelessWidget {
               create: (context) => AssignmentBloc(),
             ),
             BlocProvider<FeeBloc>(create: (context) => FeeBloc()),
-            BlocProvider<ProfileBloc>(create: (context) => ProfileBloc())
+            BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
+            BlocProvider<NoticeBloc>(
+              create: (context) => NoticeBloc(),
+            ),
           ],
           child: const AuthPage(),
         ));

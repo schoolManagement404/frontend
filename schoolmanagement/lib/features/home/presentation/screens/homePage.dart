@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
+import 'package:schoolmanagement/features/notices/services/noticeApi.dart';
 
 import '../../../../core/hiveLocalDB/loggedInState/loggedIn.dart';
 
@@ -63,7 +64,12 @@ class _homePageState extends State<homePage> {
                   Navigator.pushNamed(context, "/profile");
                 },
                 child: Text("Profile"),
-              )
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/notices");
+                  },
+                  child: Text("Notice")),
             ],
           )),
         );
