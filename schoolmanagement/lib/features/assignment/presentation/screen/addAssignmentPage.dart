@@ -1,11 +1,8 @@
-import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
-import 'package:schoolmanagement/features/assignment/data/service/assignmentApiService.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentWidgets.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
@@ -129,12 +126,12 @@ class _addAssignmentState extends State<addAssignment> {
                   children: [
                     DropdownButton<String>(
                       borderRadius: BorderRadius.circular(20),
-                      hint: Text(" Select Class Room ID"),
+                      hint: const Text(" Select Class Room ID"),
                       value: selectedClassRoomID,
                       items: classRoomID.map((option) {
                         return DropdownMenuItem(
-                          child: Text(option),
                           value: option,
+                          child: Text(option),
                         );
                       }).toList(),
                       onChanged: (value) {
@@ -145,12 +142,12 @@ class _addAssignmentState extends State<addAssignment> {
                     ),
                     DropdownButton<String>(
                       borderRadius: BorderRadius.circular(20),
-                      hint: Text(" Select the Subject"),
+                      hint: const Text(" Select the Subject"),
                       value: selectedSubject,
                       items: subject.map((option) {
                         return DropdownMenuItem(
-                          child: Text(option),
                           value: option,
+                          child: Text(option),
                         );
                       }).toList(),
                       onChanged: (value) {
@@ -183,10 +180,10 @@ class _addAssignmentState extends State<addAssignment> {
                 TextField(
                   controller: dueDateController,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                       labelText: 'Due date',
                       suffixIcon: SuffixIconButton1(
-                          icon: Icon(Icons.edit_calendar_outlined),
+                          icon: const Icon(Icons.edit_calendar_outlined),
                           onTap: () async {
                             await dateTime();
                           })),

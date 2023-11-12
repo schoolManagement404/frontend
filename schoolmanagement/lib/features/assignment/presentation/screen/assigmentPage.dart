@@ -6,9 +6,8 @@ import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/core/hiveLocalDB/loggedInState/loggedIn.dart';
 import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
-import 'package:schoolmanagement/features/assignment/data/service/assignmentApiService.dart';
+import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentTiles.dart';
 
-import 'assignmentDetails.dart';
 
 class assignmentPage extends StatelessWidget {
   const assignmentPage({super.key});
@@ -37,33 +36,23 @@ class assignmentPage extends StatelessWidget {
       } else if (state is assignmentLoadedState) {
         return Scaffold(
           body: ListView.builder(
+            prototypeItem: AssignmentTiles(
+              assignmentModel: assignment(
+                  assignment_id: "1",
+                  assignment_name: "Assignment 1",
+                  subject_id: "Maths",
+                  classroom_id: '',
+                  teacher_id: '',
+                  assignment_description: '',
+                  assignment_file: '',
+                  assignment_deadline: DateTime.now(),
+                  created_date: DateTime.now()),
+            ),
+            cacheExtent: 10,
             itemCount: state.assignmentList.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(
-                  state.assignmentList[index].assignment_name,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(state.assignmentList[index].subject_id),
-                trailing: Column(
-                  children: [
-                    Text("Due Date:"),
-                    Text(state.assignmentList[index].assignment_deadline
-                        .toIso8601String()
-                        .split("T")[0]
-                        .toString()),
-                  ],
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AssignmentDetailPage(
-                        currentAssignment: state.assignmentList[index],
-                      ),
-                    ),
-                  );
-                },
+              return AssignmentTiles(
+                assignmentModel: state.assignmentList[index],
               );
             },
           ),

@@ -6,7 +6,7 @@ class CustomDropdownButton extends StatelessWidget {
   final void Function(String?)? onChanged; // Update the parameter type
   final String hint;
 
-  const CustomDropdownButton({
+  const CustomDropdownButton({super.key, 
     required this.items,
     required this.value,
     required this.onChanged,

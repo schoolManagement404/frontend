@@ -5,14 +5,14 @@ import '../../data/model/assignment.dart';
 class AssignmentDetailPage extends StatelessWidget {
   final assignment currentAssignment;
 
-  AssignmentDetailPage({required this.currentAssignment});
+  const AssignmentDetailPage({super.key, required this.currentAssignment});
 
   @override
   Widget build(BuildContext context) {
     TextEditingController driveLinkController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Assignment Detail'),
+        title: const Text('Assignment Detail'),
       ),
       body: Column(
         children: <Widget>[
@@ -32,7 +32,7 @@ class AssignmentDetailPage extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text("Add Drive Link"),
+                        title: const Text("Add Drive Link"),
                         content: TextField(
                           controller: driveLinkController,
                           decoration: const InputDecoration(
@@ -45,18 +45,18 @@ class AssignmentDetailPage extends StatelessWidget {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text("Cancel")),
+                              child: const Text("Cancel")),
                           TextButton(
                               onPressed: () {
                                 // bloc for student posting assignment
                                 Navigator.pop(context);
                               },
-                              child: Text("Add")),
+                              child: const Text("Add")),
                         ],
                       );
                     });
               },
-              icon: Icon(Icons.add)),
+              icon: const Icon(Icons.add)),
 
           // Display other assignment details
         ],

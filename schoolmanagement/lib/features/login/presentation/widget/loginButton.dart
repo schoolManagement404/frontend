@@ -11,7 +11,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      color: Color(0xFF472B61),
+      color: const Color(0xFF472B61),
       child: InkWell(
           canRequestFocus: true,
           focusColor: const Color.fromARGB(52, 255, 255, 255),

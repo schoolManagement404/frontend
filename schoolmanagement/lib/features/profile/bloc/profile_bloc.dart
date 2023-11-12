@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 
 import '../data/userData.dart';
 
@@ -11,8 +10,8 @@ class ProfileBloc extends Bloc<ProfileEvent,ProfileState>{
   on<viewProfileEvent>((event,emit)async{
     emit(const profileInitialState(isLoading: true));
     try {
-      UserProfile _userProfile=UserProfile();
-      final Map<String,dynamic> userData=await _userProfile.getUserProfile();
+      UserProfile userProfile=UserProfile();
+      final Map<String,dynamic> userData=await userProfile.getUserProfile();
       if(userData.isEmpty)
       {
         emit(profileErrorState(exception: Exception("No Data Found"), message: "No data Found", isLoading: false));
@@ -23,7 +22,7 @@ class ProfileBloc extends Bloc<ProfileEvent,ProfileState>{
     } catch (e) {
       emit(profileErrorState(
         exception: Exception(e), 
-        message: "error while fetching ${e}", 
+        message: "error while fetching $e", 
         isLoading: false));
       
     }

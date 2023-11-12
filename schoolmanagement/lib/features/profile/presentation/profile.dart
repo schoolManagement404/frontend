@@ -1,19 +1,14 @@
-import 'dart:async';
-import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
+import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/curved_nav/draw_curvednav.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/image.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/tiles.dart';
 
-import '../../../core/hiveLocalDB/loggedInState/loggedIn.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -52,11 +47,13 @@ class _ProfileState extends State<Profile> {
                 appBarHeight: 56.0,
                 leadingWidget: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    //change the index to 0
+                    BlocProvider.of<NavigationBloc>(context)
+                        .add(const TabChanged(tabIndex: 0));
                   },
                   icon: const Icon(Icons.arrow_back, color: Colors.white),
                 ),
-                titleWidget: Text(
+                titleWidget: const Text(
                   'User Profile',
                   style: TextStyle(
                       color: Colors.white,
@@ -160,12 +157,12 @@ class _ProfileState extends State<Profile> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Container(
-                          height: 400,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            // color: Colors.red,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                        height: 400,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: SingleChildScrollView(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -174,13 +171,14 @@ class _ProfileState extends State<Profile> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SelectingTiles(
-                                    text: "Edit Profile",
+                                    text: "Notices",
                                     icon: const Icon(
                                       Icons.person_2_rounded,
                                       color: Colors.black,
                                     ),
                                     onPressed: () {
-                                      print("Name");
+                                      BlocProvider.of<NavigationBloc>(context)
+                                          .add(const TabChanged(tabIndex: 4));
                                     },
                                   ),
                                   SelectingTiles(
@@ -200,7 +198,7 @@ class _ProfileState extends State<Profile> {
                                 children: [
                                   SelectingTiles(
                                     text: "Class",
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.class_,
                                       color: Colors.black,
                                     ),
@@ -210,12 +208,13 @@ class _ProfileState extends State<Profile> {
                                   ),
                                   SelectingTiles(
                                     text: "Fees",
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.money_rounded,
                                       color: Colors.black,
                                     ),
                                     onPressed: () {
-                                      print("School");
+                                      BlocProvider.of<NavigationBloc>(context)
+                                          .add(const TabChanged(tabIndex: 2));
                                     },
                                   ),
                                 ],
@@ -225,17 +224,18 @@ class _ProfileState extends State<Profile> {
                                 children: [
                                   SelectingTiles(
                                     text: "Assignments",
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.notes_rounded,
                                       color: Colors.black,
                                     ),
                                     onPressed: () {
-                                      print("Assignments");
+                                      BlocProvider.of<NavigationBloc>(context)
+                                          .add(const TabChanged(tabIndex: 1));
                                     },
                                   ),
                                   SelectingTiles(
                                     text: "Personal Records",
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.info_outlined,
                                       color: Colors.black,
                                     ),
@@ -246,7 +246,9 @@ class _ProfileState extends State<Profile> {
                                 ],
                               ),
                             ],
-                          )),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],

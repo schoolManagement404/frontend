@@ -1,4 +1,3 @@
-import 'package:schoolmanagement/core/allUser/student/studentModal.dart';
 
 abstract class authProvider {
   //initialize

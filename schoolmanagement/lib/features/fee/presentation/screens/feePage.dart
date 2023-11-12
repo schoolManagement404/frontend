@@ -34,7 +34,7 @@ class feePage extends StatelessWidget {
                 return Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       color: Colors.blue,
                       child: Column(
                         children: [
@@ -48,7 +48,7 @@ class feePage extends StatelessWidget {
                                   Text(
                                     'Remaining Rs: ${state.feeList[index].monthly_fee + (state.feeList[index].exam_fee ?? 0) + (state.feeList[index].extracurricular_fee ?? 0) + (state.feeList[index].late_charge ?? 0) - (state.feeList[index].discount_scholarship ?? 0) - (state.feeList[index].paid_fee ?? 0)}',
                                     style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                        const TextStyle(fontWeight: FontWeight.bold),
                                   )
                                 ],
                               ),
@@ -66,7 +66,7 @@ class feePage extends StatelessWidget {
                           ),
                           if (state.expandedStates![index])
                             Container(
-                              padding: EdgeInsets.symmetric(vertical: 10),
+                              padding: const EdgeInsets.symmetric(vertical: 10),
                               child: Column(
                                 children: [
                                   Text(
@@ -84,7 +84,7 @@ class feePage extends StatelessWidget {
                                   Text(
                                     'Remaining: ${state.feeList[index].monthly_fee + (state.feeList[index].exam_fee ?? 0) + (state.feeList[index].extracurricular_fee ?? 0) + (state.feeList[index].late_charge ?? 0) - (state.feeList[index].discount_scholarship ?? 0) - (state.feeList[index].paid_fee ?? 0)}',
                                     style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                        const TextStyle(fontWeight: FontWeight.bold),
                                   )
                                 ],
                               ),

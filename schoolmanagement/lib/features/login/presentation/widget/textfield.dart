@@ -22,7 +22,7 @@ class LoginTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Material(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        color: Color(0xFFE9D7FB),
+        color: const Color(0xFFE9D7FB),
         child: TextFormField(
           style: const TextStyle(
               color: Color(0xFF200123), fontWeight: FontWeight.bold),
