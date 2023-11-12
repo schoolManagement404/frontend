@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
 import 'package:schoolmanagement/core/Error/404_page.dart';
 import 'package:schoolmanagement/features/assignment/presentation/screen/addAssignmentPage.dart';
 import 'package:schoolmanagement/features/assignment/presentation/screen/assigmentPage.dart';
-import 'package:schoolmanagement/features/calendar/presentation/screens/home/home_page.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/fee/presentation/screens/feePage.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/profile/presentation/profile.dart';
+import 'package:schoolmanagement/main.dart';
 
+import '../../auth/authService/mongodbAuthProvider.dart';
 import '../../features/assignment/bloc/assignment_bloc.dart';
-import '../../features/assignment/presentation/screen/assignmentDetails.dart';
 
 class AppRoutes {
   static Route<dynamic> onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
+      case '/':
+        return _materialRoute(
+          settings,
+          BlocProvider<AuthBloc>(
+            create: (context) => AuthBloc(mongoDBAuth()),
+            child: const AuthPage(),
+          ),
+        );
       case '/view_assignments':
         return _materialRoute(
           settings,
@@ -41,13 +50,13 @@ class AppRoutes {
           ),
         );
 
-        case '/profile':
+      case '/profile':
         return _materialRoute(
-          settings,
-          BlocProvider<ProfileBloc>
-          (create:(context) => ProfileBloc(),
-          child: const Profile(),) 
-        );
+            settings,
+            BlocProvider<ProfileBloc>(
+              create: (context) => ProfileBloc(),
+              child: const Profile(),
+            ));
 
       default:
         return _materialRoute(settings, const NotFound());

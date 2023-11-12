@@ -31,7 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           password: password,
         );
         emit(const AuthStateLoggedIn(isLoading: false));
-      } on userNotFoundAuthException catch (e) {
+      } on Exception catch (e) {
         print("Bloc threw ${e}");
         emit(AuthStateLoggedOut(exception: e, isLoading: false));
       }

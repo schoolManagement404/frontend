@@ -5,6 +5,7 @@ import 'package:schoolmanagement/config/routes/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
+import 'package:schoolmanagement/features/calendar/presentation/screens/calenderPage.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/home/presentation/screens/homePage.dart';
 import 'package:schoolmanagement/features/login/presentation/screen/loginPage.dart';
@@ -25,26 +26,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        onGenerateRoute: AppRoutes.onGenerateRoutes,
-        initialRoute: "/",
-        home: MultiBlocProvider(
-          providers: [
-            BlocProvider<AuthBloc>(
-              create: (context) => AuthBloc(mongoDBAuth()),
-            ),
-            BlocProvider<AssignmentBloc>(
-              create: (context) => AssignmentBloc(),
-            ),
-            BlocProvider<FeeBloc>(create: (context) => FeeBloc()),
-            BlocProvider<ProfileBloc>(create: (context) => ProfileBloc())
-          ],
-          child: const AuthPage(),
-        ));
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      onGenerateRoute: AppRoutes.onGenerateRoutes,
+      initialRoute: "/",
+      // home: MultiBlocProvider(
+      //   providers: [
+      //     BlocProvider<AuthBloc>(
+      //       create: (context) => AuthBloc(mongoDBAuth()),
+      //     ),
+      //     BlocProvider<AssignmentBloc>(
+      //       create: (context) => AssignmentBloc(),
+      //     ),
+      //     BlocProvider<FeeBloc>(create: (context) => FeeBloc()),
+      //     BlocProvider<ProfileBloc>(create: (context) => ProfileBloc())
+      //   ],
+      //   child: const ,
+      // )
+    );
   }
 }
 

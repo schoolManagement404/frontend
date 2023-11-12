@@ -46,6 +46,7 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^23.1.43
   gap: ^3.0.1
   cached_network_image: ^3.3.0
+  table_calendar: ^3.0.9
   
 
 dev_dependencies:
