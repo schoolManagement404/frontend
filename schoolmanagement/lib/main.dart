@@ -9,10 +9,9 @@ import 'package:schoolmanagement/features/calendar/presentation/screens/calender
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/home/presentation/screens/homePage.dart';
 import 'package:schoolmanagement/features/login/presentation/screen/loginPage.dart';
+import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
+import 'package:schoolmanagement/features/navigationShell/scaffold_with_navbar.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
-
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,27 +25,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      onGenerateRoute: AppRoutes.onGenerateRoutes,
-      initialRoute: "/",
-      // home: MultiBlocProvider(
-      //   providers: [
-      //     BlocProvider<AuthBloc>(
-      //       create: (context) => AuthBloc(mongoDBAuth()),
-      //     ),
-      //     BlocProvider<AssignmentBloc>(
-      //       create: (context) => AssignmentBloc(),
-      //     ),
-      //     BlocProvider<FeeBloc>(create: (context) => FeeBloc()),
-      //     BlocProvider<ProfileBloc>(create: (context) => ProfileBloc())
-      //   ],
-      //   child: const ,
-      // )
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        onGenerateRoute: AppRoutes.onGenerateRoutes,
+        initialRoute: "/",
+        home: MultiBlocProvider(
+          providers: [
+            BlocProvider<AuthBloc>(
+              create: (context) => AuthBloc(mongoDBAuth()),
+            ),
+            BlocProvider<NavigationBloc>(create: (context) => NavigationBloc()),
+            BlocProvider<AssignmentBloc>(
+              create: (context) => AssignmentBloc(),
+            ),
+            BlocProvider<FeeBloc>(create: (context) => FeeBloc()),
+            BlocProvider<ProfileBloc>(create: (context) => ProfileBloc())
+          ],
+          child: const AuthPage(),
+        ));
   }
 }
 
@@ -68,7 +67,7 @@ class AuthPage extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is AuthStateLoggedIn) {
-          return const homePage();
+          return const ScaffoldWithNavBar();
         } else if (state is AuthStateLoggedOut) {
           return const loginPage();
         } else {

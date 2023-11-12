@@ -7,6 +7,8 @@ import 'package:schoolmanagement/features/assignment/presentation/screen/assigme
 import 'package:schoolmanagement/features/calendar/presentation/screens/calenderPage.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/fee/presentation/screens/feePage.dart';
+import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
+import 'package:schoolmanagement/features/navigationShell/scaffold_with_navbar.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/profile/presentation/profile.dart';
 import 'package:schoolmanagement/main.dart';
@@ -16,6 +18,7 @@ import '../../features/assignment/bloc/assignment_bloc.dart';
 
 class AppRoutes {
   static Route<dynamic> onGenerateRoutes(RouteSettings settings) {
+    print(settings.name);
     switch (settings.name) {
       case '/':
         return _materialRoute(
