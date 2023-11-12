@@ -1,12 +1,9 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:meta/meta.dart';
-import 'package:schoolmanagement/core/allUser/student/studentModal.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
 import 'package:schoolmanagement/features/assignment/data/service/assignmentApiService.dart';
-
 part 'assignment_event.dart';
 part 'assignment_state.dart';
 
@@ -16,9 +13,9 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
     on<fetchAssignmentEvent>((event, emit) async {
       emit(const assignmentInitialState(isLoading: true));
       try {
-        assignmentApi _assignmentApi = assignmentApi();
+        AssignmentApi assignmentApi = AssignmentApi();
         final List<assignment> assignments =
-            await _assignmentApi.getAllAssignment(userId: event.userId);
+            await assignmentApi.getAllAssignment(userId: event.userId);
         if (assignments.isEmpty) {
           emit(assignmentErrorState(
               exception: Exception('No assignments found'),
@@ -63,8 +60,8 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
     on<createAssignmentEvent>((event, emit) async {
       emit(const assignmentInitialState(isLoading: true));
       try {
-        assignmentApi _assignmentApi = assignmentApi();
-        await _assignmentApi.postAssignment(event.newAssignment);
+        AssignmentApi assignmentApi = AssignmentApi();
+        await assignmentApi.postAssignment(event.newAssignment);
 
         emit(const assignmentAddState(
           isLoading: false,

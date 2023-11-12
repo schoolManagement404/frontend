@@ -6,11 +6,8 @@ import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/core/hiveLocalDB/loggedInState/loggedIn.dart';
 import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
-import 'package:schoolmanagement/features/assignment/data/service/assignmentApiService.dart';
 import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentTiles.dart';
-import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentWidgets.dart';
 
-import 'assignmentDetails.dart';
 
 class assignmentPage extends StatelessWidget {
   const assignmentPage({super.key});

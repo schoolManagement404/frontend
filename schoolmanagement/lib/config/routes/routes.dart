@@ -6,8 +6,6 @@ import 'package:schoolmanagement/features/assignment/presentation/screen/addAssi
 import 'package:schoolmanagement/features/assignment/presentation/screen/assigmentPage.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/fee/presentation/screens/feePage.dart';
-import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
-import 'package:schoolmanagement/features/navigationShell/scaffold_with_navbar.dart';
 import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.dart';
 import 'package:schoolmanagement/features/notices/presentation/noticesPage.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';

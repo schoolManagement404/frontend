@@ -8,5 +8,5 @@ sealed class NoticeEvent extends Equatable {
 }
 
 class fetchNoticeEvent extends NoticeEvent {
-  fetchNoticeEvent();
+  const fetchNoticeEvent();
 }

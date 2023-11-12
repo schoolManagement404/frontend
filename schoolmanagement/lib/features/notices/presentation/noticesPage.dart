@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.dart';
@@ -11,7 +9,7 @@ class noticePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<NoticeBloc>().add(fetchNoticeEvent());
+    context.read<NoticeBloc>().add(const fetchNoticeEvent());
     return BlocConsumer<NoticeBloc, NoticeState>(
       listener: (BuildContext context, NoticeState state) {
         if (state.isLoading) {
@@ -37,7 +35,7 @@ class noticePage extends StatelessWidget {
                 return Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       color: Colors.blue,
                       child: InkWell(
                         onTap: () {
@@ -58,7 +56,7 @@ class noticePage extends StatelessWidget {
                                         'Notice for ${state.noticeList[index].noticeTitle}'),
                                     Text(
                                       '${state.noticeList[index].noticeDescription}',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     )
                                   ],
@@ -75,13 +73,13 @@ class noticePage extends StatelessWidget {
             ),
           );
         } else if (state is NoticeEmptyState) {
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: Text("No notices found"),
             ),
           );
         } else {
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: Text("Something went wrong"),
             ),

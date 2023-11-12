@@ -19,9 +19,9 @@ class _CalenderPageState extends State<CalenderPage> {
           focusedDay: DateTime.now(),
           rangeStartDay: DateTime(2023, 11, 1),
           rangeEndDay: DateTime(2023, 11, 13),
-          weekendDays: [DateTime.saturday],
+          weekendDays: const [DateTime.saturday],
           daysOfWeekHeight: 30,
-          headerStyle: HeaderStyle(
+          headerStyle: const HeaderStyle(
               titleTextStyle: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 20,

@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:schoolmanagement/config/appUrl/appUrl.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
 import 'package:http/http.dart' as http;
 
-class assignmentApi {
+class AssignmentApi {
   //funtion to get all assignments
   Future<List<assignment>> getAllAssignment({required String userId}) async {
     try {

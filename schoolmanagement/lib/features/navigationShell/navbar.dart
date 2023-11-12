@@ -44,26 +44,29 @@ class _CustomNavBarState extends State<CustomNavBar> {
             items: [
               /// Home
               DotNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: const Icon(Icons.home),
                 // selectedColor: Color(0xff73544C),
               ),
 
               /// Likes
               DotNavigationBarItem(
-                icon: Icon(Icons.assessment),
+                icon: const Icon(Icons.assessment),
                 // selectedColor: Color(0xff73544C),
               ),
 
               /// Search
               DotNavigationBarItem(
-                icon: Icon(Icons.attach_money_sharp),
+                icon: const Icon(Icons.attach_money_sharp),
                 // selectedColor: Color(0xff73544C),
               ),
 
               /// Profile
               DotNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: const Icon(Icons.person),
                 // selectedColor: Color(0xff73544C),
+              ),
+              DotNavigationBarItem(
+                icon: const Icon(Icons.notifications),
               ),
             ],
           ),

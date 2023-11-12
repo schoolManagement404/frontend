@@ -7,13 +7,13 @@ part 'notice_event.dart';
 part 'notice_state.dart';
 
 class NoticeBloc extends Bloc<NoticeEvent, NoticeState> {
-  NoticeBloc() : super(NoticeInitial(isLoading: false)) {
+  NoticeBloc() : super(const NoticeInitial(isLoading: false)) {
     on<NoticeEvent>((event, emit) async {
       if (event is fetchNoticeEvent) {
-        emit(NoticeInitial(isLoading: true));
+        emit(const NoticeInitial(isLoading: true));
         try {
-          NoticeApi _noticeApi = NoticeApi();
-          final List<Notice> noticeList = await _noticeApi.getNotices();
+          NoticeApi noticeApi = NoticeApi();
+          final List<Notice> noticeList = await noticeApi.getNotices();
           if (noticeList.isEmpty) {
             emit(NoticeErrorState(
                 exception: Exception('No notices found'),

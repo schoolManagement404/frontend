@@ -2,11 +2,8 @@
 
 import 'dart:convert';
 
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:schoolmanagement/auth/authService/authProvider.dart';
 import 'package:http/http.dart' as http;
-import 'package:schoolmanagement/config/appUrl/appUrl.dart';
-import 'package:schoolmanagement/core/allUser/student/studentModal.dart';
 import 'package:schoolmanagement/core/hiveLocalDB/loggedInState/loggedIn.dart';
 
 import 'authException.dart';
@@ -27,14 +24,14 @@ class mongoDBAuth implements authProvider {
   @override
   Future<void> login({required String id, required String password}) async {
     try {
-      const emulator_url = 'http://10.0.2.2:3000/auth/login';
-      const web_url = '192.168.100.236:3000/auth/login';
+      const emulatorUrl = 'http://10.0.2.2:3000/auth/login';
+      const webUrl = '192.168.100.236:3000/auth/login';
       //check current running platform
       //if platform is android then use emulator url
       //else use web url
 
       final response = await http.post(
-        Uri.parse(emulator_url),
+        Uri.parse(emulatorUrl),
         body: jsonEncode({
           'id': id,
           'password': password,

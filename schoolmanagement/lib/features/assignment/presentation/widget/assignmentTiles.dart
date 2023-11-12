@@ -48,14 +48,14 @@ class _AssignmentTilesState extends State<AssignmentTiles> {
                         children: [
                           Text(
                             widget.assignmentModel.assignment_name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                           ),
                           Text(
                             widget.assignmentModel.subject_id,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -65,7 +65,7 @@ class _AssignmentTilesState extends State<AssignmentTiles> {
                                 .toIso8601String()
                                 .split("T")[0]
                                 .toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),

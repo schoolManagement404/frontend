@@ -11,9 +11,9 @@ class FeeBloc extends Bloc<FeeEvent, FeeState> {
     on<fetchFeeEvent>((event, emit) async {
       emit(const FeeInitialState(isLoading: true));
       try {
-        StudentFeeApi _studentFeeApi = StudentFeeApi();
+        StudentFeeApi studentFeeApi = StudentFeeApi();
         final List<StudentFee> feeList =
-            await _studentFeeApi.getStudentFees(event.student_id);
+            await studentFeeApi.getStudentFees(event.student_id);
         if (feeList.isEmpty) {
           emit(feeErrorState(
               exception: Exception('No fees found'),

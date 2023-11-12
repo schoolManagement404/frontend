@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class SelectingTiles extends StatelessWidget {
   final String text;
@@ -20,10 +19,10 @@ class SelectingTiles extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           onTap: onPressed,
           splashFactory: InkSparkle.constantTurbulenceSeedSplashFactory,
-          splashColor: Color.fromARGB(255, 239, 250, 253),
+          splashColor: const Color.fromARGB(255, 239, 250, 253),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
+            child: SizedBox(
               height: 100,
               width: 150,
               child: Padding(

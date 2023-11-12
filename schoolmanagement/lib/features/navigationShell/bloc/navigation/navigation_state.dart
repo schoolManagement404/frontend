@@ -13,3 +13,13 @@ sealed class NavigationState extends Equatable {
 final class NavigationInitial extends NavigationState {
   const NavigationInitial({required super.tabIndex});
 }
+
+class NavigationErrorState extends NavigationState {
+  final Exception? exception;
+  final String? message;
+  const NavigationErrorState({
+    required this.exception,
+    required this.message,
+    required tabIndex,
+  }) : super(tabIndex: tabIndex);
+}

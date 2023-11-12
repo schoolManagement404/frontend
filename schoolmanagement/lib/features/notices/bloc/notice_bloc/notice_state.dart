@@ -13,7 +13,7 @@ sealed class NoticeState extends Equatable {
 }
 
 final class NoticeInitial extends NoticeState {
-  NoticeInitial({required super.isLoading});
+  const NoticeInitial({required super.isLoading});
 }
 
 class NoticeLoadedState extends NoticeState {

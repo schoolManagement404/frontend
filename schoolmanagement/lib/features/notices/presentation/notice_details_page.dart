@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:schoolmanagement/features/notices/data/model/noticeModel.dart';
 
@@ -13,7 +12,7 @@ class NoticeDetails extends StatelessWidget {
         title: Text(noticeModel.noticeTitle!),
       ),
       body: Center(
-        child: Text("Notice Details"),
+        child: Text(noticeModel.noticeDescription!),
       ),
     );
   }

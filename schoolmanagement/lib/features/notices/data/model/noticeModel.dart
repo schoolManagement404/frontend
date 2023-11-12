@@ -116,7 +116,7 @@ class Notice {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['_id'] = _sId;
     data['notice_id'] = _noticeId;
     data['notice_attendance'] = _noticeAttendance;
