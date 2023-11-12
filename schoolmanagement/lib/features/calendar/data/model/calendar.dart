@@ -8,25 +8,24 @@ class CalenderModel {
     if (json['one_day_events'] != null) {
       oneDayEvents = <OneDayEvents>[];
       json['one_day_events'].forEach((v) {
-        oneDayEvents!.add(new OneDayEvents.fromJson(v));
+        oneDayEvents!.add(OneDayEvents.fromJson(v));
       });
     }
     if (json['range_events'] != null) {
       rangeEvents = <RangeEvents>[];
       json['range_events'].forEach((v) {
-        rangeEvents!.add(new RangeEvents.fromJson(v));
+        rangeEvents!.add(RangeEvents.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.oneDayEvents != null) {
-      data['one_day_events'] =
-          this.oneDayEvents!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (oneDayEvents != null) {
+      data['one_day_events'] = oneDayEvents!.map((v) => v.toJson()).toList();
     }
-    if (this.rangeEvents != null) {
-      data['range_events'] = this.rangeEvents!.map((v) => v.toJson()).toList();
+    if (rangeEvents != null) {
+      data['range_events'] = rangeEvents!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -46,10 +45,10 @@ class OneDayEvents {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['eventName'] = this.eventName;
-    data['date'] = this.date;
-    data['isHoliday'] = this.isHoliday;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['eventName'] = eventName;
+    data['date'] = date;
+    data['isHoliday'] = isHoliday;
     return data;
   }
 }
@@ -70,11 +69,11 @@ class RangeEvents {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['eventName'] = this.eventName;
-    data['start'] = this.start;
-    data['end'] = this.end;
-    data['isHoliday'] = this.isHoliday;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['eventName'] = eventName;
+    data['start'] = start;
+    data['end'] = end;
+    data['isHoliday'] = isHoliday;
     return data;
   }
 }
