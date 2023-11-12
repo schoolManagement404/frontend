@@ -5,6 +5,7 @@ import 'package:schoolmanagement/features/fee/presentation/screens/feePage.dart'
 import 'package:schoolmanagement/features/home/presentation/screens/homePage.dart';
 
 import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
+import 'package:schoolmanagement/features/navigationShell/navbar.dart';
 import 'package:schoolmanagement/features/profile/presentation/profile.dart';
 
 const bottomNavScreen = <Widget>[
@@ -38,18 +39,24 @@ class ScaffoldWithNavBar extends StatelessWidget {
         return Scaffold(
           // body: Center(child: bottomNavScreen.elementAt(state.tabIndex)),
           body: pages.elementAt(state.tabIndex),
-          bottomNavigationBar: BottomNavigationBar(
-              items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.assignment), label: "Assignment"),
-                BottomNavigationBarItem(icon: Icon(Icons.money), label: "Fee"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.person), label: "Profile"),
-              ],
-              currentIndex: state.tabIndex,
-              unselectedItemColor: Colors.grey,
-              selectedItemColor: Colors.deepPurple,
+          // bottomNavigationBar: BottomNavigationBar(
+          //     items: const [
+          //       BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          //       BottomNavigationBarItem(
+          //           icon: Icon(Icons.assignment), label: "Assignment"),
+          //       BottomNavigationBarItem(icon: Icon(Icons.money), label: "Fee"),
+          //       BottomNavigationBarItem(
+          //           icon: Icon(Icons.person), label: "Profile"),
+          //     ],
+          //     currentIndex: state.tabIndex,
+          //     unselectedItemColor: Colors.grey,
+          //     selectedItemColor: Colors.deepPurple,
+          //     onTap: (index) {
+          //       BlocProvider.of<NavigationBloc>(context)
+          //           .add(TabChanged(tabIndex: index));
+          //     }),
+          bottomNavigationBar: CustomNavBar(
+              index: state.tabIndex,
               onTap: (index) {
                 BlocProvider.of<NavigationBloc>(context)
                     .add(TabChanged(tabIndex: index));
