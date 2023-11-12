@@ -27,8 +27,14 @@ class mongoDBAuth implements authProvider {
   @override
   Future<void> login({required String id, required String password}) async {
     try {
+      const emulator_url = 'http://10.0.2.2:3000/auth/login';
+      const web_url = '192.168.100.236:3000/auth/login';
+      //check current running platform
+      //if platform is android then use emulator url
+      //else use web url
+
       final response = await http.post(
-        Uri.parse("http://10.0.2.2:3000/auth/login"),
+        Uri.parse(emulator_url),
         body: jsonEncode({
           'id': id,
           'password': password,

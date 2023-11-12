@@ -163,12 +163,12 @@ class _ProfileState extends State<Profile> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Container(
-                          height: 400,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            // color: Colors.red,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                        height: 400,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: SingleChildScrollView(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -218,7 +218,8 @@ class _ProfileState extends State<Profile> {
                                       color: Colors.black,
                                     ),
                                     onPressed: () {
-                                      print("School");
+                                      BlocProvider.of<NavigationBloc>(context)
+                                          .add(TabChanged(tabIndex: 2));
                                     },
                                   ),
                                 ],
@@ -233,7 +234,8 @@ class _ProfileState extends State<Profile> {
                                       color: Colors.black,
                                     ),
                                     onPressed: () {
-                                      print("Assignments");
+                                      BlocProvider.of<NavigationBloc>(context)
+                                          .add(TabChanged(tabIndex: 1));
                                     },
                                   ),
                                   SelectingTiles(
@@ -249,7 +251,9 @@ class _ProfileState extends State<Profile> {
                                 ],
                               ),
                             ],
-                          )),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],
