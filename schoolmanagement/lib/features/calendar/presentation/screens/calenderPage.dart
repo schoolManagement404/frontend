@@ -57,8 +57,8 @@ class _CalenderPageState extends State<CalenderPage> {
         child: Column(
           children: [
             TableCalendar<Event>(
-              firstDay: kFirstDay,
-              lastDay: kLastDay,
+              firstDay: firstDay,
+              lastDay: lastDay,
               focusedDay: _focusedDay,
               rangeStartDay: _rangeStart,
               holidayPredicate: isHoliday,
