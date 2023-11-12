@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
             BlocProvider<FeeBloc>(create: (context) => FeeBloc()),
             BlocProvider<ProfileBloc>(create: (context) => ProfileBloc())
           ],
-          child: const AuthPage(),
+          child: const CalenderPage(),
         ));
   }
 }
