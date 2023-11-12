@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
+import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/curved_nav/draw_curvednav.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/image.dart';
@@ -52,7 +53,9 @@ class _ProfileState extends State<Profile> {
                 appBarHeight: 56.0,
                 leadingWidget: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    //change the index to 0
+                    BlocProvider.of<NavigationBloc>(context)
+                        .add(TabChanged(tabIndex: 0));
                   },
                   icon: const Icon(Icons.arrow_back, color: Colors.white),
                 ),
