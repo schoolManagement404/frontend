@@ -71,6 +71,11 @@ class _homePageState extends State<homePage> {
                     Navigator.pushNamed(context, "/notices");
                   },
                   child: const Text("Notice")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/calender");
+                  },
+                  child: Text("calender"))
             ],
           )),
         );

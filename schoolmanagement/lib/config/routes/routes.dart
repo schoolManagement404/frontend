@@ -75,6 +75,12 @@ class AppRoutes {
             child: const noticePage(),
           ),
         );
+
+      case '/calender':
+        return _materialRoute(
+          settings,
+          const CalenderPage(),
+        );
       default:
         return _materialRoute(settings, const NotFound());
     }
