@@ -1,5 +1,6 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class CustomNavBar extends StatefulWidget {
   final int index;
@@ -22,7 +23,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(40),
           child: DotNavigationBar(
-            margin: const EdgeInsets.only(left: 20, right: 20),
+            margin: const EdgeInsets.only(left: 25, right: 25),
             selectedItemColor: Colors.deepPurple,
             currentIndex: widget.index,
             dotIndicatorColor: Colors.deepPurple,
@@ -39,34 +40,49 @@ class _CustomNavBarState extends State<CustomNavBar> {
                 offset: const Offset(0, 3), // changes position of shadow
               ),
             ],
-            enablePaddingAnimation: true,
+            // enablePaddingAnimation: true,
             onTap: widget.onTap,
             items: [
               /// Home
               DotNavigationBarItem(
-                icon: const Icon(Icons.home),
+                icon: const Icon(
+                  EvaIcons.home,
+                  size: 25,
+                ),
                 // selectedColor: Color(0xff73544C),
               ),
 
               /// Likes
               DotNavigationBarItem(
-                icon: const Icon(Icons.assessment),
+                icon: const Icon(
+                  Icons.calculate_rounded,
+                  size: 25,
+                ),
                 // selectedColor: Color(0xff73544C),
               ),
 
               /// Search
               DotNavigationBarItem(
-                icon: const Icon(Icons.attach_money_sharp),
+                icon: const Icon(
+                  Bootstrap.wallet_fill,
+                  size: 25,
+                ),
                 // selectedColor: Color(0xff73544C),
               ),
 
               /// Profile
               DotNavigationBarItem(
-                icon: const Icon(Icons.person),
+                icon: const Icon(
+                  Bootstrap.person_circle,
+                  size: 25,
+                ),
                 // selectedColor: Color(0xff73544C),
               ),
               DotNavigationBarItem(
-                icon: const Icon(Icons.notifications),
+                icon: const Icon(
+                  EvaIcons.bell,
+                  size: 25,
+                ),
               ),
             ],
           ),

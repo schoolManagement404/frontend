@@ -31,13 +31,30 @@ class ScaffoldWithNavBar extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          body: pages.elementAt(state.tabIndex),
-          bottomNavigationBar: CustomNavBar(
-              index: state.tabIndex,
-              onTap: (index) {
-                BlocProvider.of<NavigationBloc>(context)
-                    .add(TabChanged(tabIndex: index));
-              }),
+          body: Stack(
+            children: [
+              pages.elementAt(state.tabIndex),
+              Positioned(
+                bottom: 10,
+                left: 0,
+                right: 0,
+                child: CustomNavBar(
+                  index: state.tabIndex,
+                  onTap: (index) {
+                    BlocProvider.of<NavigationBloc>(context)
+                        .add(TabChanged(tabIndex: index));
+                  },
+                ),
+              ),
+            ],
+          ),
+          // body: pages.elementAt(state.tabIndex),
+          // bottomNavigationBar: CustomNavBar(
+          //     index: state.tabIndex,
+          //     onTap: (index) {
+          //       BlocProvider.of<NavigationBloc>(context)
+          //           .add(TabChanged(tabIndex: index));
+          //     }),
         );
       },
     );

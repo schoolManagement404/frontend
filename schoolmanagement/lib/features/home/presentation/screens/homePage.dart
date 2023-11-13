@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
+import 'package:schoolmanagement/core/constants/colors/constants.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
 import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 
@@ -23,14 +24,17 @@ class _homePageState extends State<homePage> {
         return Scaffold(
           appBar: CustomAppBar(
             appBarHeight: 50,
-            backGroundColor: Colors.amber,
-            leadingWidget: const Icon(Icons.home),
+            backGroundColor: primaryColor,
+            leadingWidget: const Icon(Icons.home, color: backgroundColor),
             title: "Hello",
-            titleWidget: const Text("MM"),
+            titleWidget:
+                const Text("MM", style: TextStyle(color: backgroundColor)),
             centerTitle: true,
             endingWidgets: [
-              const Text("data"),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.abc))
+              const Text("data", style: TextStyle(color: backgroundColor)),
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.abc, color: backgroundColor))
             ],
           ),
           body: Center(

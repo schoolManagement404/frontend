@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:schoolmanagement/core/constants/colors/constants.dart';
 
 class LoginButton extends StatelessWidget {
   final String text;
@@ -11,7 +12,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      color: const Color(0xFF472B61),
+      color: primaryColor,
       child: InkWell(
           canRequestFocus: true,
           focusColor: const Color.fromARGB(52, 255, 255, 255),

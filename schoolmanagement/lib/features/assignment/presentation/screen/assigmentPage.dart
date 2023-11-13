@@ -3,11 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
+import 'package:schoolmanagement/core/constants/colors/constants.dart';
 import 'package:schoolmanagement/core/hiveLocalDB/loggedInState/loggedIn.dart';
 import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
 import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentTiles.dart';
-
+import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
 
 class assignmentPage extends StatelessWidget {
   const assignmentPage({super.key});
@@ -35,26 +36,42 @@ class assignmentPage extends StatelessWidget {
         );
       } else if (state is assignmentLoadedState) {
         return Scaffold(
-          body: ListView.builder(
-            prototypeItem: AssignmentTiles(
-              assignmentModel: assignment(
-                  assignment_id: "1",
-                  assignment_name: "Assignment 1",
-                  subject_id: "Maths",
-                  classroom_id: '',
-                  teacher_id: '',
-                  assignment_description: '',
-                  assignment_file: '',
-                  assignment_deadline: DateTime.now(),
-                  created_date: DateTime.now()),
+          backgroundColor: backgroundColor,
+          appBar: AppBar(
+            backgroundColor: backgroundColor,
+            // scrolledUnderElevation: 0,
+            elevation: 0,
+            scrolledUnderElevation: 0,
+            title: const Text("Assignments",
+                style: TextStyle(
+                  color: primaryColor,
+                  fontWeight: FontWeight.bold,
+                )),
+            centerTitle: true,
+          ),
+          body: Padding(
+            padding: const EdgeInsets.only(bottom: 80.0),
+            child: ListView.builder(
+              prototypeItem: AssignmentTiles(
+                assignmentModel: assignment(
+                    assignment_id: "1",
+                    assignment_name: "Assignment 1",
+                    subject_id: "Maths",
+                    classroom_id: '',
+                    teacher_id: '',
+                    assignment_description: '',
+                    assignment_file: '',
+                    assignment_deadline: DateTime.now(),
+                    created_date: DateTime.now()),
+              ),
+              cacheExtent: 10,
+              itemCount: state.assignmentList.length,
+              itemBuilder: (context, index) {
+                return AssignmentTiles(
+                  assignmentModel: state.assignmentList[index],
+                );
+              },
             ),
-            cacheExtent: 10,
-            itemCount: state.assignmentList.length,
-            itemBuilder: (context, index) {
-              return AssignmentTiles(
-                assignmentModel: state.assignmentList[index],
-              );
-            },
           ),
         );
       } else {
