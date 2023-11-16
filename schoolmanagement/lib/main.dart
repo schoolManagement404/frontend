@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
+import 'package:schoolmanagement/features/home/presentation/screens/homePage.dart';
 import 'package:schoolmanagement/features/login/presentation/screen/loginPage.dart';
 import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 import 'package:schoolmanagement/features/navigationShell/scaffold_with_navbar.dart';
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
               create: (context) => NoticeBloc(),
             ),
           ],
-          child: const CalenderPage(),
+          child: const AuthPage(),
         ));
   }
 }

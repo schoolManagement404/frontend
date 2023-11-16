@@ -28,10 +28,10 @@ class NoticeApi {
   }
 
   //funtion to post Notice
-  Future<List<Notice>> postNotice(Notice Notice) async {
+  Future<List<Notice>> postNotice(Notice notice) async {
     try {
       final response =
-          await http.post(Uri.parse('url'), body: jsonEncode(Notice.toJson()));
+          await http.post(Uri.parse('url'), body: jsonEncode(notice.toJson()));
       // If response is ok, then return a list of Notices
       if (response.statusCode == 201) {
         print('successfully posted');
