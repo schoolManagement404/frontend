@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:schoolmanagement/core/constants/colors/constants.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
 import 'package:schoolmanagement/features/assignment/presentation/screen/assignmentDetails.dart';
 import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentWidgets.dart';
@@ -22,66 +24,83 @@ class _AssignmentTilesState extends State<AssignmentTiles> {
         child: Material(
           elevation: 2,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(20),
           ),
-          color: Colors.white70,
-          child: InkWell(
-              onTap: () {
-                //navigate to the details page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AssignmentDetailPage(
-                      currentAssignment: widget.assignmentModel,
+          color: Colors.white,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: InkWell(
+                onTap: () {
+                  //navigate to the details page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AssignmentDetailPage(
+                        currentAssignment: widget.assignmentModel,
+                      ),
+                    ),
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        const CircleAvatar(
+                          radius: 30,
+                          backgroundColor: secondaryColor,
+                          child: Icon(
+                            Icons.assignment,
+                            color: backgroundColor,
+                          ),
+                        ),
+                        const Gap(15),
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                widget.assignmentModel.assignment_name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: spaceCadet,
+                                  package: AutofillHints.addressCity,
+                                ),
+                              ),
+                              Gap(10),
+                              Text(
+                                widget.assignmentModel.subject_id,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Text(
+                                widget.assignmentModel.assignment_deadline
+                                    .toIso8601String()
+                                    .split("T")[0]
+                                    .toString(),
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: SuffixIconButton(
+                            icon: Icons.arrow_forward_ios_outlined,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.assignmentModel.assignment_name,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            widget.assignmentModel.subject_id,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            widget.assignmentModel.assignment_deadline
-                                .toIso8601String()
-                                .split("T")[0]
-                                .toString(),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: SuffixIconButton(
-                        icon: Icons.arrow_forward_ios_outlined,
-                      ),
-                    ),
-                  ],
-                ),
-              )),
+                )),
+          ),
         ),
       ),
     );

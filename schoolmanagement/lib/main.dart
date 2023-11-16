@@ -4,6 +4,7 @@ import 'package:schoolmanagement/auth/authService/mongodbAuthProvider.dart';
 import 'package:schoolmanagement/config/routes/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
+import 'package:schoolmanagement/core/hiveLocalDB/loggedInState/loggedIn.dart';
 import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/home/presentation/screens/homePage.dart';
@@ -12,11 +13,17 @@ import 'package:schoolmanagement/features/navigationShell/bloc/navigation/naviga
 import 'package:schoolmanagement/features/navigationShell/scaffold_with_navbar.dart';
 import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
-
-import 'features/calendar/presentation/screens/calenderPage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:schoolmanagement/core/notifications/firebase_api.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await loggedInHive().initializeHive();
+  await FirebaseApi.initNotificationFirebase();
   runApp(const MyApp());
 }
 

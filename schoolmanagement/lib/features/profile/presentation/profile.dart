@@ -1,14 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
+import 'package:schoolmanagement/core/constants/colors/constants.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
 import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/curved_nav/draw_curvednav.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/image.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/tiles.dart';
-
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -34,6 +33,7 @@ class _ProfileState extends State<Profile> {
       builder: (context, state) {
         if (state is profileErrorState) {
           return Scaffold(
+            backgroundColor: backgroundColor,
             body: Center(child: Text("Error ${state.message!}")),
           );
         } else if (state is profileLoadedState) {
@@ -61,7 +61,7 @@ class _ProfileState extends State<Profile> {
                       fontWeight: FontWeight.bold),
                 ),
                 centerTitle: true,
-                backGroundColor: Colors.deepPurple,
+                backGroundColor: primaryColor,
               ),
               body: Stack(
                 children: [
@@ -74,7 +74,7 @@ class _ProfileState extends State<Profile> {
                           CustomShape(), // this is my own class which extendsCustomClipper
                       child: Container(
                         height: 100,
-                        color: Colors.deepPurple,
+                        color: primaryColor,
                       ),
                     ),
                   ),
