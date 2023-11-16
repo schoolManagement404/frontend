@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
 import 'package:schoolmanagement/auth/authService/mongodbAuthProvider.dart';
@@ -5,6 +6,7 @@ import 'package:schoolmanagement/config/routes/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/core/hiveLocalDB/loggedInState/loggedIn.dart';
+import 'package:schoolmanagement/core/notifications/notification.dart';
 import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/login/presentation/screen/loginPage.dart';
@@ -22,7 +24,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await loggedInHive().initializeHive();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await FirebaseApi.initNotificationFirebase();
+
   runApp(const MyApp());
 }
 

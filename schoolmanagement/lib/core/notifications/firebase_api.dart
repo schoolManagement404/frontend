@@ -11,6 +11,7 @@ class FirebaseApi {
     //check if the user is already logged in
     //if logged in, then get the fcm token and add it to the database
     //if not logged in, then do nothing
+    // ignore: no_leading_underscores_for_local_identifiers
 
     String hiveState = loggedInHive().getLoggedIn();
     if (hiveState == "true") {
@@ -50,6 +51,7 @@ class FirebaseApi {
           //Update the listeners in the app and update the notification list UI
         }
       });
+
       //Add it to the database
       AddNotifier.addNotificationUsersToDatabase(notificationUser);
     } else {
