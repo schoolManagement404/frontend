@@ -4,6 +4,7 @@ import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
 import 'package:schoolmanagement/core/Error/404_page.dart';
 import 'package:schoolmanagement/features/assignment/presentation/screen/addAssignmentPage.dart';
 import 'package:schoolmanagement/features/assignment/presentation/screen/assigmentPage.dart';
+import 'package:schoolmanagement/features/calendar/bloc/calendar_bloc.dart';
 import 'package:schoolmanagement/features/calendar/presentation/screens/calenderPage.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/fee/presentation/screens/feePage.dart';
@@ -31,7 +32,10 @@ class AppRoutes {
       case '/calendar':
         return _materialRoute(
           settings,
-          const CalenderPage(),
+          BlocProvider<CalendarBloc>(
+            create: (context) => CalendarBloc(),
+            child: const CalenderPage(),
+          ),
         );
       case '/view_assignments':
         return _materialRoute(

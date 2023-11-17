@@ -38,49 +38,55 @@ class _homePageState extends State<homePage> {
             ],
           ),
           body: Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("HomePage"),
-              Text(json.decode(loggedInHive().getLoginInfo()).toString()),
-              ElevatedButton(
-                  onPressed: () {
-                    context.read<AuthBloc>().add(const AuthEventLogOut());
-                  },
-                  child: const Text("Logout")),
-              ElevatedButton(
-                  onPressed: () {
-                    BlocProvider.of<NavigationBloc>(context)
-                        .add(const TabChanged(tabIndex: 1));
-                  },
-                  child: const Text("Assignment")),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/add_assignment");
-                  },
-                  child: const Text("Add Assignment")),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/fee");
-                  },
-                  child: const Text("Fee")),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "/profile");
-                },
-                child: const Text("Profile"),
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/notices");
-                  },
-                  child: const Text("Notice")),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/calender");
-                  },
-                  child: Text("calender"))
-            ],
+              child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("HomePage"),
+                Text(json.decode(loggedInHive().getLoginInfo()).toString()),
+                ElevatedButton(
+                    onPressed: () {
+                      context.read<AuthBloc>().add(const AuthEventLogOut());
+                    },
+                    child: const Text("Logout")),
+                ElevatedButton(
+                    onPressed: () {
+                      BlocProvider.of<NavigationBloc>(context)
+                          .add(const TabChanged(tabIndex: 1));
+                    },
+                    child: const Text("Assignment")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/add_assignment");
+                    },
+                    child: const Text("Add Assignment")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/fee");
+                    },
+                    child: const Text("Fee")),
+                Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/profile");
+                      },
+                      child: const Text("Profile"),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/notices");
+                        },
+                        child: const Text("Notice")),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/calendar");
+                        },
+                        child: Text("calender"))
+                  ],
+                ),
+              ],
+            ),
           )),
         );
       },

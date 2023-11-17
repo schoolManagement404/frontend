@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/core/hiveLocalDB/loggedInState/loggedIn.dart';
 import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
+import 'package:schoolmanagement/features/calendar/bloc/calendar_bloc.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/home/presentation/screens/homePage.dart';
 import 'package:schoolmanagement/features/login/presentation/screen/loginPage.dart';
@@ -15,6 +16,7 @@ import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.d
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:schoolmanagement/core/notifications/firebase_api.dart';
+import 'features/calendar/presentation/screens/calenderPage.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -55,6 +57,7 @@ class MyApp extends StatelessWidget {
             BlocProvider<NoticeBloc>(
               create: (context) => NoticeBloc(),
             ),
+            BlocProvider<CalendarBloc>(create: (context) => CalendarBloc())
           ],
           child: const AuthPage(),
         ));
