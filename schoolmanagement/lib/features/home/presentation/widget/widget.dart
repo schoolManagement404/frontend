@@ -6,38 +6,42 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     Key? key,
     this.centerTitle,
     required this.parentContext,
+    this.isnotice,
   }) : super(key: key);
 
   final bool? centerTitle;
   final parentContext;
+  final bool? isnotice;
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: Image.network(
-        "https://activelearninglab.ku.edu.np/assets/img/KU%20logo.png",
-      ),
-      title: Column(
-        children: [
-          Text(
-            "Welcome,",
-            style: TextStyle(fontSize: 13),
+        leading: Image.network(
+          "https://activelearninglab.ku.edu.np/assets/img/KU%20logo.png",
+        ),
+        title: Column(
+          children: [
+            Text(
+              "Welcome,",
+              style: TextStyle(fontSize: 13),
+            ),
+            Text(
+              "Student Name",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        backgroundColor: backgroundColor,
+        centerTitle: centerTitle,
+        actions: [
+          Visibility(
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(parentContext, '/notices');
+                },
+                icon: Icon(Icons.notifications)),
+            visible: isnotice ?? true,
           ),
-          Text(
-            "Student Name",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-      backgroundColor: backgroundColor,
-      centerTitle: centerTitle,
-      actions: [
-        IconButton(
-            onPressed: () {
-              Navigator.pushNamed(parentContext, '/notices');
-            },
-            icon: Icon(Icons.notifications))
-      ],
-    );
+        ]);
   }
 
   @override

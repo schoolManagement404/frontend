@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
+import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
 import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.dart';
 import 'package:schoolmanagement/features/notices/presentation/notice_details_page.dart';
 
@@ -29,6 +30,10 @@ class noticePage extends StatelessWidget {
           );
         } else if (state is NoticeLoadedState) {
           return Scaffold(
+            appBar: CustomAppBar(
+              parentContext: context,
+              isnotice: false,
+            ),
             body: ListView.builder(
               itemCount: state.noticeList.length,
               itemBuilder: (BuildContext context, int index) {
