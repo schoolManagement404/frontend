@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/core/constants/colors/constants.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
 import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
-import 'package:schoolmanagement/features/profile/presentation/widgets/curved_nav/draw_curvednav.dart';
-import 'package:schoolmanagement/features/profile/presentation/widgets/image.dart';
-import 'package:schoolmanagement/features/profile/presentation/widgets/tiles.dart';
+import 'package:schoolmanagement/features/profile/presentation/widgets/features_tile.dart';
+import 'package:schoolmanagement/features/profile/presentation/widgets/profileCard.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double width_of_image = 100;
     context.read<ProfileBloc>().add(viewProfileEvent());
     return BlocConsumer<ProfileBloc, ProfileState>(
       listener: (context, state) {
@@ -34,203 +33,89 @@ class Profile extends StatelessWidget {
         } else if (state is profileLoadedState) {
           final jsonData = state.profileList;
           final userData = jsonData["data"]["student"];
-          userData["profile_pic"] =
-              'https://iidamidamerica.org/wp-content/uploads/2020/12/male-placeholder-image.jpeg';
 
           return Scaffold(
-              appBar: CustomAppBar(
-                parentContext: context,
+            appBar: CustomAppBar(parentContext: context),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Profile",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 21,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ProfileCard(
+                      userData: userData,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "More Features",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 21,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    FeatureTile(
+                      title: 'View Fee Details',
+                      subTitle: 'View your fee details',
+                      leadingImage: 'assets/images/fee.png',
+                      route: '/fee',
+                    ),
+                    FeatureTile(
+                      title: "Gallery",
+                      subTitle: 'View Photos and Videos',
+                      leadingImage: 'assets/images/gallery.png',
+                      route: '/profile',
+                    ),
+                    FeatureTile(
+                      title: 'Attendance Record',
+                      subTitle: 'View your attendance',
+                      leadingImage: 'assets/images/attendance.png',
+                      route: '/calendar',
+                    ),
+                    FeatureTile(
+                      title: "Events",
+                      subTitle: 'Upcoming Events and Programs',
+                      leadingImage: 'assets/images/event.png',
+                      route: '/notices',
+                    ),
+                    FeatureTile(
+                      title: 'Report Card',
+                      subTitle: 'View Exams Result',
+                      leadingImage: 'assets/images/reportCard.png',
+                      route: '/profile',
+                    ),
+                    FeatureTile(
+                      title: "Routine",
+                      subTitle: 'View your Exam and Class Routine',
+                      leadingImage: 'assets/images/routine.png',
+                      route: '/profile',
+                    )
+                  ],
+                ),
               ),
-              body: Stack(
-                children: [
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: ClipPath(
-                      clipper:
-                          CustomShape(), // this is my own class which extendsCustomClipper
-                      child: Container(
-                        height: 100,
-                        color: primaryColor,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 10,
-                    left: MediaQuery.of(context).size.width * 0.5 -
-                        width_of_image / 2,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: ImageNetwork(
-                        url: userData["profile_pic"] ??
-                            "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg",
-                        width: 100,
-                        height: 100,
-                        loadingWidget: const Material(
-                          shape: CircleBorder(),
-                          child: Icon(Icons.person, size: 50),
-                        ),
-                        errorWidget: const Material(
-                          shape: CircleBorder(),
-                          child: Icon(Icons.error, color: Colors.red, size: 50),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 120,
-                    width: MediaQuery.of(context).size.width,
-                    child: SingleChildScrollView(
-                      child: Center(
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  "Welcome ,",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                Text(
-                                  " ${userData["name"] ?? "User"}",
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  "Class :",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  " ${userData["class"] ?? "Class"} ${userData["section"] ?? "Section"}",
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    width: MediaQuery.of(context).size.width,
-                    height: 400,
-                    top: 250,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Container(
-                        height: 400,
-                        width: 300,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SelectingTiles(
-                                    text: "Notices",
-                                    icon: const Icon(
-                                      Icons.person_2_rounded,
-                                      color: Colors.black,
-                                    ),
-                                    onPressed: () {
-                                      BlocProvider.of<NavigationBloc>(context)
-                                          .add(const TabChanged(tabIndex: 4));
-                                    },
-                                  ),
-                                  SelectingTiles(
-                                    text: "App Settings",
-                                    icon: const Icon(
-                                      Icons.settings,
-                                      color: Colors.black,
-                                    ),
-                                    onPressed: () {
-                                      print("Settings");
-                                    },
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SelectingTiles(
-                                    text: "Class",
-                                    icon: const Icon(
-                                      Icons.class_,
-                                      color: Colors.black,
-                                    ),
-                                    onPressed: () {
-                                      print("Class");
-                                    },
-                                  ),
-                                  SelectingTiles(
-                                    text: "Fees",
-                                    icon: const Icon(
-                                      Icons.money_rounded,
-                                      color: Colors.black,
-                                    ),
-                                    onPressed: () {
-                                      BlocProvider.of<NavigationBloc>(context)
-                                          .add(const TabChanged(tabIndex: 2));
-                                    },
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SelectingTiles(
-                                    text: "Assignments",
-                                    icon: const Icon(
-                                      Icons.notes_rounded,
-                                      color: Colors.black,
-                                    ),
-                                    onPressed: () {
-                                      BlocProvider.of<NavigationBloc>(context)
-                                          .add(const TabChanged(tabIndex: 1));
-                                    },
-                                  ),
-                                  SelectingTiles(
-                                    text: "Personal Records",
-                                    icon: const Icon(
-                                      Icons.info_outlined,
-                                      color: Colors.black,
-                                    ),
-                                    onPressed: () {
-                                      print("More info");
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ));
+            ),
+          );
         } else {
           return const Scaffold(
               body: Center(child: Text("Unable to Load Profile Page")));
