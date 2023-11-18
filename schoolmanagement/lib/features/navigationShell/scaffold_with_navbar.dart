@@ -6,15 +6,14 @@ import 'package:schoolmanagement/features/home/presentation/screens/homePage.dar
 
 import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 import 'package:schoolmanagement/features/navigationShell/navbar.dart';
+import 'package:schoolmanagement/features/notes/presentation/notePage.dart';
 import 'package:schoolmanagement/features/notices/presentation/noticesPage.dart';
 import 'package:schoolmanagement/features/profile/presentation/profile.dart';
 
 final List<Widget> pages = [
+  const NotePage(),
   const homePage(),
-  const assignmentPage(),
-  const feePage(),
   const Profile(),
-  const noticePage(),
 ];
 
 class ScaffoldWithNavBar extends StatelessWidget {
