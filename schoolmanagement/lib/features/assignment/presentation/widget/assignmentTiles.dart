@@ -5,15 +5,10 @@ import 'package:schoolmanagement/features/assignment/data/model/assignment.dart'
 import 'package:schoolmanagement/features/assignment/presentation/screen/assignmentDetails.dart';
 import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentWidgets.dart';
 
-class AssignmentTiles extends StatefulWidget {
+class AssignmentTiles extends StatelessWidget {
   final assignment assignmentModel;
   const AssignmentTiles({super.key, required this.assignmentModel});
 
-  @override
-  State<AssignmentTiles> createState() => _AssignmentTilesState();
-}
-
-class _AssignmentTilesState extends State<AssignmentTiles> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,7 +31,7 @@ class _AssignmentTilesState extends State<AssignmentTiles> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => AssignmentDetailPage(
-                        currentAssignment: widget.assignmentModel,
+                        currentAssignment: assignmentModel,
                       ),
                     ),
                   );
@@ -63,7 +58,7 @@ class _AssignmentTilesState extends State<AssignmentTiles> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                widget.assignmentModel.assignment_name,
+                                assignmentModel.assignment_name,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -73,13 +68,13 @@ class _AssignmentTilesState extends State<AssignmentTiles> {
                               ),
                               Gap(10),
                               Text(
-                                widget.assignmentModel.subject_id,
+                                assignmentModel.subject_id,
                                 style: const TextStyle(
                                   fontSize: 14,
                                 ),
                               ),
                               Text(
-                                widget.assignmentModel.assignment_deadline
+                                assignmentModel.assignment_deadline
                                     .toIso8601String()
                                     .split("T")[0]
                                     .toString(),

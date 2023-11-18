@@ -9,17 +9,12 @@ import 'package:schoolmanagement/features/profile/presentation/widgets/curved_na
 import 'package:schoolmanagement/features/profile/presentation/widgets/image.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/tiles.dart';
 
-class Profile extends StatefulWidget {
+class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
-  State<Profile> createState() => _ProfileState();
-}
-
-class _ProfileState extends State<Profile> {
-  double width_of_image = 100;
-  @override
   Widget build(BuildContext context) {
+    double width_of_image = 100;
     context.read<ProfileBloc>().add(viewProfileEvent());
     return BlocConsumer<ProfileBloc, ProfileState>(
       listener: (context, state) {

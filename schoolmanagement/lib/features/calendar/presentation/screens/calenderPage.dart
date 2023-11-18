@@ -10,45 +10,8 @@ import '../../../../core/Error/loadingScreen/loadingScreen.dart';
 import '../../bloc/calendar_bloc.dart';
 import '../../data/service/calenderUtils.dart';
 
-class CalenderPage extends StatefulWidget {
+class CalenderPage extends StatelessWidget {
   const CalenderPage({super.key});
-
-  @override
-  State<CalenderPage> createState() => _CalenderPageState();
-}
-
-class _CalenderPageState extends State<CalenderPage> {
-  // late final ValueNotifier<List<Event>> _selectedEvents;
-  // DateTime _focusedDay = DateTime.now();
-  // DateTime? _selectedDay;
-
-  // List<Event> _getEventsForDay(DateTime day) {
-  //   return kEvents[day] ?? [];
-  // }
-
-  // void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-  //   if (!isSameDay(_selectedDay, selectedDay)) {
-  //     setState(() {
-  //       _selectedDay = selectedDay;
-  //       _focusedDay = focusedDay;
-  //     });
-
-  //     _selectedEvents.value = _getEventsForDay(selectedDay);
-  //   }
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _selectedDay = _focusedDay;
-  //   _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
-  // }
-
-  // @override
-  // void dispose() {
-  //   _selectedEvents.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
