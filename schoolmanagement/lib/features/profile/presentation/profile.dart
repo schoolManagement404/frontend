@@ -44,24 +44,7 @@ class _ProfileState extends State<Profile> {
 
           return Scaffold(
               appBar: CustomAppBar(
-                appBarHeight: 56.0,
-                leadingWidget: IconButton(
-                  onPressed: () {
-                    //change the index to 0
-                    BlocProvider.of<NavigationBloc>(context)
-                        .add(const TabChanged(tabIndex: 0));
-                  },
-                  icon: const Icon(Icons.arrow_back, color: Colors.white),
-                ),
-                titleWidget: const Text(
-                  'User Profile',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                centerTitle: true,
-                backGroundColor: primaryColor,
+                parentContext: context,
               ),
               body: Stack(
                 children: [

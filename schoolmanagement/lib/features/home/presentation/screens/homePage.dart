@@ -23,19 +23,7 @@ class _homePageState extends State<homePage> {
       builder: (context, state) {
         return Scaffold(
           appBar: CustomAppBar(
-            appBarHeight: 50,
-            backGroundColor: primaryColor,
-            leadingWidget: const Icon(Icons.home, color: backgroundColor),
-            title: "Hello",
-            titleWidget:
-                const Text("MM", style: TextStyle(color: backgroundColor)),
-            centerTitle: true,
-            endingWidgets: [
-              const Text("data", style: TextStyle(color: backgroundColor)),
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.abc, color: backgroundColor))
-            ],
+            parentContext: context,
           ),
           body: Center(
               child: SingleChildScrollView(

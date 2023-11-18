@@ -1,54 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:schoolmanagement/core/constants/colors/constants.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     Key? key,
-    this.title = '',
-    this.leadingWidget,
-    this.titleWidget,
-    this.postWidget,
-    this.backGroundColor,
     this.centerTitle,
-    this.topLeftBorderRadius,
-    this.topRightBorderRadius,
-    this.bottomLeftRadius,
-    this.bottomRightRadus,
-    required this.appBarHeight,
-    this.endingWidgets,
+    required this.parentContext,
   }) : super(key: key);
 
-  final String title;
-  final Widget? leadingWidget;
-  final Widget? titleWidget;
-  final Widget? postWidget;
-  final Color? backGroundColor;
   final bool? centerTitle;
-  final Radius? topLeftBorderRadius;
-  final Radius? topRightBorderRadius;
-  final Radius? bottomLeftRadius;
-  final Radius? bottomRightRadus;
-  final double appBarHeight;
-  final List<Widget>? endingWidgets;
+  final parentContext;
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: leadingWidget,
-      title: titleWidget ?? Text(title),
-      backgroundColor: backGroundColor,
+      leading: Image.network(
+        "https://activelearninglab.ku.edu.np/assets/img/KU%20logo.png",
+      ),
+      title: Column(
+        children: [
+          Text(
+            "Welcome,",
+            style: TextStyle(fontSize: 13),
+          ),
+          Text(
+            "Student Name",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+      backgroundColor: backgroundColor,
       centerTitle: centerTitle,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-        topLeft: topLeftBorderRadius ?? Radius.zero,
-        topRight: topRightBorderRadius ?? Radius.zero,
-        bottomLeft: bottomLeftRadius ?? Radius.zero,
-        bottomRight: bottomRightRadus ?? Radius.zero,
-      )),
-      actions: endingWidgets,
+      actions: [
+        IconButton(
+            onPressed: () {
+              Navigator.pushNamed(parentContext, '/notices');
+            },
+            icon: Icon(Icons.notifications))
+      ],
     );
   }
 
   @override
-  Size get preferredSize => Size(double.maxFinite, appBarHeight);
+  Size get preferredSize => const Size(double.maxFinite, 56.0);
 }
 
 class CustomSnackBar {
@@ -71,5 +64,29 @@ class CustomSnackBar {
         topRight: Radius.circular(15.0),
       )),
     ));
+  }
+}
+
+class CustomHeader extends StatelessWidget {
+  final String headerText;
+  final parentContext;
+  const CustomHeader(
+      {super.key, required this.headerText, required this.parentContext});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        IconButton(
+            onPressed: () {
+              Navigator.pop(parentContext);
+            },
+            icon: Icon(Icons.arrow_back_ios)),
+        Text(
+          headerText,
+          style: TextStyle(fontSize: 20),
+        ),
+      ],
+    );
   }
 }
