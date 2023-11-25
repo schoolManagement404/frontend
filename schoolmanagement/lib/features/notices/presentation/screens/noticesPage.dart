@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
-import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
+import 'package:schoolmanagement/core/constants/colors/constants.dart';
+import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
 import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.dart';
 import 'package:schoolmanagement/features/notices/presentation/widgets/noticeButton.dart';
 import 'package:schoolmanagement/features/notices/presentation/widgets/noticeTile.dart';
 
+// ignore: camel_case_types
 class noticePage extends StatelessWidget {
   const noticePage({super.key});
 
@@ -23,16 +25,16 @@ class noticePage extends StatelessWidget {
         }
       },
       builder: (BuildContext context, NoticeState state) {
-        print(state);
         if (state is NoticeErrorState) {
           return Scaffold(
+            backgroundColor: backgroundColor,
             body: Center(
               child: Text("Error ${state.message!}"),
             ),
           );
         } else if (state is NoticeLoadedState) {
-          // state.noticeList[index]
           return Scaffold(
+            backgroundColor: backgroundColor,
             appBar: CustomAppBar(parentContext: context),
             body: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -69,7 +71,9 @@ class noticePage extends StatelessWidget {
                       itemBuilder: (BuildContext contex, int index) {
                         return Column(
                           children: [
-                            NoticeCard(noticeModel: state.noticeList[index],),
+                            NoticeCard(
+                              noticeModel: state.noticeList[index],
+                            ),
                             const Divider(
                               thickness: 1.5,
                             ),
@@ -86,6 +90,12 @@ class noticePage extends StatelessWidget {
           return const Scaffold(
             body: Center(
               child: Text("No notices found"),
+            ),
+          );
+        } else if (state is NoticeInitial) {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
             ),
           );
         } else {

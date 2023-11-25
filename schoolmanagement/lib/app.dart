@@ -19,6 +19,12 @@ class SchoolManagement extends StatelessWidget {
       title: 'School Management',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          },
+        ),
         useMaterial3: true,
       ),
       onGenerateRoute: AppRoutes.onGenerateRoutes,

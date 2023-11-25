@@ -44,7 +44,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  Navigator.pushNamed(parentContext, '/messages');
+                  Navigator.pushNamed(parentContext, '/notices');
                 },
                 icon: const Icon(Icons.notifications_none_rounded,
                     color: primaryColor, size: 30),

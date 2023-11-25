@@ -12,6 +12,7 @@ import 'package:schoolmanagement/features/assignment/data/model/assignment.dart'
 import 'package:schoolmanagement/features/assignment/presentation/widget/assignment_tiles.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
 
+//TODO : Sort assignments that have passed deadline
 class assignmentPage extends StatelessWidget {
   const assignmentPage({super.key});
 
@@ -45,6 +46,11 @@ class assignmentPage extends StatelessWidget {
               child: BlocBuilder<AssignmentBloc, AssignmentState>(
                 builder: (context, state) {
                   if (state is assignmentLoadedState) {
+                    //sorted by date
+                    state.assignmentList.sort((a, b) {
+                      return b.assignment_deadline
+                          .compareTo(a.assignment_deadline); //sort by date
+                    });
                     return ListView.builder(
                       itemCount: state.assignmentList.length,
                       itemBuilder: (context, index) {

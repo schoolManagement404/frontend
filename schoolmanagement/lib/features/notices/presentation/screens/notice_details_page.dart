@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
+import 'package:intl/intl.dart';
+import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
 import 'package:schoolmanagement/features/notices/data/model/noticeModel.dart';
 
 class NoticeDetails extends StatelessWidget {
@@ -9,7 +10,6 @@ class NoticeDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
         appBar: CustomAppBar(parentContext: context),
         body: Padding(
@@ -18,22 +18,30 @@ class NoticeDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomHeader(headerText: "Announcements", parentContext: context),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               Text(
-                "${noticeModel.publishedDate}",
+                DateFormat.yMMMMd()
+                    .format(DateTime.parse(noticeModel.noticeDate!)),
                 style: GoogleFonts.inter(
-                    textStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 13.5)),
+                    textStyle: const TextStyle(
+                        fontWeight: FontWeight.w400, fontSize: 13.5)),
               ),
               Text(
                 "${noticeModel.noticeTitle!} ",
                 style: GoogleFonts.inter(
-                    textStyle:
-                        const TextStyle(fontSize: 21.5, fontWeight: FontWeight.bold)),
+                    textStyle: const TextStyle(
+                        fontSize: 21.5, fontWeight: FontWeight.bold)),
               ),
-              const SizedBox(height: 40,),
+              const SizedBox(
+                height: 40,
+              ),
               Text(
-                  "${noticeModel.noticeDescription}",
-                      style: GoogleFonts.inter(textStyle: const TextStyle(fontSize: 15.5)),)
+                "${noticeModel.noticeDescription}",
+                style: GoogleFonts.inter(
+                    textStyle: const TextStyle(fontSize: 15.5)),
+              )
             ],
           ),
         ));
