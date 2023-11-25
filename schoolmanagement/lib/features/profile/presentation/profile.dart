@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/core/constants/colors/constants.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
-import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/features_tile.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/profileCard.dart';
@@ -35,84 +35,92 @@ class Profile extends StatelessWidget {
           final userData = jsonData["data"]["student"];
 
           return Scaffold(
+            backgroundColor: backgroundColor,
             appBar: CustomAppBar(parentContext: context),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Profile",
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 21,
-                        ),
+            body: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Profile",
+                    style: GoogleFonts.inter(
+                      textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21,
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    ProfileCard(
-                      userData: userData,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "More Features",
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 21,
-                        ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ProfileCard(
+                    userData: userData,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "More Features",
+                    style: GoogleFonts.inter(
+                      textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21,
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          FeatureTile(
+                            title: 'View Fee Details',
+                            subTitle: 'View your fee details',
+                            leadingImage: 'assets/images/fee.png',
+                            route: '/fee',
+                          ),
+                          FeatureTile(
+                            title: "Gallery",
+                            subTitle: 'View Photos and Videos',
+                            leadingImage: 'assets/images/gallery.png',
+                            route: '/profile',
+                          ),
+                          FeatureTile(
+                            title: 'Attendance Record',
+                            subTitle: 'View your attendance',
+                            leadingImage: 'assets/images/attendance.png',
+                            route: '/calendar',
+                          ),
+                          FeatureTile(
+                            title: "Events",
+                            subTitle: 'Upcoming Events and Programs',
+                            leadingImage: 'assets/images/event.png',
+                            route: '/notices',
+                          ),
+                          FeatureTile(
+                            title: 'Report Card',
+                            subTitle: 'View Exams Result',
+                            leadingImage: 'assets/images/reportCard.png',
+                            route: '/profile',
+                          ),
+                          FeatureTile(
+                            title: "Routine",
+                            subTitle: 'View your Exam and Class Routine',
+                            leadingImage: 'assets/images/routine.png',
+                            route: '/profile',
+                          ),
+                          Gap(100),
+                        ],
+                      ),
                     ),
-                    FeatureTile(
-                      title: 'View Fee Details',
-                      subTitle: 'View your fee details',
-                      leadingImage: 'assets/images/fee.png',
-                      route: '/fee',
-                    ),
-                    FeatureTile(
-                      title: "Gallery",
-                      subTitle: 'View Photos and Videos',
-                      leadingImage: 'assets/images/gallery.png',
-                      route: '/profile',
-                    ),
-                    FeatureTile(
-                      title: 'Attendance Record',
-                      subTitle: 'View your attendance',
-                      leadingImage: 'assets/images/attendance.png',
-                      route: '/calendar',
-                    ),
-                    FeatureTile(
-                      title: "Events",
-                      subTitle: 'Upcoming Events and Programs',
-                      leadingImage: 'assets/images/event.png',
-                      route: '/notices',
-                    ),
-                    FeatureTile(
-                      title: 'Report Card',
-                      subTitle: 'View Exams Result',
-                      leadingImage: 'assets/images/reportCard.png',
-                      route: '/profile',
-                    ),
-                    FeatureTile(
-                      title: "Routine",
-                      subTitle: 'View your Exam and Class Routine',
-                      leadingImage: 'assets/images/routine.png',
-                      route: '/profile',
-                    )
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );

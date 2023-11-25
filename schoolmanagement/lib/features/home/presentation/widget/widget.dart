@@ -18,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: Image.network(
           "https://activelearninglab.ku.edu.np/assets/img/KU%20logo.png",
         ),
-        title: Column(
+        title: const Column(
           children: [
             Text(
               "Welcome,",
@@ -34,12 +34,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: centerTitle,
         actions: [
           Visibility(
+            visible: isnotice ?? true,
             child: IconButton(
                 onPressed: () {
                   Navigator.pushNamed(parentContext, '/notices');
                 },
-                icon: Icon(Icons.notifications)),
-            visible: isnotice ?? true,
+                icon: const Icon(Icons.notifications)),
           ),
         ]);
   }
@@ -85,10 +85,10 @@ class CustomHeader extends StatelessWidget {
             onPressed: () {
               Navigator.pop(parentContext);
             },
-            icon: Icon(Icons.arrow_back_ios)),
+            icon: const Icon(Icons.arrow_back_ios)),
         Text(
           headerText,
-          style: TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20),
         ),
       ],
     );

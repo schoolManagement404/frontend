@@ -60,7 +60,7 @@ class CalenderPage extends StatelessWidget {
                       context.read<CalendarBloc>().add(dateSelectedEvent(
                           selectedDate: selectedDay, focusedDate: focusedDay));
                     },
-                    headerStyle: HeaderStyle(
+                    headerStyle: const HeaderStyle(
                         titleTextStyle: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 20,

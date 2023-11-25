@@ -8,10 +8,11 @@ import 'package:schoolmanagement/core/hiveLocalDB/loggedInState/loggedIn.dart';
 
 import 'authException.dart';
 
+// ignore: camel_case_types
 class mongoDBAuth implements authProvider {
   @override
   Future<void> initialize() async {
-    //not initilizing mongodb beacuse user can open app without internet
+    //not initializing mongodb because user can open app without internet
     //instead initializing hive for local storage
     await loggedInHive().initializeHive();
   }
@@ -25,7 +26,6 @@ class mongoDBAuth implements authProvider {
   Future<void> login({required String id, required String password}) async {
     try {
       const emulatorUrl = 'http://10.0.2.2:3000/auth/login';
-      const webUrl = '192.168.100.236:3000/auth/login';
       //check current running platform
       //if platform is android then use emulator url
       //else use web url

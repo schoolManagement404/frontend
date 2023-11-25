@@ -2,7 +2,6 @@ import 'dart:collection';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:schoolmanagement/features/calendar/data/service/calendarApi.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:schoolmanagement/features/calendar/data/model/event.dart';

@@ -59,7 +59,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       color: secondaryColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         numberOfNotifications,
                         style: TextStyle(
@@ -117,10 +117,10 @@ class CustomHeader extends StatelessWidget {
             onPressed: () {
               Navigator.pop(parentContext);
             },
-            icon: Icon(Icons.arrow_back_ios)),
+            icon: const Icon(Icons.arrow_back_ios)),
         Text(
           headerText,
-          style: TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20),
         ),
       ],
     );

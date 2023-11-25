@@ -18,9 +18,9 @@ class NoticeButton extends StatelessWidget {
             BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
         child: Center(
           child: Text(
-            '${title}',
+            title,
             style: GoogleFonts.inter(
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                     fontSize: 13.5,
                     color: Colors.white,
                     fontWeight: FontWeight.bold)),
