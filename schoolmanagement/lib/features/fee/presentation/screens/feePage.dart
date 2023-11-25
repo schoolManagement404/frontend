@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
-import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
+import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
 
 import '../../../../core/Error/loadingScreen/loadingScreen.dart';
 

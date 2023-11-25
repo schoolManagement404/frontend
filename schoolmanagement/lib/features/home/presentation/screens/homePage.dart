@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
 import 'package:schoolmanagement/core/constants/colors/constants.dart';
-import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
+import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
 import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 
 import '../../../../core/hiveLocalDB/loggedInState/loggedIn.dart';
@@ -22,6 +22,7 @@ class _homePageState extends State<homePage> {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         return Scaffold(
+          backgroundColor: backgroundColor,
           appBar: CustomAppBar(
             parentContext: context,
           ),

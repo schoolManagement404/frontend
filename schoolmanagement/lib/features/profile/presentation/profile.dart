@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/core/constants/colors/constants.dart';
-import 'package:schoolmanagement/features/home/presentation/widget/widget.dart';
+import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
 import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/curved_nav/draw_curvednav.dart';
