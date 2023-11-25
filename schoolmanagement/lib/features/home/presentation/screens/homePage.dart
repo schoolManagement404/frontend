@@ -56,9 +56,9 @@ class _homePageState extends State<homePage> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/profile");
+                        Navigator.pushNamed(context, "/timeline");
                       },
-                      child: const Text("Profile"),
+                      child: const Text("Timeline"),
                     ),
                     ElevatedButton(
                         onPressed: () {
