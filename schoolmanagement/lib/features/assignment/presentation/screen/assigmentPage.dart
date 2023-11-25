@@ -1,14 +1,15 @@
+// ignore_for_file: camel_case_types
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/core/constants/colors/constants.dart';
 import 'package:schoolmanagement/core/hiveLocalDB/loggedInState/loggedIn.dart';
 import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
-import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentTiles.dart';
+import 'package:schoolmanagement/features/assignment/presentation/widget/assignment_tiles.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
 
 class assignmentPage extends StatelessWidget {
@@ -39,9 +40,7 @@ class assignmentPage extends StatelessWidget {
           Expanded(
             child: RefreshIndicator(
               onRefresh: () async {
-                context.read<AssignmentBloc>().add(fetchAssignmentEvent(
-                    userId: json.decode(loggedInHive().getLoginInfo())["data"]
-                        ["student"]["student_id"]));
+                fetchAssignments(context);
               },
               child: BlocBuilder<AssignmentBloc, AssignmentState>(
                 builder: (context, state) {
@@ -57,12 +56,23 @@ class assignmentPage extends StatelessWidget {
                       },
                     );
                   } else if (state is assignmentErrorState) {
-                    return const Center(
-                      child: Text("Error while getting assignments"),
+                    return Center(
+                      child: Column(
+                        children: [
+                          const Text(
+                              "Failed To Get Assignments ! \nCheck internet Connection"),
+                          ElevatedButton(
+                            onPressed: () async {
+                              fetchAssignments(context);
+                            },
+                            child: const Text("Retry"),
+                          )
+                        ],
+                      ),
                     );
                   } else if (state is assignmentInitialState) {
                     return const Center(
-                      //replace with skeleton
+                      //TODO:replace with skeleton
                       child: CircularProgressIndicator(),
                     );
                   }
@@ -76,6 +86,12 @@ class assignmentPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void fetchAssignments(BuildContext context) {
+    context.read<AssignmentBloc>().add(fetchAssignmentEvent(
+        userId: json.decode(loggedInHive().getLoginInfo())["data"]["student"]
+            ["student_id"]));
   }
 }
 //   

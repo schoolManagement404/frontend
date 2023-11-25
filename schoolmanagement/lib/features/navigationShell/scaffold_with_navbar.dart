@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/features/assignment/presentation/screen/assigmentPage.dart';
-import 'package:schoolmanagement/features/fee/presentation/screens/feePage.dart';
+import 'package:schoolmanagement/features/fee/presentation/screens/fee_page.dart';
 import 'package:schoolmanagement/features/home/presentation/screens/homePage.dart';
 
 import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';

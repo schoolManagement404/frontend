@@ -7,7 +7,7 @@ import 'package:schoolmanagement/features/assignment/presentation/screen/assigme
 import 'package:schoolmanagement/features/calendar/bloc/calendar_bloc.dart';
 import 'package:schoolmanagement/features/calendar/presentation/screens/calenderPage.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
-import 'package:schoolmanagement/features/fee/presentation/screens/feePage.dart';
+import 'package:schoolmanagement/features/fee/presentation/screens/fee_page.dart';
 import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.dart';
 import 'package:schoolmanagement/features/notices/presentation/screens/noticesPage.dart';
 
@@ -60,7 +60,7 @@ class AppRoutes {
           settings,
           BlocProvider<FeeBloc>(
             create: (context) => FeeBloc(),
-            child: const feePage(),
+            child: const FeePage(),
           ),
         );
 

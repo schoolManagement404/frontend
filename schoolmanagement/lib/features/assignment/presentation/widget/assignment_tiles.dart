@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:schoolmanagement/core/constants/colors/constants.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
 import 'package:schoolmanagement/features/assignment/presentation/screen/assignmentDetails.dart';
-import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentWidgets.dart';
 
 class AssignmentTiles extends StatelessWidget {
   final assignment assignmentModel;
