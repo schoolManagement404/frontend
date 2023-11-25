@@ -6,15 +6,10 @@ import 'package:schoolmanagement/features/assignment/data/model/assignment.dart'
 import 'package:schoolmanagement/features/assignment/presentation/screen/assignmentDetails.dart';
 import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentWidgets.dart';
 
-class AssignmentTiles extends StatefulWidget {
+class AssignmentTiles extends StatelessWidget {
   final assignment assignmentModel;
   const AssignmentTiles({super.key, required this.assignmentModel});
 
-  @override
-  State<AssignmentTiles> createState() => _AssignmentTilesState();
-}
-
-class _AssignmentTilesState extends State<AssignmentTiles> {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -27,7 +22,7 @@ class _AssignmentTilesState extends State<AssignmentTiles> {
               context,
               MaterialPageRoute(
                 builder: (context) => AssignmentDetailPage(
-                  currentAssignment: widget.assignmentModel,
+                  currentAssignment: assignmentModel,
                 ),
               ),
             );
@@ -57,7 +52,7 @@ class _AssignmentTilesState extends State<AssignmentTiles> {
                         top: 5.0, left: 10, right: 20, bottom: 10),
                     child: Text(
                       DateFormat('yyyy MMMM dd').format(
-                          widget.assignmentModel.assignment_deadline.toLocal()),
+                          assignmentModel.assignment_deadline.toLocal()),
                       style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -96,21 +91,21 @@ class _AssignmentTilesState extends State<AssignmentTiles> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                widget.assignmentModel.subject_id,
+                                assignmentModel.subject_id,
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
-                                widget.assignmentModel.assignment_name,
+                                assignmentModel.assignment_name,
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
-                                widget.assignmentModel.teacher_id,
+                                assignmentModel.teacher_id,
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,

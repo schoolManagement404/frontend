@@ -19,86 +19,63 @@ class assignmentPage extends StatelessWidget {
     context.read<AssignmentBloc>().add(fetchAssignmentEvent(
         userId: json.decode(loggedInHive().getLoginInfo())["data"]["student"]
             ["student_id"]));
-    print(loggedInHive().getLoginInfo());
-    return BlocConsumer<AssignmentBloc, AssignmentState>(
-        listener: (context, state) {
-      if (state.isLoading) {
-        LoadingScreen().show(
-            context: context, text: state.message ?? "Please wait a moment");
-      } else {
-        LoadingScreen().hide();
-      }
-    }, builder: (context, state) {
-      if (state is assignmentErrorState) {
-        return Scaffold(
-          body: Center(
-            child: Text("Error ${state.message!}"),
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      appBar: CustomAppBar(
+        parentContext: context,
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Text(
+              'Assignments',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
           ),
-        );
-      } else if (state is assignmentLoadedState) {
-        return Scaffold(
-          backgroundColor: backgroundColor,
-          appBar: CustomAppBar(
-            parentContext: context,
-          ),
-          body: RefreshIndicator(
-            triggerMode: RefreshIndicatorTriggerMode.anywhere,
-            backgroundColor: backgroundColor,
-            onRefresh: () async {
-              context.read<AssignmentBloc>().add(fetchAssignmentEvent(
-                  userId: json.decode(loggedInHive().getLoginInfo())["data"]
-                      ["student"]["student_id"]));
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 80.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Text(
-                      'Assignments',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const Gap(10),
-                  Expanded(
-                    child: ListView.builder(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      prototypeItem: AssignmentTiles(
-                        assignmentModel: assignment(
-                            assignment_id: "1",
-                            assignment_name: "Assignment 1",
-                            subject_id: "Maths",
-                            classroom_id: '',
-                            teacher_id: '',
-                            assignment_description: '',
-                            assignment_file: '',
-                            assignment_deadline: DateTime.now(),
-                            created_date: DateTime.now()),
-                      ),
-                      cacheExtent: 10,
+          const Gap(10),
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                context.read<AssignmentBloc>().add(fetchAssignmentEvent(
+                    userId: json.decode(loggedInHive().getLoginInfo())["data"]
+                        ["student"]["student_id"]));
+              },
+              child: BlocBuilder<AssignmentBloc, AssignmentState>(
+                builder: (context, state) {
+                  if (state is assignmentLoadedState) {
+                    return ListView.builder(
                       itemCount: state.assignmentList.length,
                       itemBuilder: (context, index) {
+                        final assignment assignmentModel =
+                            state.assignmentList[index];
                         return AssignmentTiles(
-                          assignmentModel: state.assignmentList[index],
+                          assignmentModel: assignmentModel,
                         );
                       },
-                    ),
-                  ),
-                ],
+                    );
+                  } else if (state is assignmentErrorState) {
+                    return const Center(
+                      child: Text("Error while getting assignments"),
+                    );
+                  } else if (state is assignmentInitialState) {
+                    return const Center(
+                      //replace with skeleton
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return const Center(
+                    child: Text("No assignments found"),
+                  );
+                },
               ),
             ),
           ),
-        );
-      } else {
-        return const Scaffold(
-            body: Center(
-          child: CircularProgressIndicator(),
-        ));
-      }
-    });
+        ],
+      ),
+    );
   }
 }
+//   

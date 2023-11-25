@@ -40,8 +40,7 @@ class _homePageState extends State<homePage> {
                     child: const Text("Logout")),
                 ElevatedButton(
                     onPressed: () {
-                      BlocProvider.of<NavigationBloc>(context)
-                          .add(const TabChanged(tabIndex: 1));
+                      Navigator.pushNamed(context, "/view_assignments");
                     },
                     child: const Text("Assignment")),
                 ElevatedButton(

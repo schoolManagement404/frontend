@@ -43,28 +43,18 @@ class _CustomNavBarState extends State<CustomNavBar> {
             // enablePaddingAnimation: true,
             onTap: widget.onTap,
             items: [
+              DotNavigationBarItem(
+                icon: const Icon(
+                  Icons.note,
+                  size: 25,
+                ),
+                // selectedColor: Color(0xff73544C),
+              ),
+
               /// Home
               DotNavigationBarItem(
                 icon: const Icon(
                   EvaIcons.home,
-                  size: 25,
-                ),
-                // selectedColor: Color(0xff73544C),
-              ),
-
-              /// Likes
-              DotNavigationBarItem(
-                icon: const Icon(
-                  Icons.calculate_rounded,
-                  size: 25,
-                ),
-                // selectedColor: Color(0xff73544C),
-              ),
-
-              /// Search
-              DotNavigationBarItem(
-                icon: const Icon(
-                  Bootstrap.wallet_fill,
                   size: 25,
                 ),
                 // selectedColor: Color(0xff73544C),
@@ -77,12 +67,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   size: 25,
                 ),
                 // selectedColor: Color(0xff73544C),
-              ),
-              DotNavigationBarItem(
-                icon: const Icon(
-                  EvaIcons.bell,
-                  size: 25,
-                ),
               ),
             ],
           ),

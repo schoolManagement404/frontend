@@ -9,7 +9,8 @@ import 'package:schoolmanagement/features/calendar/presentation/screens/calender
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/fee/presentation/screens/feePage.dart';
 import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.dart';
-import 'package:schoolmanagement/features/notices/presentation/noticesPage.dart';
+import 'package:schoolmanagement/features/notices/presentation/screens/noticesPage.dart';
+
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/profile/presentation/profile.dart';
 import 'package:schoolmanagement/main.dart';
