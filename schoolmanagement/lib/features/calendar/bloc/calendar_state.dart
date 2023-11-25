@@ -31,7 +31,7 @@ class CalendarErrorState extends CalendarState {
 
 class CalendarLoadedState extends CalendarState {
   final List<CalendarModel> calendarData;
-  CalendarLoadedState({
+  const CalendarLoadedState({
     super.selectedEvents,
     super.selectedDate,
     required super.focusedDate,

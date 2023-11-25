@@ -3,24 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
 import 'package:schoolmanagement/core/Error/404_page.dart';
 import 'package:schoolmanagement/features/assignment/presentation/screen/addAssignmentPage.dart';
-import 'package:schoolmanagement/features/assignment/presentation/screen/assigmentPage.dart';
+import 'package:schoolmanagement/features/assignment/presentation/screen/assignmentPage.dart';
+import 'package:schoolmanagement/features/auth/auth_page.dart';
 import 'package:schoolmanagement/features/calendar/bloc/calendar_bloc.dart';
 import 'package:schoolmanagement/features/calendar/presentation/screens/calenderPage.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
-import 'package:schoolmanagement/features/fee/presentation/screens/feePage.dart';
+import 'package:schoolmanagement/features/fee/presentation/screens/fee_page.dart';
 import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.dart';
 import 'package:schoolmanagement/features/notices/presentation/screens/noticesPage.dart';
-
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/profile/presentation/profile.dart';
-import 'package:schoolmanagement/main.dart';
 
 import '../../auth/authService/mongodbAuthProvider.dart';
 import '../../features/assignment/bloc/assignment_bloc.dart';
 
 class AppRoutes {
   static Route<dynamic> onGenerateRoutes(RouteSettings settings) {
-    print(settings.name);
     switch (settings.name) {
       case '/':
         return _materialRoute(
@@ -60,7 +58,7 @@ class AppRoutes {
           settings,
           BlocProvider<FeeBloc>(
             create: (context) => FeeBloc(),
-            child: const feePage(),
+            child: const FeePage(),
           ),
         );
 

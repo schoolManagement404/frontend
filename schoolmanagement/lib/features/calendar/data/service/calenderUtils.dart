@@ -14,9 +14,9 @@ final kEvents = LinkedHashMap<DateTime, List<Event>>(
   equals: isSameDay,
   hashCode: getHashCode,
 )..addAll({
-    DateTime(2023, 11, 17): [Event("New")],
-    DateTime(2023, 11, 13): [Event("gg"), Event("mm")],
-    DateTime(2023, 11, 18): [Event("gg"), Event("mm"), Event("xs")],
+    DateTime(2023, 11, 17): [const Event("New")],
+    DateTime(2023, 11, 13): [const Event("gg"), const Event("mm")],
+    DateTime(2023, 11, 18): [const Event("gg"), const Event("mm"), const Event("xs")],
   });
 
 int getHashCode(DateTime key) {

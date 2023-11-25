@@ -18,22 +18,22 @@ class NoticeDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomHeader(headerText: "Announcements", parentContext: context),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Text(
                 "${noticeModel.publishedDate}",
                 style: GoogleFonts.inter(
-                    textStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 13.5)),
+                    textStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 13.5)),
               ),
               Text(
                 "${noticeModel.noticeTitle!} ",
                 style: GoogleFonts.inter(
                     textStyle:
-                        TextStyle(fontSize: 21.5, fontWeight: FontWeight.bold)),
+                        const TextStyle(fontSize: 21.5, fontWeight: FontWeight.bold)),
               ),
-              SizedBox(height: 40,),
+              const SizedBox(height: 40,),
               Text(
                   "${noticeModel.noticeDescription}",
-                      style: GoogleFonts.inter(textStyle: TextStyle(fontSize: 15.5)),)
+                      style: GoogleFonts.inter(textStyle: const TextStyle(fontSize: 15.5)),)
             ],
           ),
         ));

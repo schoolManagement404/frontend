@@ -42,16 +42,16 @@ class noticePage extends StatelessWidget {
                   Text(
                     "Announcements",
                     style: GoogleFonts.inter(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 21,
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  Row(
+                  const Row(
                     children: [
                       NoticeButton(title: "Today", color: Colors.grey),
                       SizedBox(
@@ -60,7 +60,7 @@ class noticePage extends StatelessWidget {
                       NoticeButton(title: "This Week", color: Colors.black),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Expanded(
@@ -70,7 +70,7 @@ class noticePage extends StatelessWidget {
                         return Column(
                           children: [
                             NoticeCard(noticeModel: state.noticeList[index],),
-                            Divider(
+                            const Divider(
                               thickness: 1.5,
                             ),
                           ],

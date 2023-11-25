@@ -6,42 +6,74 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     Key? key,
     this.centerTitle,
     required this.parentContext,
-    this.isnotice,
   }) : super(key: key);
 
   final bool? centerTitle;
   final parentContext;
-  final bool? isnotice;
   @override
   Widget build(BuildContext context) {
-    return AppBar(
+    const numberOfNotifications = "2";
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      child: AppBar(
+        elevation: 0.0,
+        scrolledUnderElevation: 0,
         leading: Image.network(
           "https://activelearninglab.ku.edu.np/assets/img/KU%20logo.png",
+          height: 35,
+          width: 35,
         ),
         title: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               "Welcome,",
-              style: TextStyle(fontSize: 13),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             Text(
               "Student Name",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
             ),
           ],
         ),
         backgroundColor: backgroundColor,
         centerTitle: centerTitle,
         actions: [
-          Visibility(
-            visible: isnotice ?? true,
-            child: IconButton(
+          Stack(
+            children: [
+              IconButton(
                 onPressed: () {
-                  Navigator.pushNamed(parentContext, '/notices');
+                  Navigator.pushNamed(parentContext, '/messages');
                 },
-                icon: const Icon(Icons.notifications)),
+                icon: const Icon(Icons.notifications_none_rounded,
+                    color: primaryColor, size: 30),
+              ),
+              Positioned(
+                top: 5,
+                left: 5,
+                child: Container(
+                    height: 20,
+                    width: 20,
+                    decoration: BoxDecoration(
+                      color: secondaryColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        numberOfNotifications,
+                        style: TextStyle(
+                          color: backgroundColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )),
+              )
+            ],
           ),
-        ]);
+        ],
+      ),
+    );
   }
 
   @override

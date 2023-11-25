@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:schoolmanagement/features/calendar/data/model/event.dart';
 
 class CalendarModel {
   final List<String> event_name;

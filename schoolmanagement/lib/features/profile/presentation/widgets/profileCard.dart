@@ -14,7 +14,7 @@ class ProfileCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Color.fromRGBO(33, 35, 38, 0.1),
               offset: Offset(0, 10),
@@ -35,37 +35,37 @@ class ProfileCard extends StatelessWidget {
                   Text(
                     "Name",
                     style: GoogleFonts.inter(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w300, fontSize: 13.5)),
                   ),
                   Text(
                     "${userData["name"]}",
                     style: GoogleFonts.inter(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 13.5)),
                   ),
                   Text(
                     "Roll No",
                     style: GoogleFonts.inter(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w300, fontSize: 13.5)),
                   ),
                   Text(
                     "${userData["roll_no"]}",
                     style: GoogleFonts.inter(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 13.5)),
                   ),
                   Text(
                     "Class",
                     style: GoogleFonts.inter(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w300, fontSize: 13.5)),
                   ),
                   Text(
                     "${userData["class"]}",
                     style: GoogleFonts.inter(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 13.5)),
                   ),
                 ],
@@ -77,7 +77,7 @@ class ProfileCard extends StatelessWidget {
                     child: Container(
                       width: 100,
                       height: 100,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.grey,
                           shape: BoxShape.circle,
                           image: DecorationImage(
@@ -90,14 +90,14 @@ class ProfileCard extends StatelessWidget {
                     text: TextSpan(
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
-                        TextSpan(
+                        const TextSpan(
                           text: 'id: ',
                         ),
                         TextSpan(
                           text: '${userData["student_id"]}',
                           style: GoogleFonts.inter(
                               textStyle:
-                                  TextStyle(fontWeight: FontWeight.bold)),
+                                  const TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),

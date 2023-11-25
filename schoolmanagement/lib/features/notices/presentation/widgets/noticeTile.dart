@@ -14,7 +14,7 @@ class NoticeCard extends StatelessWidget {
       onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context)=>NoticeDetails(noticeModel: noticeModel)));
       },
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,16 +22,16 @@ class NoticeCard extends StatelessWidget {
             Text(
               '${noticeModel.publishedDate}',
               style: GoogleFonts.inter(
-                  textStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 10)),
+                  textStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 10)),
             ),
-            SizedBox(height: 5,),
+            const SizedBox(height: 5,),
             Text(
               "${noticeModel.noticeTitle} ",
               style: GoogleFonts.inter(
                   textStyle:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             ),
-            SizedBox(height: 5,),
+            const SizedBox(height: 5,),
             Text(noticeModel.noticeDescription!.length > 150
                 ? "${noticeModel.noticeDescription!.substring(0, 150)}..."
                 : "${noticeModel.noticeDescription}")
