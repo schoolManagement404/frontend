@@ -13,6 +13,8 @@ import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.d
 import 'package:schoolmanagement/features/notices/presentation/screens/noticesPage.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/profile/presentation/profile.dart';
+import 'package:schoolmanagement/features/timeline/bloc/timeline/timeline_bloc.dart';
+import 'package:schoolmanagement/features/timeline/presentation/screen/timeline.dart';
 
 import '../../auth/authService/mongodbAuthProvider.dart';
 import '../../features/assignment/bloc/assignment_bloc.dart';
@@ -76,6 +78,15 @@ class AppRoutes {
           BlocProvider<NoticeBloc>(
             create: (context) => NoticeBloc(),
             child: const noticePage(),
+          ),
+        );
+
+      case '/timeline':
+        return _materialRoute(
+          settings,
+          BlocProvider<TimelineBloc>(
+            create: (context) => TimelineBloc(),
+            child: const TimelinePage(),
           ),
         );
 

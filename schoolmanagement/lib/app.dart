@@ -9,6 +9,7 @@ import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.dart';
 import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
+import 'package:schoolmanagement/features/timeline/bloc/timeline/timeline_bloc.dart';
 import 'package:schoolmanagement/injector.dart';
 
 class SchoolManagement extends StatelessWidget {
@@ -41,6 +42,8 @@ class SchoolManagement extends StatelessWidget {
           BlocProvider<NoticeBloc>.value(value: serviceLocator<NoticeBloc>()),
           BlocProvider<CalendarBloc>.value(
               value: serviceLocator<CalendarBloc>()),
+          BlocProvider<TimelineBloc>.value(
+              value: serviceLocator<TimelineBloc>()),
         ],
         child: const AuthPage(),
       ),
