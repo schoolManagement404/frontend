@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
 import 'package:schoolmanagement/features/assignment/data/service/assignmentApiService.dart';
@@ -43,18 +44,20 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
     });
 
     // ***For File Picker*** (not used now)
-    // on<selectFilesEvent>((event, emit) async {
-    //   FilePickerResult? result =
-    //       await FilePicker.platform.pickFiles(allowMultiple: true);
-    //   print("Result= ${result}");
-    //   if (result != null) {
-    //     final List<File> _selectedFiles =
-    //         result.paths.map((path) => File(path!)).toList();
-    //     emit(selectFilesState(files: _selectedFiles, isLoading: false));
-    //   } else {
-    //     // User canceled the picker
-    //   }
-    // });
+    on<selectFilesEvent>((event, emit) async {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+          allowMultiple: true,
+          type: FileType.custom,
+          allowedExtensions: ['jpeg', 'jpg', 'HEIF', 'png']);
+      print("Result= ${result}");
+      if (result != null) {
+        final List<File> _selectedFiles =
+            result.paths.map((path) => File(path!)).toList();
+        emit(selectFilesState(files: _selectedFiles, isLoading: false));
+      } else {
+        // User canceled the picker
+      }
+    });
 
     // uploading assignment for teacher
     on<createAssignmentEvent>((event, emit) async {

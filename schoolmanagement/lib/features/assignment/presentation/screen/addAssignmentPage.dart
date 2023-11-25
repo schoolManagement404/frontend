@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
@@ -62,9 +64,9 @@ class _addAssignmentState extends State<addAssignment> {
   List<String> filePaths = [];
   List<String> classRoomID = ['C002', '2', '3', '4', '5'];
   List<String> subject = ["EEEG101", 'math', 'science'];
-  // List<File> selectedFiles = [];
-  // List<String> selectedFilesPaths = [];
-  // List<int> fileSizes = [];
+  List<File> selectedFiles = [];
+  List<String> selectedFilesPaths = [];
+  List<int> fileSizes = [];
   String? selectedClassRoomID;
   String? selectedSubject;
   @override
@@ -97,12 +99,12 @@ class _addAssignmentState extends State<addAssignment> {
       if (state is dueDateAddedState) {
         dueDateController.text = state.dueDate.toString();
       }
-      //to update the selected files in the listview
-      // if (state is selectFilesState) {
-      //   selectedFiles = state.files;
-      //   selectedFilesPaths = selectedFiles.map((e) => e.path).toList();
-      //   fileSizes = selectedFiles.map((file) => file.lengthSync()).toList();
-      // }
+      // to update the selected files in the listview
+      if (state is selectFilesState) {
+        selectedFiles = state.files;
+        selectedFilesPaths = selectedFiles.map((e) => e.path).toList();
+        fileSizes = selectedFiles.map((file) => file.lengthSync()).toList();
+      }
       //to show snackbar when error occurs
       if (state is assignmentErrorState) {
         print(state.message);
@@ -202,23 +204,23 @@ class _addAssignmentState extends State<addAssignment> {
                     labelText: 'Drive Link',
                   ),
                 ),
-                // ElevatedButton(
-                //     onPressed: () async {
-                //       context.read<AssignmentBloc>().add(selectFilesEvent());
-                //     },
-                //     child: Text("Add file")),
-                //List view to show files if files are selected
-                // ListView.builder(
-                //   shrinkWrap: true,
-                //   itemCount: selectedFiles.length,
-                //   itemBuilder: (context, index) {
-                //     return ListTile(
-                //       title: Text(selectedFilesPaths[index].split('/').last),
-                //       subtitle: Text(
-                //           "${(fileSizes[index] / 1024).toStringAsFixed(2)} KB"),
-                //     );
-                //   },
-                // ),
+                ElevatedButton(
+                    onPressed: () async {
+                      context.read<AssignmentBloc>().add(selectFilesEvent());
+                    },
+                    child: Text("Add file")),
+
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: selectedFiles.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(selectedFilesPaths[index].split('/').last),
+                      subtitle: Text(
+                          "${(fileSizes[index] / 1024).toStringAsFixed(2)} KB"),
+                    );
+                  },
+                ),
 
                 ElevatedButton(
                     onPressed: () {
