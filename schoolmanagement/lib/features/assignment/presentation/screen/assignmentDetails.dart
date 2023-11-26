@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:schoolmanagement/features/assignment/data/service/add_assignment_file_firebase_api.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../data/model/assignment.dart';
