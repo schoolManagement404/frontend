@@ -5,10 +5,34 @@ import 'package:file_picker/file_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
 import 'package:schoolmanagement/features/assignment/data/service/assignmentApiService.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 part 'assignment_event.dart';
 part 'assignment_state.dart';
 
 class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
+  Future<firebase_storage.UploadTask> uploadFile(File file) async {
+    firebase_storage.UploadTask uploadTask;
+    try {
+      // Create a Reference to the file
+      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+          .ref()
+          .child('assignmentFiles')
+          .child('/some-file.pdf');
+
+      final metadata = firebase_storage.SettableMetadata(
+          contentType: 'file/pdf',
+          customMetadata: {'picked-file-path': file.path});
+      print("Uploading..!");
+
+      uploadTask = ref.putData(await file.readAsBytes(), metadata);
+      print('done');
+      return Future.value(uploadTask);
+    } catch (e) {
+      print('error: ${e.toString()}');
+      throw Error();
+    }
+  }
+
   AssignmentBloc() : super(const assignmentInitialState(isLoading: false)) {
     // for fetching assignments for student.
     on<fetchAssignmentEvent>((event, emit) async {
@@ -46,14 +70,14 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
     // ***For File Picker*** (not used now)
     on<selectFilesEvent>((event, emit) async {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
-          allowMultiple: true,
+          allowMultiple: false,
           type: FileType.custom,
-          allowedExtensions: ['jpeg', 'jpg', 'HEIF', 'png']);
+          allowedExtensions: ['pdf']);
       print("Result= ${result}");
       if (result != null) {
-        final List<File> _selectedFiles =
-            result.paths.map((path) => File(path!)).toList();
-        emit(selectFilesState(files: _selectedFiles, isLoading: false));
+        final File _selectedFile = File(result.paths[0]!);
+
+        emit(selectFilesState(file: _selectedFile, isLoading: false));
       } else {
         // User canceled the picker
       }
@@ -65,7 +89,7 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
       try {
         AssignmentApi assignmentApi = AssignmentApi();
         await assignmentApi.postAssignment(event.newAssignment);
-
+        await uploadFile(event.toUploadFile!);
         emit(const assignmentAddState(
           isLoading: false,
         ));

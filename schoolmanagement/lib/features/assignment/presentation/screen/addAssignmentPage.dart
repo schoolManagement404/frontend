@@ -64,9 +64,9 @@ class _addAssignmentState extends State<addAssignment> {
   List<String> filePaths = [];
   List<String> classRoomID = ['C002', '2', '3', '4', '5'];
   List<String> subject = ["EEEG101", 'math', 'science'];
-  List<File> selectedFiles = [];
-  List<String> selectedFilesPaths = [];
-  List<int> fileSizes = [];
+  File? selectedFile;
+  String? selectedFilePath;
+  int? fileSize;
   String? selectedClassRoomID;
   String? selectedSubject;
   @override
@@ -101,9 +101,9 @@ class _addAssignmentState extends State<addAssignment> {
       }
       // to update the selected files in the listview
       if (state is selectFilesState) {
-        selectedFiles = state.files;
-        selectedFilesPaths = selectedFiles.map((e) => e.path).toList();
-        fileSizes = selectedFiles.map((file) => file.lengthSync()).toList();
+        selectedFile = state.file;
+        selectedFilePath = state.file.path;
+        fileSize = state.file.lengthSync();
       }
       //to show snackbar when error occurs
       if (state is assignmentErrorState) {
@@ -209,18 +209,27 @@ class _addAssignmentState extends State<addAssignment> {
                       context.read<AssignmentBloc>().add(selectFilesEvent());
                     },
                     child: Text("Add file")),
-
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: selectedFiles.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(selectedFilesPaths[index].split('/').last),
-                      subtitle: Text(
-                          "${(fileSizes[index] / 1024).toStringAsFixed(2)} KB"),
-                    );
-                  },
+                Column(
+                  children: [
+                    Text(selectedFilePath == null
+                        ? ''
+                        : selectedFilePath!.split('/').last),
+                    Text(fileSize == null
+                        ? ''
+                        : '${(fileSize! / 1024).toStringAsFixed(2)} KB')
+                  ],
                 ),
+                // ListView.builder(
+                //   shrinkWrap: true,
+                //   itemCount: selectedFiles.length,
+                //   itemBuilder: (context, index) {
+                //     return ListTile(
+                //       title: Text(selectedFilesPaths[index].split('/').last),
+                //       subtitle: Text(
+                //           "${(fileSizes[index] / 1024).toStringAsFixed(2)} KB"),
+                //     );
+                //   },
+                // ),
 
                 ElevatedButton(
                     onPressed: () {
@@ -244,6 +253,7 @@ class _addAssignmentState extends State<addAssignment> {
                                 assignment_deadline: dueDate!,
                                 created_date: DateTime.now(),
                               ),
+                              toUploadFile: selectedFile!,
                               classroom_id: selectedClassRoomID.toString(),
                               teacher_id: teacherIdController.text.trim(),
                             ));

@@ -48,9 +48,9 @@ class selectClassroomState extends AssignmentState {
 }
 
 class selectFilesState extends AssignmentState {
-  final List<File> files;
+  final File file;
   const selectFilesState({
-    required this.files,
+    required this.file,
     required isLoading,
   }) : super(isLoading: isLoading);
 }

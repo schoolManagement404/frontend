@@ -20,9 +20,11 @@ class dueDateAddedEvent extends AssignmentEvent {
 
 class createAssignmentEvent extends AssignmentEvent {
   final assignment newAssignment;
+  File? toUploadFile;
   final String teacher_id;
   final String classroom_id;
   createAssignmentEvent({
+    this.toUploadFile,
     required this.teacher_id,
     required this.classroom_id,
     required this.newAssignment,
