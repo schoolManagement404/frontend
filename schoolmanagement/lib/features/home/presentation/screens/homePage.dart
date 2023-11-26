@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
 import 'package:schoolmanagement/core/constants/colors/constants.dart';
+import 'package:schoolmanagement/features/calendar/bloc/calendar_bloc.dart';
+import 'package:schoolmanagement/features/calendar/data/model/event.dart';
+import 'package:schoolmanagement/features/calendar/data/service/calenderUtils.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
+import 'package:table_calendar/table_calendar.dart';
 
-import '../../../../core/hiveLocalDB/loggedInState/loggedIn.dart';
+// import '../../../../core/hiveLocalDB/loggedInState/loggedIn.dart';
 
 class homePage extends StatefulWidget {
   const homePage({super.key});
@@ -18,6 +22,8 @@ class homePage extends StatefulWidget {
 class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
+    context.read<CalendarBloc>().add(fetchCalendarDataEvent());
+
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         return Scaffold(
@@ -25,13 +31,70 @@ class _homePageState extends State<homePage> {
           appBar: CustomAppBar(
             parentContext: context,
           ),
-          body: Center(
-              child: SingleChildScrollView(
+          body: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("HomePage"),
-                Text(json.decode(loggedInHive().getLoginInfo()).toString()),
+                // Text(json.decode(loggedInHive().getLoginInfo()).toString()),
+                BlocBuilder<CalendarBloc, CalendarState>(
+                    builder: (context, state) {
+                  if (state is CalendarLoadedState) {
+                    return TableCalendar<Event>(
+                      firstDay: firstDay,
+                      lastDay: lastDay,
+                      focusedDay: state.focusedDate!,
+                      holidayPredicate: (day) =>
+                          context.read<CalendarBloc>().isHoliday(day),
+                      weekendDays: const [DateTime.saturday],
+                      daysOfWeekHeight: 30,
+                      eventLoader: (day) =>
+                          context.read<CalendarBloc>().getEventsForDay(day),
+                      selectedDayPredicate: (day) {
+                        return isSameDay(state.selectedDate, day);
+                      },
+                      onDaySelected: (selectedDay, focusedDay) {
+                        context.read<CalendarBloc>().add(dateSelectedEvent(
+                            selectedDate: selectedDay,
+                            focusedDate: focusedDay));
+                      },
+                      headerStyle: const HeaderStyle(
+                          titleTextStyle: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                      )),
+                      daysOfWeekStyle: const DaysOfWeekStyle(
+                        weekdayStyle: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                        ),
+                        weekendStyle: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                            color: Colors.red),
+                      ),
+                      calendarStyle: const CalendarStyle(
+                          weekendTextStyle: TextStyle(
+                            color: Colors.red,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          defaultTextStyle: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          holidayTextStyle: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                            color: Colors.red,
+                          ),
+                          holidayDecoration: BoxDecoration()),
+                    );
+                  } else if (state is CalendarErrorState) {
+                    return Text("Calendar Error");
+                  } else {
+                    return Text("Calendar Initial");
+                  }
+                }),
                 ElevatedButton(
                     onPressed: () {
                       context.read<AuthBloc>().add(const AuthEventLogOut());
@@ -74,7 +137,7 @@ class _homePageState extends State<homePage> {
                 ),
               ],
             ),
-          )),
+          ),
         );
       },
     );

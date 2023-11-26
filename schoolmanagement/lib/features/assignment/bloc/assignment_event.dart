@@ -18,9 +18,10 @@ class dueDateAddedEvent extends AssignmentEvent {
   dueDateAddedEvent({required this.dueDate});
 }
 
+// ignore: must_be_immutable
 class createAssignmentEvent extends AssignmentEvent {
   final assignment newAssignment;
-  File? toUploadFile;
+  final File? toUploadFile;
   final String teacher_id;
   final String classroom_id;
   createAssignmentEvent({

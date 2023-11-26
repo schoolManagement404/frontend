@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
@@ -51,6 +50,7 @@ class _addAssignmentState extends State<addAssignment> {
       transitionDuration: const Duration(milliseconds: 200),
       barrierDismissible: true,
     );
+    // ignore: use_build_context_synchronously
     context.read<AssignmentBloc>().add(dueDateAddedEvent(dueDate: dueDate));
   }
 
@@ -80,11 +80,10 @@ class _addAssignmentState extends State<addAssignment> {
       } else {
         LoadingScreen().hide();
       }
-      //To update of choosen classroom in the dropdown field
+      //To update of chosen classroom in the dropdown field
       //Also TO change the options of subject according to the class room selected
       if (state is selectClassroomState) {
         selectedClassRoomID = state.classroom_id.toString();
-        print(selectedClassRoomID);
       }
       //to show snackbar when assignment is added
       if (state is assignmentAddState) {
@@ -99,7 +98,7 @@ class _addAssignmentState extends State<addAssignment> {
       if (state is dueDateAddedState) {
         dueDateController.text = state.dueDate.toString();
       }
-      // to update the selected files in the listview
+      // to update the selected files in the listView
       if (state is selectFilesState) {
         selectedFile = state.file;
         selectedFilePath = state.file.path;
@@ -107,8 +106,6 @@ class _addAssignmentState extends State<addAssignment> {
       }
       //to show snackbar when error occurs
       if (state is assignmentErrorState) {
-        print(state.message);
-
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("Error: ${state.message}"),
@@ -205,10 +202,11 @@ class _addAssignmentState extends State<addAssignment> {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () async {
-                      context.read<AssignmentBloc>().add(selectFilesEvent());
-                    },
-                    child: Text("Add file")),
+                  onPressed: () async {
+                    context.read<AssignmentBloc>().add(selectFilesEvent());
+                  },
+                  child: const Text("Add file"),
+                ),
                 Column(
                   children: [
                     Text(selectedFilePath == null
@@ -219,17 +217,6 @@ class _addAssignmentState extends State<addAssignment> {
                         : '${(fileSize! / 1024).toStringAsFixed(2)} KB')
                   ],
                 ),
-                // ListView.builder(
-                //   shrinkWrap: true,
-                //   itemCount: selectedFiles.length,
-                //   itemBuilder: (context, index) {
-                //     return ListTile(
-                //       title: Text(selectedFilesPaths[index].split('/').last),
-                //       subtitle: Text(
-                //           "${(fileSizes[index] / 1024).toStringAsFixed(2)} KB"),
-                //     );
-                //   },
-                // ),
 
                 ElevatedButton(
                     onPressed: () {
@@ -237,26 +224,34 @@ class _addAssignmentState extends State<addAssignment> {
                           selectedClassRoomID != null &&
                           selectedSubject != null &&
                           assignmentTitleController.text.trim() != '') {
-                        context
-                            .read<AssignmentBloc>()
-                            .add(createAssignmentEvent(
-                              newAssignment: assignment(
-                                classroom_id: selectedClassRoomID.toString(),
-                                teacher_id: teacherIdController.text.trim(),
-                                subject_id: selectedSubject.toString(),
-                                assignment_name:
-                                    assignmentTitleController.text.trim(),
-                                assignment_description:
-                                    descriptionController.text.trim(),
-                                assignment_file:
-                                    driveLinkController.text.trim(),
-                                assignment_deadline: dueDate!,
-                                created_date: DateTime.now(),
-                              ),
-                              toUploadFile: selectedFile!,
-                              classroom_id: selectedClassRoomID.toString(),
-                              teacher_id: teacherIdController.text.trim(),
-                            ));
+                        if (state is FileSelectedState) {
+                          addAssignmentWithFile(context, state);
+                        } else {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  height: 300,
+                                  width: double.infinity,
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                          "You have not selected a file to upload\nDo you want to continue?"),
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            addAssignment(context);
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text("Ok"))
+                                    ],
+                                  ),
+                                );
+                              });
+                        }
                       } else {
                         // Handle the case when the assigned date is not selected
                         const CustomSnackBar(
@@ -271,5 +266,45 @@ class _addAssignmentState extends State<addAssignment> {
         ),
       );
     });
+  }
+
+  void addAssignmentWithFile(BuildContext context, FileSelectedState state) {
+    context.read<AssignmentBloc>().add(
+          createAssignmentEvent(
+            newAssignment: assignment(
+              classroom_id: selectedClassRoomID.toString(),
+              teacher_id: teacherIdController.text.trim(),
+              subject_id: selectedSubject.toString(),
+              assignment_name: assignmentTitleController.text.trim(),
+              assignment_description: descriptionController.text.trim(),
+              assignment_file: driveLinkController.text.trim(),
+              assignment_deadline: dueDate!,
+              created_date: DateTime.now(),
+            ),
+            toUploadFile: state.file,
+            classroom_id: selectedClassRoomID.toString(),
+            teacher_id: teacherIdController.text.trim(),
+          ),
+        );
+  }
+
+  void addAssignment(BuildContext context) {
+    context.read<AssignmentBloc>().add(
+          createAssignmentEvent(
+            newAssignment: assignment(
+              classroom_id: selectedClassRoomID.toString(),
+              teacher_id: teacherIdController.text.trim(),
+              subject_id: selectedSubject.toString(),
+              assignment_name: assignmentTitleController.text.trim(),
+              assignment_description: descriptionController.text.trim(),
+              assignment_file: driveLinkController.text.trim(),
+              assignment_deadline: dueDate!,
+              created_date: DateTime.now(),
+            ),
+            toUploadFile: null,
+            classroom_id: selectedClassRoomID.toString(),
+            teacher_id: teacherIdController.text.trim(),
+          ),
+        );
   }
 }
