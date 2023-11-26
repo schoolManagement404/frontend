@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/core/Error/loadingScreen/loadingScreen.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
+import 'package:schoolmanagement/features/assignment/data/service/add_assignment_file_firebase_api.dart';
 import 'package:schoolmanagement/features/assignment/presentation/widget/assignmentWidgets.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
 import '../../bloc/assignment_bloc.dart';
@@ -278,7 +279,8 @@ class _addAssignmentState extends State<addAssignment> {
     });
   }
 
-  void addAssignmentWithFile(BuildContext context, FileSelectedState state) {
+  void addAssignmentWithFile(
+      BuildContext context, FileSelectedState state) async {
     context.read<AssignmentBloc>().add(
           createAssignmentEvent(
             newAssignment: assignment(
@@ -287,7 +289,7 @@ class _addAssignmentState extends State<addAssignment> {
               subject_id: selectedSubject.toString(),
               assignment_name: assignmentTitleController.text.trim(),
               assignment_description: descriptionController.text.trim(),
-              assignment_file: driveLinkController.text.trim(),
+              assignment_file: state.file.uri.pathSegments.last,
               assignment_deadline: dueDate!,
               created_date: DateTime.now(),
             ),

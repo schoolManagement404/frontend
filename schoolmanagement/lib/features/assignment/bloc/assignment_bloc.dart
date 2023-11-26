@@ -55,7 +55,6 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
             isLoading: false,
             message: 'Only pdf files allowed'));
       }
-      emit(FileSelectedState(file: file, isLoading: false));
     });
 
     // uploading assignment for teacher
@@ -65,9 +64,9 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
         AssignmentApi assignmentApi = AssignmentApi();
         await assignmentApi.postAssignment(event.newAssignment);
         await uploadFile(event.toUploadFile!);
-        String Document_URL = await downloadURLExample(
-            fileName: event.toUploadFile!.uri.pathSegments.last);
-        print(Document_URL);
+        // String Document_URL = await downloadURLExample(
+        //     fileName: event.toUploadFile!.uri.pathSegments.last);
+        // print(Document_URL);
         emit(const assignmentAddState(
           isLoading: false,
         ));

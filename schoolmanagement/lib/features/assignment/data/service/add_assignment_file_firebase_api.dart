@@ -6,7 +6,6 @@ Future<firebase_storage.UploadTask> uploadFile(File file) async {
   firebase_storage.UploadTask uploadTask;
   String exactFile = file.uri.pathSegments.last;
   //only allow pdf files to be uploaded
-  if (!exactFile.contains('.pdf')) {}
   firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
       .ref()
       .child('assignments')
