@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:schoolmanagement/core/constants/colors/constants.dart';
+import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
 import 'package:schoolmanagement/features/timeline/bloc/timeline/timeline_bloc.dart';
 import 'package:schoolmanagement/features/timeline/presentation/widget/time_card.dart';
 
@@ -11,11 +13,14 @@ class TimelinePage extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<TimelineBloc>().add(fetchTimelineEvent(date: DateTime.now()));
     return Scaffold(
+      backgroundColor: backgroundColor,
+      appBar: CustomAppBar(parentContext: context),
       body: Padding(
-        padding: const EdgeInsets.only(left: 8.0, top: 50),
+        padding: const EdgeInsets.only(left: 8.0),
         child: Column(
           children: [
-            Row(
+            CustomHeader(headerText: "Timeline", parentContext: context),
+            const Row(
               children: [
                 DayButton(day: "Mon"),
                 DayButton(day: "Tue"),
@@ -26,7 +31,8 @@ class TimelinePage extends StatelessWidget {
                 DayButton(day: "Sun"),
               ],
             ),
-            const Gap(20),
+            const Gap(5),
+            const Gap(5),
             Expanded(
               child: BlocBuilder<TimelineBloc, TimelineState>(
                 builder: (context, state) {

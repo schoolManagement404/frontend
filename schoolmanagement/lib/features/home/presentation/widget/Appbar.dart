@@ -1,17 +1,24 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:schoolmanagement/core/constants/colors/constants.dart';
+import 'package:schoolmanagement/core/hiveLocalDB/loggedInState/loggedIn.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     Key? key,
     this.centerTitle,
+    this.location,
     required this.parentContext,
   }) : super(key: key);
-
+  final String? location;
   final bool? centerTitle;
-  final parentContext;
+  final BuildContext parentContext;
   @override
   Widget build(BuildContext context) {
+    String hiveLoginInfo = loggedInHive().getLoginInfo();
+    //convert this string to JSON
+    Map<String, dynamic> jsonLoginInfo = jsonDecode(hiveLoginInfo);
     const numberOfNotifications = "2";
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -23,16 +30,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           height: 35,
           width: 35,
         ),
-        title: const Column(
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               "Welcome,",
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             Text(
-              "Student Name",
+              jsonLoginInfo['data']['student']['name'],
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
             ),
           ],
@@ -44,7 +51,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  Navigator.pushNamed(parentContext, '/notices');
+                  if (location == "noticedetails") {
+                    print("You are already in NoticeDetails page");
+                  }
+                  if (location == "Notice") {
+                    print("You are already in Notice page");
+                  } else {
+                    Navigator.pushNamed(context, "/notices");
+                  }
                 },
                 icon: const Icon(Icons.notifications_none_rounded,
                     color: primaryColor, size: 30),
@@ -105,7 +119,7 @@ class CustomSnackBar {
 
 class CustomHeader extends StatelessWidget {
   final String headerText;
-  final parentContext;
+  final BuildContext parentContext;
   const CustomHeader(
       {super.key, required this.headerText, required this.parentContext});
 
@@ -117,10 +131,13 @@ class CustomHeader extends StatelessWidget {
             onPressed: () {
               Navigator.pop(parentContext);
             },
-            icon: const Icon(Icons.arrow_back_ios)),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded)),
         Text(
           headerText,
-          style: const TextStyle(fontSize: 20),
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );

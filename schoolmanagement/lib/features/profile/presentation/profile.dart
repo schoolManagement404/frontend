@@ -9,8 +9,8 @@ import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/features_tile.dart';
 import 'package:schoolmanagement/features/profile/presentation/widgets/profileCard.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class Profile extends StatelessWidget {
                             title: "Gallery",
                             subTitle: 'View Photos and Videos',
                             leadingImage: 'assets/images/gallery.png',
-                            route: '/profile',
+                            route: '/gallery',
                           ),
                           FeatureTile(
                             title: 'Attendance Record',
@@ -101,19 +101,19 @@ class Profile extends StatelessWidget {
                             title: "Events",
                             subTitle: 'Upcoming Events and Programs',
                             leadingImage: 'assets/images/event.png',
-                            route: '/notices',
+                            route: '/events',
                           ),
                           FeatureTile(
                             title: 'Report Card',
                             subTitle: 'View Exams Result',
                             leadingImage: 'assets/images/reportCard.png',
-                            route: '/profile',
+                            route: '/report',
                           ),
                           FeatureTile(
                             title: "Routine",
                             subTitle: 'View your Exam and Class Routine',
                             leadingImage: 'assets/images/routine.png',
-                            route: '/profile',
+                            route: '/timeline',
                           ),
                           Gap(100),
                         ],

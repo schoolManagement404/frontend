@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schoolmanagement/core/constants/colors/constants.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
 
@@ -10,6 +11,7 @@ class FeePage extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<FeeBloc>().add(fetchFeeEvent(student_id: '12'));
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: CustomAppBar(
         parentContext: context,
       ),

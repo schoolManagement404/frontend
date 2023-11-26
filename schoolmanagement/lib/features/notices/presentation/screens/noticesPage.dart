@@ -35,7 +35,10 @@ class noticePage extends StatelessWidget {
         } else if (state is NoticeLoadedState) {
           return Scaffold(
             backgroundColor: backgroundColor,
-            appBar: CustomAppBar(parentContext: context),
+            appBar: CustomAppBar(
+              parentContext: context,
+              location: "Notice",
+            ),
             body: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(

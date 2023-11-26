@@ -9,7 +9,6 @@ part 'timeline_state.dart';
 class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
   TimelineBloc() : super(const TimelineInitial(isLoading: true)) {
     on<fetchTimelineEvent>((event, emit) {
-      print(event.date);
       final List<Routine> list = listOfRoutine;
       emit(TimelineLoaded(routineList: list, isLoading: false));
     });

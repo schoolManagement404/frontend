@@ -69,7 +69,7 @@ class AppRoutes {
             settings,
             BlocProvider<ProfileBloc>(
               create: (context) => ProfileBloc(),
-              child: const Profile(),
+              child: const ProfilePage(),
             ));
 
       case '/notices':

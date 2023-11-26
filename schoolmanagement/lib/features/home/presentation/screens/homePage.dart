@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
@@ -12,14 +10,14 @@ import 'package:table_calendar/table_calendar.dart';
 
 // import '../../../../core/hiveLocalDB/loggedInState/loggedIn.dart';
 
-class homePage extends StatefulWidget {
-  const homePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<homePage> createState() => _homePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _homePageState extends State<homePage> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     context.read<CalendarBloc>().add(fetchCalendarDataEvent());

@@ -9,8 +9,8 @@ import 'package:schoolmanagement/features/profile/presentation/profile.dart';
 
 final List<Widget> pages = [
   const NotePage(),
-  const homePage(),
-  const Profile(),
+  const HomePage(),
+  const ProfilePage(),
 ];
 
 class ScaffoldWithNavBar extends StatelessWidget {

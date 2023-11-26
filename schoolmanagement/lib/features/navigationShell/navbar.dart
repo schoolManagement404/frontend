@@ -45,7 +45,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
             items: [
               DotNavigationBarItem(
                 icon: const Icon(
-                  Icons.note,
+                  EvaIcons.book,
                   size: 25,
                 ),
                 // selectedColor: Color(0xff73544C),
