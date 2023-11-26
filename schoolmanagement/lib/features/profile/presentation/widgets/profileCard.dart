@@ -9,7 +9,7 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 155,
+        height: 130,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -30,7 +30,7 @@ class ProfileCard extends StatelessWidget {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Name",
@@ -56,6 +56,14 @@ class ProfileCard extends StatelessWidget {
                         textStyle: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 13.5)),
                   ),
+                  
+                ],
+              ),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Text(
                     "Class",
                     style: GoogleFonts.inter(
@@ -68,6 +76,18 @@ class ProfileCard extends StatelessWidget {
                         textStyle: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 13.5)),
                   ),
+                  Text(
+                    "Section",
+                    style: GoogleFonts.inter(
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.w300, fontSize: 13.5)),
+                  ),
+                  Text(
+                    "B",
+                    style: GoogleFonts.inter(
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 13.5)),
+                  ),
                 ],
               ),
               Column(
@@ -75,8 +95,8 @@ class ProfileCard extends StatelessWidget {
                 children: [
                   ClipOval(
                     child: Container(
-                      width: 100,
-                      height: 100,
+                      width: 70,
+                      height: 70,
                       decoration: const BoxDecoration(
                           color: Colors.grey,
                           shape: BoxShape.circle,
