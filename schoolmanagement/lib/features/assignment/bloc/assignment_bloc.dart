@@ -47,8 +47,14 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
     on<selectFilesEvent>((event, emit) async {
       final path = await FlutterDocumentPicker.openDocument();
       File file = File(path!);
-      // firebase_storage.UploadTask task = await uploadFile(file);
-      // print(task);
+      if (file.path.contains('.pdf')) {
+        emit(FileSelectedState(file: file, isLoading: false));
+      } else {
+        emit(FileSelectedErrorState(
+            file: File(''),
+            isLoading: false,
+            message: 'Only pdf files allowed'));
+      }
       emit(FileSelectedState(file: file, isLoading: false));
     });
 
@@ -58,8 +64,10 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
       try {
         AssignmentApi assignmentApi = AssignmentApi();
         await assignmentApi.postAssignment(event.newAssignment);
-        // await uploadFile(event.toUploadFile);
-        uploadFile(event.toUploadFile!);
+        await uploadFile(event.toUploadFile!);
+        String Document_URL = await downloadURLExample(
+            fileName: event.toUploadFile!.uri.pathSegments.last);
+        print(Document_URL);
         emit(const assignmentAddState(
           isLoading: false,
         ));

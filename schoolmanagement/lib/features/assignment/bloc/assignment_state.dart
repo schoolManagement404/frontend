@@ -63,6 +63,15 @@ class FileSelectedState extends AssignmentState {
   }) : super(isLoading: isLoading);
 }
 
+class FileSelectedErrorState extends AssignmentState {
+  final File file;
+  const FileSelectedErrorState({
+    required this.file,
+    required isLoading,
+    required message,
+  }) : super(isLoading: isLoading, message: message);
+}
+
 class assignmentAddState extends AssignmentState {
   const assignmentAddState({
     required isLoading,

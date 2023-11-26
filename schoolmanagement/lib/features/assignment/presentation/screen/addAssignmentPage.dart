@@ -225,7 +225,17 @@ class _addAssignmentState extends State<addAssignment> {
                           selectedSubject != null &&
                           assignmentTitleController.text.trim() != '') {
                         if (state is FileSelectedState) {
-                          addAssignmentWithFile(context, state);
+                          //TODO : Checks the file contains pdf or not
+                          if (state.file.path.contains('.pdf')) {
+                            addAssignmentWithFile(context, state);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Only pdf files allowed"),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+                          }
                         } else {
                           showModalBottomSheet(
                               context: context,
