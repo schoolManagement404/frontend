@@ -1,15 +1,16 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:schoolmanagement/config/appUrl/appUrl.dart';
 import 'package:schoolmanagement/features/calendar/data/model/calendar.dart';
 
 class CalendarApi {
-  //funtion to get all calendar
+  //function to get all calendar
   Future<List<CalendarModel>> getCalendarEvents() async {
     try {
       // Get all calendar from the server
       final response =
-          await http.get(Uri.parse('http://10.0.2.2:3000/students/calendar'));
+          await http.get(Uri.parse('${appUrl.baseUrl}/students/calendar'));
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body) as List<dynamic>;
         print(jsonData);

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:schoolmanagement/config/appUrl/appUrl.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,8 +9,7 @@ class AssignmentApi {
   Future<List<assignment>> getAllAssignment({required String userId}) async {
     try {
       // Get all assignments from the server
-      final response = await http
-          .get(Uri.parse('http://10.0.2.2:3000/students/$userId/assignments'));
+      final response = await http.get(Uri.parse(appUrl.assigmentUrl));
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body) as List<dynamic>;
 
@@ -29,7 +29,7 @@ class AssignmentApi {
   Future<assignment> postAssignment(assignment assignment) async {
     try {
       final response = await http.post(
-        Uri.parse("http://10.0.2.2:3000/teachers/12/assignments"),
+        Uri.parse(appUrl.assignmentPost),
         body: jsonEncode(assignment.toJson()),
         //add header
         headers: {

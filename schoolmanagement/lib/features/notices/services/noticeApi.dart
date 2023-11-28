@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:schoolmanagement/config/appUrl/appUrl.dart';
 
 import '../data/model/noticeModel.dart';
 
@@ -9,7 +10,7 @@ class NoticeApi {
   Future<List<Notice>> getNotices() async {
     try {
       // Get all Notices from the server
-      const url = 'http://10.0.2.2:3000/globals/notices';
+      const url = '${appUrl.baseUrl}/globals/notices';
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body) as List<dynamic>;

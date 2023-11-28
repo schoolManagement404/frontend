@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-
 import 'package:http/http.dart' as http;
+import 'package:schoolmanagement/config/appUrl/appUrl.dart';
 
 import '../model/feeModel.dart';
 
@@ -11,8 +11,8 @@ class StudentFeeApi {
     print(studentID);
     try {
       // Get all StudentFees from the server
-      final response = await http.get(
-          Uri.parse('http://10.0.2.2:3000/students/$studentID/fee_status'));
+      final response = await http
+          .get(Uri.parse('${appUrl.baseUrl}/students/$studentID/fee_status'));
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body) as List<dynamic>;
         // If response is ok, then return a list of StudentFees
