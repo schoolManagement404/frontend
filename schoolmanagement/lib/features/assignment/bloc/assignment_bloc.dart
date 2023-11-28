@@ -1,15 +1,38 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_document_picker/flutter_document_picker.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
-import 'package:schoolmanagement/features/assignment/data/service/add_assignment_file_firebase_api.dart';
 import 'package:schoolmanagement/features/assignment/data/service/assignmentApiService.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 part 'assignment_event.dart';
 part 'assignment_state.dart';
 
 class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
+  Future<firebase_storage.UploadTask> uploadFile(File file) async {
+    firebase_storage.UploadTask uploadTask;
+    try {
+      // Create a Reference to the file
+      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+          .ref()
+          .child('assignmentFiles')
+          .child('/some-file.pdf');
+
+      final metadata = firebase_storage.SettableMetadata(
+          contentType: 'file/pdf',
+          customMetadata: {'picked-file-path': file.path});
+      print("Uploading..!");
+
+      uploadTask = ref.putData(await file.readAsBytes(), metadata);
+      print('done');
+      return Future.value(uploadTask);
+    } catch (e) {
+      print('error: ${e.toString()}');
+      throw Error();
+    }
+  }
+
   AssignmentBloc() : super(const assignmentInitialState(isLoading: false)) {
     // for fetching assignments for student.
     on<fetchAssignmentEvent>((event, emit) async {
@@ -44,16 +67,19 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
           classroom_id: event.classroom_id, isLoading: false));
     });
 
+    // ***For File Picker*** (not used now)
     on<selectFilesEvent>((event, emit) async {
-      final path = await FlutterDocumentPicker.openDocument();
-      File file = File(path!);
-      if (file.path.contains('.pdf')) {
-        emit(FileSelectedState(file: file, isLoading: false));
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+          allowMultiple: false,
+          type: FileType.custom,
+          allowedExtensions: ['pdf']);
+      print("Result= ${result}");
+      if (result != null) {
+        final File _selectedFile = File(result.paths[0]!);
+
+        emit(selectFilesState(file: _selectedFile, isLoading: false));
       } else {
-        emit(FileSelectedErrorState(
-            file: File(''),
-            isLoading: false,
-            message: 'Only pdf files allowed'));
+        // User canceled the picker
       }
     });
 
@@ -64,9 +90,6 @@ class AssignmentBloc extends Bloc<AssignmentEvent, AssignmentState> {
         AssignmentApi assignmentApi = AssignmentApi();
         await assignmentApi.postAssignment(event.newAssignment);
         await uploadFile(event.toUploadFile!);
-        // String Document_URL = await downloadURLExample(
-        //     fileName: event.toUploadFile!.uri.pathSegments.last);
-        // print(Document_URL);
         emit(const assignmentAddState(
           isLoading: false,
         ));
