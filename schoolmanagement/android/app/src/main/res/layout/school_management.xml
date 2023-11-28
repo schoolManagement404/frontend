@@ -24,6 +24,7 @@
         android:background="@android:color/white"
         android:text="Assignment"
         android:textSize="15sp"
+        android:textColor="@android:color/black"
         android:textStyle="bold" />
 
         
