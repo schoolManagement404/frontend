@@ -14,12 +14,12 @@ import 'package:schoolmanagement/injector.dart';
 Future<void> init() async {
   setupServiceLocator();
   WidgetsFlutterBinding.ensureInitialized();
-  HomeWidget.setAppGroupId(appGroupId);
-  updateAssignment(dummyAssignment);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await loggedInHive().initializeHive();
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await FirebaseApi.initNotificationFirebase();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  HomeWidget.setAppGroupId(appGroupId);
+  updateAssignment(dummyAssignment);
 }
