@@ -17,30 +17,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
         android:background="@android:color/white"
-        android:text="Title"
-        android:textSize="20sp"
+        android:text="Assignment"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/headline_description"
-        style="@style/Widget.Android.AppWidget.InnerView"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_below="@+id/headline_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="102dp"
-        android:layout_marginTop="77dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginBottom="493dp"
-        android:background="@android:color/white"
-        android:text="Title"
-        android:textSize="16sp" />
+        
 
 </RelativeLayout>

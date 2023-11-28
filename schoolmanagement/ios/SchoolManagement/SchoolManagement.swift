@@ -8,33 +8,47 @@
 import WidgetKit
 import SwiftUI
 
-struct Provider: AppIntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
+struct Provider: TimelineProvider {
+
+// Placeholder is used as a placeholder when the widget is first displayed
+    func placeholder(in context: Context) -> AssignmentEntry {
+//      Add some placeholder title and description, and get the current date
+      AssignmentEntry(date: Date(), titles: ["Title 1", "Title 2"])
     }
 
-    func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration)
+// Snapshot entry represents the current time and state
+    func getSnapshot(in context: Context, completion: @escaping (AssignmentEntry) -> ()) {
+      let entry: AssignmentEntry
+      if context.isPreview{
+        entry = placeholder(in: context)
+      }
+      else{
+        //      Get the data from the user defaults to display
+        let userDefaults = UserDefaults(suiteName: "group.com.example.schoolmanagement")
+        //i have a list of titles separated by %% and i want to store it in a list
+        let list_titles_string = userDefaults?.string(forKey: "assignments") ?? "No Titles"
+        let titles = list_titles_string.components(separatedBy: "/?")
+        let title = userDefaults?.string(forKey: "headline_title") ?? "No Title"
+        entry = AssignmentEntry(date: Date(), titles: titles)
+      }
+        completion(entry)
     }
-    
-    func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        var entries: [SimpleEntry] = []
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
-        }
-
-        return Timeline(entries: entries, policy: .atEnd)
+//    getTimeline is called for the current and optionally future times to update the widget
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+//      This just uses the snapshot function you defined earlier
+      getSnapshot(in: context) { (entry) in
+// atEnd policy tells widgetKit to request a new entry after the date has passed
+        let timeline = Timeline(entries: [entry], policy: .atEnd)
+                  completion(timeline)
+              }
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+
+struct AssignmentEntry:TimelineEntry {
     let date: Date
-    let configuration: ConfigurationAppIntent
+    let titles: [String]
 }
 
 struct SchoolManagementEntryView : View {
@@ -42,43 +56,37 @@ struct SchoolManagementEntryView : View {
 
     var body: some View {
         VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Favorite Emoji:")
-            Text(entry.configuration.favoriteEmoji)
+            Text("Assignments")
+                .font(.headline)
+                .foregroundColor(.black)
+            Divider()
+            ForEach(entry.titles, id: \.self) { title in
+                Text(title)
+                .font(.headline)
+                .foregroundColor(.black)
+                Divider()
+            }
         }
     }
 }
 
+
+// @main
 struct SchoolManagement: Widget {
     let kind: String = "SchoolManagement"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
             SchoolManagementEntryView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
         }
+        .configurationDisplayName("SchoolManagement")
+        .description("This is an example widget.")
     }
 }
 
-extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
+struct SchoolManagement_Previews: PreviewProvider {
+    static var previews: some View {
+        SchoolManagementEntryView(entry: AssignmentEntry(date: Date(), titles: ["Title 1", "Title 2"]))
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
-    
-    fileprivate static var starEyes: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
-        return intent
-    }
-}
-
-#Preview(as: .systemSmall) {
-    SchoolManagement()
-} timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
 }
