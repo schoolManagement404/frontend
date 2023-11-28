@@ -30,6 +30,7 @@ environment:
 dependencies:
   bloc: ^8.1.2
   cached_network_image: ^3.3.0
+  clean_nepali_calendar: ^2.0.1
   cloud_firestore: ^4.13.0
   cupertino_icons: ^1.0.2
   dot_navigation_bar: ^1.0.2
@@ -42,6 +43,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
+  flutter_bs_ad_calendar: ^1.0.4
   flutter_document_picker: ^5.2.3
   flutter_pdfview: ^1.3.2
   gap: ^3.0.1
