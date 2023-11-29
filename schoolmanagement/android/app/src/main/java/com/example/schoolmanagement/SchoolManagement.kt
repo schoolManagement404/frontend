@@ -3,13 +3,8 @@ package com.example.schoolmanagement
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.view.View
 import android.widget.RemoteViews
-import android.content.Intent
-import android.net.Uri
-import android.widget.RemoteViewsService
-import android.widget.ArrayAdapter 
-import android.widget.ListView
-
 import es.antonborri.home_widget.HomeWidgetPlugin
 
 
@@ -34,9 +29,23 @@ class SchoolManagement : AppWidgetProvider() {
                 if (!list_titles_string.isNullOrEmpty()) {
                     val list_titles = list_titles_string.split("/?")
                     val views = RemoteViews(context.packageName, R.layout.school_management)
-    
-                    // Update UI efficiently
-                    views.setTextViewText(R.id.headline_title, list_titles[0])
+
+                    for (i in 0 until list_titles.size) {
+                        var visible = true
+                        if(list_titles[i].isNullOrEmpty()){
+                            visible =false
+                        }
+
+                        if(visible){
+                            val titleViewId = context.resources.getIdentifier("assignment_title_$i", "id", context.packageName)
+                            val dateViewId = context.resources.getIdentifier("assignment_due_date_$i", "id", context.packageName)
+                            views.setTextViewText(titleViewId, "${i+1}. ${list_titles[i]}")
+                            views.setTextViewText(dateViewId, "Due Date!!!")
+                            views.setViewVisibility(titleViewId, View.VISIBLE)
+                            views.setViewVisibility(dateViewId, View.VISIBLE)
+                        }
+                    }
+                    
     
                     // Update the widget
                     appWidgetManager.updateAppWidget(appWidgetId, views)
@@ -44,33 +53,12 @@ class SchoolManagement : AppWidgetProvider() {
 
                 if(list_titles_string.isNullOrEmpty()) {
                     val views = RemoteViews(context.packageName, R.layout.school_management)
-                    views.setTextViewText(R.id.headline_title, "No Assignments")
+                    views.setViewVisibility(R.id.no_assignment_text, View.VISIBLE)
+
+                    //for the linear Layout
                     appWidgetManager.updateAppWidget(appWidgetId, views)
                 }
         }
-        // for (appWidgetId in appWidgetIds) {
-        //     // updateAppWidget(context, appWidgetManager, appWidgetId)
-        //     val arrayAdapter: ArrayAdapter<*> 
-        //     val widgetData = HomeWidgetPlugin.getData(context)
-        //     val views = RemoteViews(context.packageName, R.layout.school_management)
-
-        //     val list_titles_string = widgetData.getString("assignments", null)
-        //     val list_titles = list_titles_string?.split("/?") ?: listOf<String>()
-
-        //     views.setTextViewText(R.id.headline_title, list_titles[0])
-
-
-
-        //     appWidgetManager.updateAppWidget(appWidgetId, views)
-        // }
-    }
-
-    override fun onEnabled(context: Context) {
-        // Enter relevant functionality for when the first widget is created
-    }
-
-    override fun onDisabled(context: Context) {
-        // Enter relevant functionality for when the last widget is disabled
     }
 }
 
