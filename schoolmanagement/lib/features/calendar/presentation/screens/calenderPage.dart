@@ -15,6 +15,10 @@ class CalenderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _today = DateTime.now();
+    final firstDay = DateTime(_today.year - 3, _today.month, _today.day);
+    final lastDay = DateTime(_today.year + 3, _today.month, _today.day);
+
     context.read<CalendarBloc>().add(fetchCalendarDataEvent());
 
     Future.delayed(Duration.zero, () {
