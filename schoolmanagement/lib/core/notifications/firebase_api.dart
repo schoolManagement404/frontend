@@ -32,6 +32,8 @@ class FirebaseApi {
 
       final fcmToken = await FirebaseMessaging.instance.getToken();
 
+      print("FCM Token: $fcmToken");
+
       //Convert it ot NotificationUserClass
       NotificationUser notificationUser = NotificationUser(
         userId: studentId,

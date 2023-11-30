@@ -1,0 +1,128 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widget_container"
+    style="@style/Widget.Android.AppWidget.Container"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:theme="@style/Theme.Android.AppWidgetContainer">
+
+    <TextView 
+        android:id="@+id/headline_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Assignment"
+        android:textColor="@android:color/black"
+        android:background="@android:color/white"
+        android:visibility="gone"
+        />
+    
+    <LinearLayout
+    android:id="@+id/no_assignmnet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="gone"
+    android:background="@android:color/darker_gray">
+    <TextView 
+        android:id="@+id/no_assignment_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Assignment"
+        android:textColor="@android:color/black"
+        android:background="@android:color/white"
+        android:visibility="gone"
+        />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/assignment_layout_0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@id/headline_title">
+
+        <TextView
+            android:id="@+id/assignment_title_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:text="Title"
+            android:textColor="@android:color/black"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/assignment_due_date_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+        android:textColor="@android:color/black"
+
+            android:background="@android:color/white"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+    android:id="@+id/assignment_layout_1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/darker_gray"
+    android:layout_below="@id/assignment_layout_0">
+
+    <TextView
+            android:id="@+id/assignment_title_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:text="Title"
+        android:textColor="@android:color/black"
+
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/assignment_due_date_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+        android:textColor="@android:color/black"
+
+            android:background="@android:color/white"
+            android:visibility="gone" />
+
+</LinearLayout>
+
+<!-- New LinearLayout -->
+<LinearLayout
+    android:id="@+id/assignment_layout_2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/darker_gray"
+    android:layout_below="@id/assignment_layout_1">
+
+    <!-- Add your TextViews here -->
+     <TextView
+            android:id="@+id/assignment_title_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:text="Title"
+        android:textColor="@android:color/black"
+
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/assignment_due_date_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+        android:textColor="@android:color/black"
+
+            android:background="@android:color/white"
+            android:visibility="gone" />
+</LinearLayout>
+
+        
+
+</RelativeLayout>
