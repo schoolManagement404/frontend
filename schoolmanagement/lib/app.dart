@@ -5,7 +5,6 @@ import 'package:schoolmanagement/config/routes/routes.dart';
 import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
 import 'package:schoolmanagement/features/auth/auth_page.dart';
 import 'package:schoolmanagement/features/calendar/bloc/calendar_bloc.dart';
-import 'package:schoolmanagement/features/calendar/presentation/screens/nepaliCalendarPage.dart';
 import 'package:schoolmanagement/features/fee/bloc/fee_bloc.dart';
 import 'package:schoolmanagement/features/navigationShell/bloc/navigation/navigation_bloc.dart';
 import 'package:schoolmanagement/features/notices/bloc/notice_bloc/notice_bloc.dart';
@@ -13,7 +12,6 @@ import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/timeline/bloc/timeline/timeline_bloc.dart';
 import 'package:schoolmanagement/injector.dart';
 
-import 'features/calendar/presentation/screens/calenderPage.dart';
 
 class SchoolManagement extends StatelessWidget {
   const SchoolManagement({super.key});
@@ -48,7 +46,7 @@ class SchoolManagement extends StatelessWidget {
           BlocProvider<TimelineBloc>.value(
               value: serviceLocator<TimelineBloc>()),
         ],
-        child: const NepaliCalendarPage(),
+        child: const AuthPage(),
       ),
     );
   }

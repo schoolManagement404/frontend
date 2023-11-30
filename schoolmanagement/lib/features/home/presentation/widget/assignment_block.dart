@@ -38,7 +38,7 @@ class _AssignmentBlockState extends State<AssignmentBlock> {
                   Text(
                     "YOUR ASSIGNMENTS",
                     style: GoogleFonts.inter(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontSize: 21.5, fontWeight: FontWeight.bold)),
                   ),
                   GestureDetector(
@@ -50,12 +50,12 @@ class _AssignmentBlockState extends State<AssignmentBlock> {
                     child: Text(
                       showAllAssignment ? "Show less" : "See all",
                       style:
-                          GoogleFonts.inter(textStyle: TextStyle(fontSize: 16)),
+                          GoogleFonts.inter(textStyle: const TextStyle(fontSize: 16)),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               BlocBuilder<AssignmentBloc, AssignmentState>(
                 builder: (context, state) {
                   if (state is assignmentInitialState) {
@@ -65,13 +65,13 @@ class _AssignmentBlockState extends State<AssignmentBlock> {
                   } else if (state is assignmentErrorState) {
                     return Center(
                       child: Column(children: [
-                        Text(
+                        const Text(
                             "failed to get assignments!\n Check the internet connection"),
                         ElevatedButton(
                             onPressed: () async {
                               fetchAssignments(context);
                             },
-                            child: Text("Retry"))
+                            child: const Text("Retry"))
                       ]),
                     );
                   } else if (state is assignmentLoadedState) {
@@ -91,7 +91,7 @@ class _AssignmentBlockState extends State<AssignmentBlock> {
 
                     return ListView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: displayedAssignments.length,
                       itemBuilder: (context, index) {
                         final assignment assignmentModel =
@@ -100,7 +100,7 @@ class _AssignmentBlockState extends State<AssignmentBlock> {
                       },
                     );
                   } else {
-                    return Center(child: Text("No assignments found"));
+                    return const Center(child: Text("No assignments found"));
                   }
                 },
               ),
@@ -128,38 +128,37 @@ class AssignmentCard extends StatelessWidget {
     final remainingDays = DateTime.now().isAfter(deadlineDate)
         ? 0
         : deadlineDate.difference(todayDate).inDays;
-    ;
 
     return Padding(
-      padding: EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.only(bottom: 12),
       child: Container(
         height: 119,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-            border: Border.all(width: 2, color: Color(0xFFFFB2B2))),
+            border: Border.all(width: 2, color: const Color(0xFFFFB2B2))),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: 146,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Gap(6),
+                  const Gap(6),
                   Text(
-                    "${assignmentModel.subject_id}",
+                    assignmentModel.subject_id,
                     style: GoogleFonts.inter(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                           fontSize: 16.5,
                           color: Color(0xFF637EB5),
                           fontWeight: FontWeight.bold),
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  Container(height: 30, color: Color(0xFFFFB2B2))
+                  Container(height: 30, color: const Color(0xFFFFB2B2))
                 ],
               ),
             ),
-            Container(width: 2, height: 119, color: Color(0xFFFFB2B2)),
+            Container(width: 2, height: 119, color: const Color(0xFFFFB2B2)),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(14.0),
@@ -172,7 +171,7 @@ class AssignmentCard extends StatelessWidget {
                         Text(
                           "Deadline",
                           style: GoogleFonts.inter(
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                             fontSize: 12.5,
                             color: Color(0xFF808080),
                           )),
@@ -181,40 +180,40 @@ class AssignmentCard extends StatelessWidget {
                           DateFormat('yyyy MMM dd').format(
                               assignmentModel.assignment_deadline.toLocal()),
                           style: GoogleFonts.inter(
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                             fontSize: 12.5,
                             color: Color(0xFF3B3B3B),
                           )),
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                     Text(
-                      "${assignmentModel.assignment_name}",
+                      assignmentModel.assignment_name,
                       style: GoogleFonts.inter(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                               fontSize: 14.5,
                               color: Color(0xFF637EB5),
                               fontWeight: FontWeight.bold)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 3,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "${assignmentModel.teacher_id}",
+                          assignmentModel.teacher_id,
                           style: GoogleFonts.inter(
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                   fontSize: 11.5, color: Colors.black)),
                         ),
                         Text(
-                          "${remainingDays} days left",
+                          "$remainingDays days left",
                           style: GoogleFonts.inter(
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                             fontSize: 12.5,
                             color: Color(0xFF3B3B3B),
                           )),

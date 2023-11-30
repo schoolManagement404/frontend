@@ -17,19 +17,19 @@ class RoutineBlock extends StatelessWidget {
                 Text(
                   "TODAY CLASS",
                   style: GoogleFonts.inter(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                           fontSize: 21.5, fontWeight: FontWeight.bold)),
                 ),
                 Text(
                   "Sun 26 Nov",
                   style: GoogleFonts.inter(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                           fontSize: 16)),
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
               child:SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -64,8 +64,8 @@ class RoutineCard extends StatelessWidget {
     return Container(
       width: 149,
       decoration: BoxDecoration(
-        color: Color(0xFFF9F9FC),
-        boxShadow: [
+        color: const Color(0xFFF9F9FC),
+        boxShadow: const [
           BoxShadow(
             color: Color.fromRGBO(33, 35, 38, 0.1),
             offset: Offset(0, 10),
@@ -73,7 +73,7 @@ class RoutineCard extends StatelessWidget {
             spreadRadius: -8,
           ),
         ],
-        border: Border.all(width: 0.9, color: Color(0xFFE9E8E8)),
+        border: Border.all(width: 0.9, color: const Color(0xFFE9E8E8)),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Padding(
@@ -84,65 +84,65 @@ class RoutineCard extends StatelessWidget {
                crossAxisAlignment: CrossAxisAlignment.center,
                mainAxisAlignment: MainAxisAlignment.end,
                children: [
-                 Icon(
+                 const Icon(
                    Icons.access_time_outlined,
                    size: 15,
                  ),
-                 SizedBox(width: 5,),
+                 const SizedBox(width: 5,),
                  Text(
-                   "${classTime}",
+                   classTime,
                    style: GoogleFonts.inter(
-                       textStyle: TextStyle(
+                       textStyle: const TextStyle(
                      fontSize: 9.5,
                      color: Color(0xFF64748B),
                    )),
                  ),
                ],
              ),
-           Divider(height: 9,color: Color(0xFFE9E8E8),),
+           const Divider(height: 9,color: Color(0xFFE9E8E8),),
           
              Text(
-               "${subject}",
+               subject,
                style: GoogleFonts.inter(
-                   textStyle: TextStyle(
+                   textStyle: const TextStyle(
                        fontSize: 12.5,
                        color: Color(0xFF64748B),
                        fontWeight: FontWeight.bold)),
              ),
-             SizedBox(
+             const SizedBox(
                height: 10,
              ),
              Row(
                crossAxisAlignment: CrossAxisAlignment.center,
                children: [
-                 Icon(
+                 const Icon(
                    Icons.location_pin,
                    size: 15,
                  ),
-                 SizedBox(width: 5,),
+                 const SizedBox(width: 5,),
                  Text(
-                   "${classRoom}",
+                   classRoom,
                    style: GoogleFonts.inter(
-                       textStyle: TextStyle(
+                       textStyle: const TextStyle(
                      fontSize: 9.5,
                      color: Color(0xFF64748B),
                    )),
                  ),
                ],
              ),
-             SizedBox(
+             const SizedBox(
                height: 5,
              ),
              Row(
                crossAxisAlignment: CrossAxisAlignment.center,
                children: [
-                 CircleAvatar(
+                 const CircleAvatar(
                      radius: 10, child: Icon(Icons.person, size: 10)),
-                     SizedBox(width: 5,),
+                     const SizedBox(width: 5,),
                  Text(
-                   "${teacherName}",
+                   teacherName,
                    style: GoogleFonts.inter(
-                       textStyle: TextStyle(
+                       textStyle: const TextStyle(
                      fontSize: 9.5,
                      color: Color(0xFF64748B),
                    )),

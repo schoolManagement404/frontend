@@ -8,16 +8,15 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../core/Error/loadingScreen/loadingScreen.dart';
 import '../../bloc/calendar_bloc.dart';
-import '../../data/service/calenderUtils.dart';
 
 class CalenderPage extends StatelessWidget {
   const CalenderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final _today = DateTime.now();
-    final firstDay = DateTime(_today.year - 3, _today.month, _today.day);
-    final lastDay = DateTime(_today.year + 3, _today.month, _today.day);
+    final today = DateTime.now();
+    final firstDay = DateTime(today.year - 3, today.month, today.day);
+    final lastDay = DateTime(today.year + 3, today.month, today.day);
 
     context.read<CalendarBloc>().add(fetchCalendarDataEvent());
 

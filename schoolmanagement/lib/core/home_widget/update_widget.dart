@@ -3,7 +3,7 @@ import 'package:schoolmanagement/core/constants/constant.dart';
 import 'package:schoolmanagement/features/assignment/data/model/assignment.dart';
 
 void updateAssignment(assignment newAssignment) {
-  String assignments = newAssignment.assignment_name + "/?" + "Assignment 2";
+  String assignments = "${newAssignment.assignment_name}/?Assignment 2";
   HomeWidget.saveWidgetData<String>(
       'headline_title', newAssignment.assignment_name);
   HomeWidget.saveWidgetData<String>(

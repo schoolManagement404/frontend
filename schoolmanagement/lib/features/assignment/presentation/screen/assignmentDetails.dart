@@ -41,20 +41,20 @@ class AssignmentDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomHeader(
-                headerText: "${currentAssignment.subject_id}",
+                headerText: currentAssignment.subject_id,
                 parentContext: context),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Text(
-              '${currentAssignment.assignment_name}',
-              style: GoogleFonts.inter(textStyle: TextStyle(fontSize: 17)),
+              currentAssignment.assignment_name,
+              style: GoogleFonts.inter(textStyle: const TextStyle(fontSize: 17)),
             ),
             Text(
-              '${currentAssignment.teacher_id}',
-              style: GoogleFonts.inter(textStyle: TextStyle(fontSize: 17)),
+              currentAssignment.teacher_id,
+              style: GoogleFonts.inter(textStyle: const TextStyle(fontSize: 17)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Container(
@@ -62,7 +62,7 @@ class AssignmentDetailPage extends StatelessWidget {
               width: 52,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18), color: Colors.red),
-              child: Center(
+              child: const Center(
                 child: Text(
                   "Due",
                   style: TextStyle(
@@ -70,16 +70,16 @@ class AssignmentDetailPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Text(
               "${deadlineDate.year}-${deadlineDate.month}-${deadlineDate.day}",
               style: GoogleFonts.inter(
                   textStyle:
-                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                      const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             FutureBuilder(
@@ -118,7 +118,7 @@ class AssignmentDetailPage extends StatelessWidget {
                     return const CircularProgressIndicator();
                   }
                 }),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             TextField(
@@ -128,25 +128,17 @@ class AssignmentDetailPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(9.0),
                 ),
                 labelText: 'Enter the drive Link',
-                contentPadding: EdgeInsets.fromLTRB(12, 12, 8, 12),
+                contentPadding: const EdgeInsets.fromLTRB(12, 12, 8, 12),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               height: 45,
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text(
-                  "Submit Assignmnet",
-                  style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold)),
-                ),
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.black),
@@ -155,6 +147,14 @@ class AssignmentDetailPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
+                ),
+                child: Text(
+                  "Submit Assignmnet",
+                  style: GoogleFonts.inter(
+                      textStyle: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold)),
                 ),
               ),
             )

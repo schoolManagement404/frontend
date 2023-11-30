@@ -106,7 +106,7 @@ class _NepaliCalendarPageState extends State<NepaliCalendarPage> {
               holidays: [DateTime(2023, 11, 30), DateTime(2023, 11, 29)],
               calendarType: _calendarType!,
               holidayColor: Colors.red,
-              weekendDays: [DateTime.saturday],
+              weekendDays: const [DateTime.saturday],
               initialDate: DateTime.now(),
               firstDate: DateTime(1970),
               lastDate: DateTime(2024),
