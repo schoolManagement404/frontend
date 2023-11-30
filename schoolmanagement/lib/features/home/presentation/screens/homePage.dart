@@ -6,6 +6,9 @@ import 'package:schoolmanagement/features/calendar/bloc/calendar_bloc.dart';
 import 'package:schoolmanagement/features/calendar/data/model/event.dart';
 import 'package:schoolmanagement/features/calendar/data/service/calenderUtils.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
+import 'package:schoolmanagement/features/home/presentation/widget/assignment_block.dart';
+import 'package:schoolmanagement/features/home/presentation/widget/notice_board.dart';
+import 'package:schoolmanagement/features/home/presentation/widget/routine_block.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 // import '../../../../core/hiveLocalDB/loggedInState/loggedIn.dart';
@@ -33,6 +36,9 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                NoticeBoard(),
+                RoutineBlock(),
+                AssignmentBlock(),
                 // Text(json.decode(loggedInHive().getLoginInfo()).toString()),
                 BlocBuilder<CalendarBloc, CalendarState>(
                     builder: (context, state) {
