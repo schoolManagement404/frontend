@@ -46,11 +46,11 @@ class _NepaliCalendarPageState extends State<NepaliCalendarPage> {
         event: Content(title: 'Event 04'),
       ),
       Event(
-        date: DateTime(2023, 05, 29),
+        date: DateTime(2023, 11, 15),
         event: Content(title: 'Event 05'),
       ),
       Event(
-        date: DateTime(2023, 07, 21),
+        date: DateTime(2023, 11, 15),
         event: Content(title: 'Event 06'),
       ),
       Event(
