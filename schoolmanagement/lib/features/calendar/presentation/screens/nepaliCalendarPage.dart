@@ -26,19 +26,19 @@ class _NepaliCalendarPageState extends State<NepaliCalendarPage> {
   List<Event> _getEvents() {
     return [
       Event(
-        date: DateTime(2023, 04, 14),
+        date: DateTime(2024, 02, 18),
         event: Content(title: 'Event'),
       ),
       Event(
-        date: DateTime(2023, 04, 16),
+        date: DateTime(2024, 02, 18),
         event: Content(title: 'Event 01'),
       ),
       Event(
-        date: DateTime(2023, 05, 01),
+        date: DateTime(2024, 02, 22),
         event: Content(title: 'Event 02'),
       ),
       Event(
-        date: DateTime(2023, 05, 14),
+        date: DateTime(2024, 02, 22),
         event: Content(title: 'Event 03'),
       ),
       Event(
@@ -46,11 +46,11 @@ class _NepaliCalendarPageState extends State<NepaliCalendarPage> {
         event: Content(title: 'Event 04'),
       ),
       Event(
-        date: DateTime(2023, 11, 15),
+        date: DateTime(2024, 02, 29),
         event: Content(title: 'Event 05'),
       ),
       Event(
-        date: DateTime(2023, 11, 15),
+        date: DateTime(2024, 02, 16),
         event: Content(title: 'Event 06'),
       ),
       Event(
@@ -101,16 +101,16 @@ class _NepaliCalendarPageState extends State<NepaliCalendarPage> {
       body: SafeArea(
           child: Column(
         children: [
-          Expanded(
+          Flexible(
             child: FlutterBSADCalendar(
-              holidays: [DateTime(2023, 11, 30), DateTime(2023, 11, 29)],
+              holidays: [DateTime(2024, 02, 16), DateTime(2023, 02, 22)],
               calendarType: _calendarType!,
               holidayColor: Colors.red,
               weekendDays: const [DateTime.saturday],
               initialDate: DateTime.now(),
               firstDate: DateTime(1970),
-              lastDate: DateTime(2024),
-              eventColor: Colors.purple,
+              lastDate: DateTime(2028),
+              eventColor: Colors.blue,
               events: _events,
               onDateSelected: (date, events) {
                 setState(() {

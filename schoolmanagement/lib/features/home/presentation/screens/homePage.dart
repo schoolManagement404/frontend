@@ -5,6 +5,7 @@ import 'package:schoolmanagement/core/constants/colors/constants.dart';
 import 'package:schoolmanagement/core/notifications/firebase_api.dart';
 import 'package:schoolmanagement/features/calendar/bloc/calendar_bloc.dart';
 import 'package:schoolmanagement/features/calendar/data/model/event.dart';
+import 'package:schoolmanagement/features/calendar/presentation/screens/nepaliCalendarPage.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/Appbar.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/assignment_block.dart';
 import 'package:schoolmanagement/features/home/presentation/widget/notice_board.dart';
@@ -125,6 +126,15 @@ class _HomePageState extends State<HomePage> {
                         Navigator.pushNamed(context, "/view_assignments");
                       },
                       child: const Text("Assignment")),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const NepaliCalendarPage()));
+                      },
+                      child: Text('Nep/Eng calender')),
                   ElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(context, "/add_assignment");
