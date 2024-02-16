@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:schoolmanagement/auth/bloc/auth_bloc.dart';
 import 'package:schoolmanagement/config/routes/routes.dart';
+import 'package:schoolmanagement/core/notifications/firebase_api.dart';
 import 'package:schoolmanagement/features/assignment/bloc/assignment_bloc.dart';
 import 'package:schoolmanagement/features/auth/auth_page.dart';
 import 'package:schoolmanagement/features/calendar/bloc/calendar_bloc.dart';
@@ -12,6 +14,7 @@ import 'package:schoolmanagement/features/profile/bloc/profile_bloc.dart';
 import 'package:schoolmanagement/features/timeline/bloc/timeline/timeline_bloc.dart';
 import 'package:schoolmanagement/injector.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class SchoolManagement extends StatelessWidget {
   const SchoolManagement({super.key});
@@ -29,6 +32,7 @@ class SchoolManagement extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
+      navigatorKey: navigatorKey,
       onGenerateRoute: AppRoutes.onGenerateRoutes,
       initialRoute: "/",
       home: MultiBlocProvider(

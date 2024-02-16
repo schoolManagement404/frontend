@@ -45,6 +45,7 @@ dependencies:
   flutter_bloc: ^8.1.3
   flutter_bs_ad_calendar: ^1.0.4
   flutter_document_picker: ^5.2.3
+  flutter_local_notifications: ^16.3.2
   flutter_pdfview: ^1.3.2
   gap: ^3.0.1
   get_it: ^7.6.4

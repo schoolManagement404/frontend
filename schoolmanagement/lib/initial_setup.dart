@@ -22,7 +22,7 @@ Future<void> init() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await loggedInHive().initializeHive();
-  await FirebaseApi.initNotificationFirebase();
+  await FirebaseMessagingApi.initNotificationFirebase();
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   HomeWidget.setAppGroupId(appGroupId);
   updateAssignment(dummyAssignment);
